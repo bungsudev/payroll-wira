@@ -4,7 +4,7 @@
 		<div class="user-profile px-10 py-15">
 			<div class="d-flex align-items-center">
 				<div class="image">
-					<img src="<?= base_url() ?>assets/admin/images/avatar/avatar-13.png"
+					<img src="<?= base_url() ?>assets/admin/images/user/default.png"
 						class="avatar avatar-lg bg-primary-light" alt="User Image">
 				</div>
 				<div class="info ml-10">
@@ -25,7 +25,7 @@
 			<li class="header">Data Master</li>
 			<li class="<?php if($this->uri->segment(1)=="karyawan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>karyawan">
-					<i class="mdi mdi-account-plus"><span class="path1"></span><span class="path2"></span></i>
+					<i class="mdi mdi-account-multiple-plus	"><span class="path1"></span><span class="path2"></span></i>
 					<span>Karyawan</span>
 				</a>
 			</li>
@@ -35,9 +35,9 @@
 					<span>Outlet</span>
 				</a>
 			</li>
-			<li class="<?php if($this->uri->segment(1)=="karyawan"){echo "active";}?>">
-				<a href="<?= base_url(); ?>karyawan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+			<li class="<?php if($this->uri->segment(1)=="jadwal"){echo "active";}?>">
+				<a href="<?= base_url(); ?>jadwal">
+					<i class="mdi mdi-timetable"><span class="path1"></span><span class="path2"></span></i>
 					<span>Jam Kerja</span>
 				</a>
 			</li>
@@ -49,41 +49,48 @@
 				</a>
 			</li>
 			<li class="header">================================</li>
-			<li class="<?php if($this->uri->segment(1)=="karyawan"){echo "active";}?>">
-				<a href="<?= base_url(); ?>karyawan">
+			<li class="<?php if($this->uri->segment(1)=="transfer_karyawan"){echo "active";}?>">
+				<a href="<?= base_url(); ?>transfer_karyawan">
 					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
 					<span>Transfer Karyawan</span>
 				</a>
 			</li>
-			<li class="<?php if($this->uri->segment(1)=="karyawan"){echo "active";}?>">
-				<a href="<?= base_url(); ?>karyawan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+			<li class="<?php if($this->uri->segment(1)=="ppp_sdm"){echo "active";}?>">
+				<a href="<?= base_url(); ?>ppp_sdm">
+					<i class="mdi mdi-counter"><span class="path1"></span><span class="path2"></span></i>
 					<span>PPP SDM</span>
 				</a>
 			</li>
 			<li class="header">Laporan</li>
 			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>Slip Gaji</span>
 				</a>
 			</li>
 			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>PPP SDM</span>
 				</a>
 			</li>
 			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>Absensi</span>
 				</a>
 			</li>
 			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
-					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
+					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>Outlet</span>
+				</a>
+			</li>
+			<li class="header">Pengaturan</li>
+			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
+				<a href="<?= base_url(); ?>laporan">
+					<i class="mdi mdi-account-edit"><span class="path1"></span><span class="path2"></span></i>
+					<span>User Akses</span>
 				</a>
 			</li>
 			<!-- <li class="<?php if($this->uri->segment(1)=="registrasi"){echo "active";}?>">

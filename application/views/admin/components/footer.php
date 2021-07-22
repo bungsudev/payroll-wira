@@ -9,7 +9,7 @@
 			</li>
 		</ul>
 	</div> -->
-	&copy; 2020 <a href="#">Clinic</a>. All Rights Reserved.
+	&copy; 2021 <a href="#">SIAB Payroll</a>. All Rights Reserved.
 </footer>
 
 <div class="control-sidebar-bg"></div>

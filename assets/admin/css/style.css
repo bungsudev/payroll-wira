@@ -23628,4 +23628,11 @@ img.away, img.busy, img.offline, img.online {
 .waves-effect .waves-ripple {
   z-index: -1; }
 
-/*# sourceMappingURL=style.css.map */
+
+
+/* custom */
+
+.img-karyawan{
+  width: 150px;
+  height: 150px;
+}
