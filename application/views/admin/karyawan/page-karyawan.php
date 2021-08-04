@@ -117,6 +117,17 @@
 									placeholder="handphone">
 							</div>
 						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+							  <label for="jabatan">Jabatan</label>
+							  <select class="form-control" name="jabatan" id="jabatan">
+								<option value="" seleced="selected">--Pilih--</option>
+								<?php foreach ($jabatan as $key => $val): ?>
+									<option value="<?= $val['jabatan'] ?>"><?= $val['jabatan'] ?></option>
+								<?php endforeach; ?>
+							  </select>
+							</div>
+						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="tinggi">Tinggi Badan</label>
@@ -131,7 +142,6 @@
 									placeholder="75">
 							</div>
 						</div>
-						<div class="col-md-6"></div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="alamat">Alamat</label>
@@ -189,7 +199,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="mdl-importLabel">Import List Pasien</h5>
+				<h5 class="modal-title" id="mdl-importLabel">Import Data Karyawan</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -345,6 +355,7 @@
 					$("#agama").val(data.agama)
 					$("#suku").val(data.suku)
 					$("#handphone").val(data.handphone)
+					$("#jabatan").val(data.jabatan)
 					$("#tinggi").val(data.tinggi)
 					$("#berat").val(data.berat)
 					$("#alamat").val(data.alamat)
@@ -375,7 +386,8 @@
 							<td>
 								` + data[i].nik + ` <br />
 								<b>` + data[i].nama + `</b> <br />
-								` + data[i].tempat_lahir + `, ` + format_tanggal(data[i].tanggal_lahir) + `
+								` + data[i].tempat_lahir + `, ` + format_tanggal(data[i].tanggal_lahir) + ` <br />
+								<b>` + data[i].jabatan.toUpperCase() + `</b>
 							</td>
 							<td width="100px">` + data[i].alamat + `</td>
 							<td>` + data[i].pendidikan + `</td>

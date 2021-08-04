@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Karyawan extends CI_Controller {
+class Jabatan extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -11,67 +11,32 @@ class Karyawan extends CI_Controller {
 		}
 		$this->load->library('excel');
 		$this->load->model('Logs_m');
-		$this->load->model('Karyawan_m');
 		$this->load->model('Jabatan_m');
 	}
 
 	public function index(){
-		$data['title'] = 'Data Karyawan';
-		$data['content'] = "admin/karyawan/page-karyawan";
-		$data['jabatan'] = $this->Jabatan_m->data_jabatan();
+		$data['title'] = 'Jabatan';
+		$data['content'] = "admin/jabatan/page-jabatan";
 		$this->load->view('admin/layout/layout',$data);
 	}
 
 	public function get_data(){
-		echo json_encode($this->Karyawan_m->data_karyawan());
+		echo json_encode($this->Jabatan_m->data_jabatan());
 	}
 	
 	public function get_data_detail(){
-		echo json_encode($this->Karyawan_m->data_karyawan_detail());
+		echo json_encode($this->Jabatan_m->data_jabatan_detail());
 	}
 
-	function simpan_karyawan($act, $id = ''){
-		$error = '';
-        $config['upload_path']="./assets/img/karyawan";
-        $config['allowed_types']='jpg|png|jpeg|JPEG';
-		$config['max_size']=500;
-		$config['encrypt_name'] = TRUE;
-
-		$this->load->library('upload', $config);
+	function simpan_jabatan($act, $id = ''){
 		if ($act == 'Tambah') {
-			if ( ! $this->upload->do_upload('gambar_karyawan')){
-				$error = $this->upload->display_errors();
 				echo json_encode([
-					'res' => false,
-					'msg' => $error
-				]);
-			}else{
-				$data = $this->upload->data();
-				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
-				echo json_encode([
-					'res' => $this->Karyawan_m->simpan_karyawan($data['file_name']), 
+					'res' => $this->Jabatan_m->simpan_jabatan(), 
 					'msg' =>  'Data di tambahkan'
 				]);
-			}
-		}else if ($act == 'Edit' && !empty($_FILES['gambar_karyawan']['name'])){
-			if ( ! $this->upload->do_upload('gambar_karyawan')){
-				$error = $this->upload->display_errors();
-				echo json_encode([
-					'res' => false,
-					'msg' => $error
-				]);
-			}else{
-				$data = $this->upload->data();
-				$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
-				echo json_encode([
-					'res' => $this->Karyawan_m->edit_karyawan($data['file_name'], $id), 
-					'msg' =>  'Data telah di edit'
-				]);
-			}
-		}else if ($act == 'Edit' && empty($_FILES['gambar_karyawan']['name'])){
-			$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
+		}else if ($act == 'Edit'){
 			echo json_encode([
-				'res' => $this->Karyawan_m->edit_karyawan(NULL, $id), 
+				'res' => $this->Jabatan_m->edit_jabatan($id), 
 				'msg' =>  'Data telah di edit'
 			]);
 		}else{
@@ -80,15 +45,14 @@ class Karyawan extends CI_Controller {
 				'msg' =>  'Error'
 			]);
 		}
-		($error)?$this->Logs_m->save('Karyawan => error : '. $error): '';
 	}
 
-	public function hapus_karyawan(){
+	public function hapus_jabatan(){
 		$this->Logs_m->save('hapus Karyawan => id : '.$_POST['id']);
-		echo json_encode($this->Karyawan_m->hapus_karyawan());
+		echo json_encode($this->Jabatan_m->hapus_jabatan());
 	}
 
-	function import_karyawan()
+	function import_jabatan()
     {
         if (isset($_FILES["uploadFile"]["name"])) {
             $path = $_FILES["uploadFile"]["tmp_name"];
@@ -133,12 +97,12 @@ class Karyawan extends CI_Controller {
 							"foto" => 'default.png',
 							"created" => date('Y-m-d H:i:s'),
                         ];
-                        $this->db->insert("karyawan",$data);
+                        $this->db->insert("jabatan",$data);
                     }
                 }
             }
 			$this->Logs_m->save('Import Karyawan => file : '. $_FILES["uploadFile"]["name"]);
-			redirect(base_url().'karyawan');
+			redirect(base_url().'jabatan');
         }
         
         

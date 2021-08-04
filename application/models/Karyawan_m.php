@@ -31,6 +31,7 @@ class Karyawan_m extends CI_Model {
             "agama" => $this->input->post('agama'),
             "suku" => $this->input->post('suku'),
             "handphone" => $this->input->post('handphone'),
+            "jabatan" => $this->input->post('jabatan'),
             "tinggi" => $this->input->post('tinggi'),
             "berat" => $this->input->post('berat'),
             "alamat" => $this->input->post('alamat'),
@@ -38,7 +39,7 @@ class Karyawan_m extends CI_Model {
             "pengalaman" => $this->input->post('pengalaman'),
             "pelatihan" => $this->input->post('pelatihan'),
             "foto" => $nama_gambar,
-            "created" => date("d-m-Y H:i:s"),
+            "created" => date("d-m-Y H:i:s").$this->session->userdata('username'),
         ];
         $this->db->insert('karyawan', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
@@ -55,13 +56,14 @@ class Karyawan_m extends CI_Model {
             "agama" => $this->input->post('agama'),
             "suku" => $this->input->post('suku'),
             "handphone" => $this->input->post('handphone'),
+            "jabatan" => $this->input->post('jabatan'),
             "tinggi" => $this->input->post('tinggi'),
             "berat" => $this->input->post('berat'),
             "alamat" => $this->input->post('alamat'),
             "pendidikan" => $this->input->post('pendidikan'),
             "pengalaman" => $this->input->post('pengalaman'),
             "pelatihan" => $this->input->post('pelatihan'),
-            "edited" => date("d-m-Y H:i:s"),
+            "edited" => date("d-m-Y H:i:s").$this->session->userdata('username'),
         ];
 
         //cek update tanpa gambar
@@ -76,7 +78,7 @@ class Karyawan_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $data = [
-            "deleted" => date("d-m-Y H:i:s"),
+            "deleted" => date("d-m-Y H:i:s").$this->session->userdata('username'),
         ];
 
         $this->db->where('id_karyawan', $id);

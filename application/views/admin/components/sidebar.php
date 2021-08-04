@@ -23,6 +23,12 @@
 				</a>
 			</li>
 			<li class="header">Data Master</li>
+			<li class="<?php if($this->uri->segment(1)=="jabatan"){echo "active";}?>">
+				<a href="<?= base_url(); ?>jabatan">
+					<i class="mdi mdi-certificate"><span class="path1"></span><span class="path2"></span></i>
+					<span>Jabatan</span>
+				</a>
+			</li>
 			<li class="<?php if($this->uri->segment(1)=="karyawan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>karyawan">
 					<i class="mdi mdi-account-multiple-plus	"><span class="path1"></span><span class="path2"></span></i>
