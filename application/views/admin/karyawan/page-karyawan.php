@@ -77,7 +77,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="status">Status</label>
+								<label for="status">Status Kawin</label>
 								<input type="text" class="form-control required" name="status" id="status"
 									placeholder="Status">
 							</div>
@@ -249,7 +249,11 @@
 			$("form")[0].reset();
 			$('.custom-file-label').html('Pilih Gambar');
 			$("#img-prev").attr('src', '');
-			$("#mdl-karyawan").modal('show');
+			$("#mdl-karyawan").modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 		})
 		$("#btn-simpan").click(function () {
 			let check = true;
@@ -276,7 +280,11 @@
 			act = "Edit";
 			$("#act").text(act);
 			$("form")[0].reset();
-			$("#mdl-karyawan").modal('show');
+			$("#mdl-karyawan").modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 			id_karyawan = $(this).data("id");
 			get_karyawan_detail(id_karyawan)
 		})

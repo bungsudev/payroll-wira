@@ -64,12 +64,12 @@ class Outlet extends CI_Controller {
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                     $nama_outlet = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $tunjangan_outlet = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $t_ot = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                   
                     if ($nik != ''  ) {
                         $data = [ 
                             "nama_outlet" => $nama_outlet,
-                            "tunjangan_outlet" => $tunjangan_outlet,
+                            "t_ot" => $t_ot,
 							"created" => date('Y-m-d H:i:s'),
                         ];
                         $this->db->insert("outlet",$data);

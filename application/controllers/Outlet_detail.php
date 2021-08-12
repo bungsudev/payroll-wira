@@ -22,22 +22,22 @@ class Outlet_detail extends CI_Controller {
 	}
 
 	public function get_data(){
-		echo json_encode($this->Outlet_m->data_outlet());
+		echo json_encode($this->Outlet_m->data_outlet_detail_karyawan());
 	}
 	
 	public function get_data_detail(){
-		echo json_encode($this->Outlet_m->data_outlet_detail());
+		echo json_encode($this->Outlet_m->data_ByID());
 	}
 
-	function simpan_outlet($act, $id = ''){
+	function simpan_outlet_karyawan($act, $id = ''){
 		if ($act == 'Tambah') {
 				echo json_encode([
-					'res' => $this->Outlet_m->simpan_outlet(), 
+					'res' => $this->Outlet_m->simpan_outlet_karyawan(), 
 					'msg' =>  'Data di tambahkan'
 				]);
 		}else if ($act == 'Edit'){
 			echo json_encode([
-				'res' => $this->Outlet_m->edit_outlet($id), 
+				'res' => $this->Outlet_m->edit_outlet_karyawan($id), 
 				'msg' =>  'Data telah di edit'
 			]);
 		}else{

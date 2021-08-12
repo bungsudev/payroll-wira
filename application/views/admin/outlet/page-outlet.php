@@ -60,8 +60,8 @@
 						</div>
 						<div class="col-md-9">
 							<div class="form-group">
-								<label for="tunjangan_outlet">Tunjangan Outlet</label>
-								<input type="number" class="form-control required" name="tunjangan_outlet" id="tunjangan_outlet" value="0">
+								<label for="t_ot">Tunjangan Outlet</label>
+								<input type="number" class="form-control required" name="t_ot" id="t_ot" value="0">
 							</div>
 						</div>
 					</div>
@@ -182,7 +182,7 @@
 				if (data) {
 					$("#nama_outlet").val(data.nama_outlet)
 					$("#shift_outlet").val(data.shift_outlet)
-					$("#tunjangan_outlet").val(data.tunjangan_outlet)
+					$("#t_ot").val(data.t_ot)
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}
@@ -204,7 +204,7 @@
 							<td>` + data[i].id_outlet + `</td>
 							<td>` + data[i].nama_outlet + `</td>
 							<td>` + data[i].shift_outlet + ` Shift</td>
-							<td>Rp. ` + data[i].tunjangan_outlet + `</td>
+							<td>Rp. ` + data[i].t_ot + `</td>
 							<td align="center">
 								<a href="<?= base_url() ?>outlet/outlet-detail/` + data[i].id_outlet + `" class="btn btn-info"><i class="mdi mdi-account-network"></i> Detail</a>
 								<button type="button" id="btn-edit" data-id="` + data[i].id_outlet + `" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</button>

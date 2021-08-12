@@ -41,12 +41,12 @@
 					<span>Outlet</span>
 				</a>
 			</li>
-			<li class="<?php if($this->uri->segment(1)=="jadwal"){echo "active";}?>">
+			<!-- <li class="<?php if($this->uri->segment(1)=="jadwal"){echo "active";}?>">
 				<a href="<?= base_url(); ?>jadwal">
 					<i class="mdi mdi-timetable"><span class="path1"></span><span class="path2"></span></i>
 					<span>Jam Kerja</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="header">Absensi</li>
 			<li class="<?php if($this->uri->segment(1)=="absensi"){echo "active";}?>">
 				<a href="<?= base_url(); ?>absensi">

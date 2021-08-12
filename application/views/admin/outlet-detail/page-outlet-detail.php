@@ -4,6 +4,7 @@
 			<button class="float-right btn btn-success ml-2" id="btn-tambah"><i
 					class="mdi mdi-account-multiple-plus"></i>
 				Karyawan Outlet</button>
+			<a href="<?= base_url(); ?>outlet" class="btn btn-warning"><i class="mdi mdi-backburger"></i> Kembali</a>
 			<!-- <button class="float-right btn btn-info" id="btn-import"><i class="mdi mdi-file-import"></i> Import Data</button> -->
 		</h6>
 
@@ -14,9 +15,7 @@
 			<table id="tbl-outlet" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 				<thead>
 					<tr>
-						<th>Info Outlet</th>
 						<th>Info Karyawan</th>
-						<th>Info Pekerjaan</th>
 						<th>Jam Kerja</th>
 						<th></th>
 					</tr>
@@ -31,10 +30,10 @@
 </div>
 
 <div class="modal fade" id="mdl-karyawan" tabindex="-1">
-	<div class="modal-dialog modal-md">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><span id="act"></span> Karyawan</h5>
+				<h5 class="modal-title">Cari Karyawan</h5>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -45,6 +44,7 @@
 							<tr>
 								<th>ID Karyawan</th>
 								<th>Nama Karyawan</th>
+								<th>Outlet</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -74,11 +74,12 @@
 				<form ecntype="multipart/form-data" id="form-outlet">
 					<div class="row">
 						<div class="col-md-12">
+							<input type="hidden" name="id_outlet" id="id_outlet" value="<?= $outlet->id_outlet ?>">
 							<input type="hidden" name="id_karyawan" id="id_karyawan" value="">
 							<div class="form-group">
 								<label>Nama Karyawan</label>
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Cari Karyawan" id="nik" name="nik" readonly>
+									<input type="text" class="form-control required" placeholder="Cari Karyawan" id="nik" name="nik" readonly>
 									<div class="input-group-append">
 										<button class="btn btn-rounded btn-info btn-sm" id="btn-cari-karyawan">Cari</button>
 									</div>
@@ -93,8 +94,8 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="shift_outlet">Jam Kerja</label>
-								<select class="form-control" name="shift_outlet" id="shift_outlet">
+								<label for="shift_karyawan">Jam Kerja</label>
+								<select class="form-control required" name="shift_karyawan" id="shift_karyawan">
 									<option value="">-Pilih-</option>
 									<?php
 										if ($outlet->shift_outlet == '1') {
@@ -120,22 +121,22 @@
 
 <script>
 	let act = '';
-	let id_outlet = '';
+	let id_outletdetail = '';
 	$(document).ready(function () {
-		// get_outlet();
+		get_outlet();
+
 		//button action
 		$("#btn-import").click(function () {
 			$("#mdl-import").modal('show');
 		})
 		$("#btn-cari-karyawan").click(function (e) {
 			e.preventDefault();
-			act = 'Cari';
-			$("#act").text(act);
 			$("#mdl-outlet").modal('hide');
 			get_karyawan()
 		})
 		$("#btn-tambah").click(function () {
 			act = 'Tambah';
+			$("#btn-cari-karyawan").removeAttr("disabled",true);
 			$("#act").text(act);
 			$("form")[0].reset();
 			$("#mdl-outlet").modal('show');
@@ -151,11 +152,12 @@
 					check = false;
 				}
 			})
+			console.log(check)
 			if (check) {
 				if (act == 'Tambah') {
 					simpan(act, '');
 				} else if (act == 'Edit') {
-					simpan(act, id_outlet);
+					simpan(act, id_outletdetail);
 				} else {
 					a_error('Terjadi Kesalahan!', 'Reload Page dahulu');
 				}
@@ -164,7 +166,8 @@
 
 		//tbody button action
 		$("#tbl-karyawan tbody").on("click", ".btn-pilih-karyawan", function () {
-			id_karyawan = $(this).data("id");
+			id_outletdetail = $(this).data("id");
+			id_karyawan = $(this).data("id_karyawan");
 			nik = $(this).data("nik");
 			nama = $(this).data("nama");
 			$("#id_karyawan").val(id_karyawan);
@@ -175,15 +178,16 @@
 		})
 		$("#tbl-outlet tbody").on("click", "#btn-edit", function () {
 			act = "Edit";
+			$("#btn-cari-karyawan").attr("disabled",true);
 			$("#act").text(act);
-			$("form")[0].reset();
+			$("#form-outlet")[0].reset();
 			$("#mdl-outlet").modal('show');
-			id_outlet = $(this).data("id");
-			get_outlet_detail(id_outlet)
+			id_outletdetail = $(this).data("id");
+			get_outlet_detail(id_outletdetail)
 		})
 		$("#tbl-outlet tbody").on("click", "#btn-hapus", function () {
-			id_outlet = $(this).data("id");
-			hapus_outlet(id_outlet)
+			id_outletdetail = $(this).data("id");
+			hapus_outlet(id_outletdetail)
 		})
 	})
 
@@ -195,14 +199,15 @@
 			success: function (data) {
 				let html = '';
 				for (let i = 0; i < data.length; i++) {
-					let foto = (data[i].foto == '') ? 'default.png' : data[i].foto;
 					html += `
 						<tr>
 							<td>` + data[i].nik + `</td>
 							<td>` + data[i].nama + `</td>
+							<td>` + data[i].nama_outlet + `</td>
 							<td class="text-center">
 								<button type="button" 
-									data-id="` + data[i].id_karyawan + `"
+									data-id="` + data[i].id_outlet + `"
+									data-id_karyawan="` + data[i].id_karyawan + `"
 									data-nik="` + data[i].nik + `"
 									data-nama="` + data[i].nama + `"
 								class="btn btn-warning btn-pilih-karyawan"><i class="mdi mdi-account-plus"></i></button>
@@ -218,12 +223,12 @@
 		});
 	}
 
-	function hapus_outlet(id_outlet) {
+	function hapus_outlet(id_outletdetail) {
 		if (confirm('Apakah kamu yakin?')) {
 			$.ajax({
 				url: base_url + 'Outlet/hapus_outlet',
 				data: {
-					id: id_outlet
+					id: id_outletdetail
 				},
 				method: "POST",
 				dataType: "json",
@@ -241,7 +246,7 @@
 
 	function simpan(act) {
 		$.ajax({
-			url: base_url + 'Outlet/simpan_outlet/' + act + '/' + id_outlet,
+			url: base_url + 'Outlet_detail/simpan_outlet_karyawan/' + act + '/' + id_outletdetail,
 			type: "POST",
 			data: new FormData($("#form-outlet").get(0)),
 			cache: false,
@@ -261,19 +266,22 @@
 		});
 	}
 
-	function get_outlet_detail(id_outlet) {
+	function get_outlet_detail(id_outletdetail) {
 		$.ajax({
-			url: base_url + 'Outlet/get_data_detail',
+			url: base_url + 'Outlet_detail/get_data_detail',
 			data: {
-				id: id_outlet
+				id: id_outletdetail
 			},
 			method: "POST",
 			dataType: "json",
 			success: function (data) {
+				console.log(data)
 				if (data) {
-					$("#nama_outlet").val(data.nama_outlet)
-					$("#shift_outlet").val(data.shift_outlet)
-					$("#tunjangan_outlet").val(data.tunjangan_outlet)
+					$("#id_karyawan").val(data.id_karyawan);
+					$("#id_outlet").val(data.id_outlet);
+					$("#nama").val(data.nama);
+					$("#nik").val(data.nik);
+					$("#shift_karyawan").val(data.shift_karyawan);
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}
@@ -283,7 +291,7 @@
 
 	function get_outlet() {
 		$.ajax({
-			url: base_url + 'Outlet/get_data',
+			url: base_url + 'Outlet_detail/get_data',
 			method: "POST",
 			dataType: "json",
 			success: function (data) {
@@ -292,14 +300,16 @@
 				for (let i = 0; i < data.length; i++) {
 					html += `
 						<tr>
-							<td>` + data[i].id_outlet + `</td>
-							<td>` + data[i].nama_outlet + `</td>
-							<td>` + data[i].shift_outlet + ` Shift</td>
-							<td>Rp. ` + data[i].tunjangan_outlet + `</td>
+							<td>
+								` + data[i].nik + ` <br />
+								<b>` + data[i].nama + `</b> <br />
+								` + data[i].tempat_lahir + `, ` + format_tanggal(data[i].tanggal_lahir) + ` <br />
+								<b>` + (data[i].jabatan || "").toUpperCase() + `</b>
+							</td>
+							<td>Shift ` + data[i].shift_karyawan + `</td>
 							<td align="center">
-								<a href="<?= base_url() ?>outlet/outlet-detail/` + data[i].id_outlet + `" class="btn btn-info"><i class="mdi mdi-account-network"></i> Detail</a>
-								<button type="button" id="btn-edit" data-id="` + data[i].id_outlet + `" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</button>
-								<button type="button" id="btn-hapus" data-id="` + data[i].id_outlet + `" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+								<button type="button" id="btn-edit" data-id="` + data[i].id_outletdetail + `" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</button>
+								<button type="button" id="btn-hapus" data-id="` + data[i].id_outletdetail + `" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
 							</td>
 						</tr>
 					`;
