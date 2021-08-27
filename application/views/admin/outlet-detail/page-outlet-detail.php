@@ -39,24 +39,19 @@
 				</button>
 			</div>
 			<div class="modal-body">
-					<table id="tbl-karyawan" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
-						<thead>
-							<tr>
-								<th>ID Karyawan</th>
-								<th>Nama Karyawan</th>
-								<th>Outlet</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
+				<table id="tbl-karyawan" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+					<thead>
+						<tr>
+							<th>ID Karyawan</th>
+							<th>Nama Karyawan</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 
-						</tbody>
-					</table>
+					</tbody>
+				</table>
 			</div>
-			<!-- <div class="modal-footer modal-footer-uniform">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-				<button type="button" class="btn btn-primary float-right" id="btn-simpan">Simpan</button>
-			</div> -->
 		</div>
 	</div>
 </div>
@@ -79,9 +74,11 @@
 							<div class="form-group">
 								<label>Nama Karyawan</label>
 								<div class="input-group">
-									<input type="text" class="form-control required" placeholder="Cari Karyawan" id="nik" name="nik" readonly>
+									<input type="text" class="form-control required" placeholder="Cari Karyawan"
+										id="nik" name="nik" readonly>
 									<div class="input-group-append">
-										<button class="btn btn-rounded btn-info btn-sm" id="btn-cari-karyawan">Cari</button>
+										<button class="btn btn-rounded btn-info btn-sm"
+											id="btn-cari-karyawan">Cari</button>
 									</div>
 								</div>
 							</div>
@@ -89,7 +86,8 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label for="nama">Nama Karyawan</label>
-								<input type="text" class="form-control required" name="nama" id="nama" readonly placeholder="Nama Karyawan">
+								<input type="text" class="form-control required" name="nama" id="nama" readonly
+									placeholder="Nama Karyawan">
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -122,8 +120,9 @@
 <script>
 	let act = '';
 	let id_outletdetail = '';
+	let id_outlet = $("#id_outlet").val();
 	$(document).ready(function () {
-		get_outlet();
+		get_outlet(id_outlet);
 
 		//button action
 		$("#btn-import").click(function () {
@@ -136,7 +135,7 @@
 		})
 		$("#btn-tambah").click(function () {
 			act = 'Tambah';
-			$("#btn-cari-karyawan").removeAttr("disabled",true);
+			$("#btn-cari-karyawan").removeAttr("disabled", true);
 			$("#act").text(act);
 			$("form")[0].reset();
 			$("#mdl-outlet").modal('show');
@@ -178,7 +177,7 @@
 		})
 		$("#tbl-outlet tbody").on("click", "#btn-edit", function () {
 			act = "Edit";
-			$("#btn-cari-karyawan").attr("disabled",true);
+			$("#btn-cari-karyawan").attr("disabled", true);
 			$("#act").text(act);
 			$("#form-outlet")[0].reset();
 			$("#mdl-outlet").modal('show');
@@ -203,7 +202,6 @@
 						<tr>
 							<td>` + data[i].nik + `</td>
 							<td>` + data[i].nama + `</td>
-							<td>` + data[i].nama_outlet + `</td>
 							<td class="text-center">
 								<button type="button" 
 									data-id="` + data[i].id_outlet + `"
@@ -234,7 +232,7 @@
 				dataType: "json",
 				success: function (data) {
 					if (data) {
-						get_outlet();
+						get_outlet(id_outletid_outlet);
 						a_ok('Berhasil!', 'Data dihapus');
 					} else {
 						a_error('Gagal!', 'Menghapus data');
@@ -257,7 +255,7 @@
 				cl(res.res);
 				if (res.res) {
 					a_ok('Berhasil!', res.msg);
-					get_outlet();
+					get_outlet(id_outlet);
 					$("#mdl-outlet").modal('hide');
 				} else {
 					a_error('Gagal!', res.msg);
@@ -289,9 +287,12 @@
 		});
 	}
 
-	function get_outlet() {
+	function get_outlet(id_outlet) {
 		$.ajax({
 			url: base_url + 'Outlet_detail/get_data',
+			data:{
+				id:id_outlet
+			},
 			method: "POST",
 			dataType: "json",
 			success: function (data) {
@@ -320,5 +321,4 @@
 			}
 		});
 	}
-
 </script>

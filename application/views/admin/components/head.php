@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="<?= base_url() ?>assets/admin/js/jquery.min.js"></script>
 	<link rel="stylesheet" href="<?= base_url() ?>assets/admin/css/jquery.ui.css">
 	<script type="text/javascript" src="<?= base_url() ?>assets/admin/js/ui.js"></script>
+	<link rel="stylesheet" href="<?= base_url() ?>assets/vendor/MaterialDesign/css/materialdesignicons.min.css">
 	<script>
 		const base_url = '<?= base_url() ?>';
 

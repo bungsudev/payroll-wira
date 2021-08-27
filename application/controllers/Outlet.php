@@ -23,9 +23,17 @@ class Outlet extends CI_Controller {
 	public function get_data(){
 		echo json_encode($this->Outlet_m->data_outlet());
 	}
+
+	public function total_karyawan_outlet($id){
+		echo json_encode($this->Outlet_m->total_karyawan_outlet($id));
+	}
 	
 	public function get_data_detail(){
 		echo json_encode($this->Outlet_m->data_outlet_detail());
+	}
+
+	public function getIDOutlet(){
+		echo json_encode($this->Outlet_m->getIDOutlet());
 	}
 
 	function simpan_outlet($act, $id = ''){

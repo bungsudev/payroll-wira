@@ -39,7 +39,7 @@ class Karyawan_m extends CI_Model {
             "pengalaman" => $this->input->post('pengalaman'),
             "pelatihan" => $this->input->post('pelatihan'),
             "foto" => $nama_gambar,
-            "created" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('karyawan', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
@@ -63,7 +63,7 @@ class Karyawan_m extends CI_Model {
             "pendidikan" => $this->input->post('pendidikan'),
             "pengalaman" => $this->input->post('pengalaman'),
             "pelatihan" => $this->input->post('pelatihan'),
-            "edited" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         //cek update tanpa gambar

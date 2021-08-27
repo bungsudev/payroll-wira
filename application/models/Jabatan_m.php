@@ -24,7 +24,7 @@ class Jabatan_m extends CI_Model {
     {
         $data = [
             "jabatan" => $this->input->post('jabatan'),
-            "created" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('jabatan', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
@@ -34,7 +34,7 @@ class Jabatan_m extends CI_Model {
     {
         $data = [
             "jabatan" => $this->input->post('jabatan'),
-            "edited" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         $this->db->where('id_jabatan', $id);
