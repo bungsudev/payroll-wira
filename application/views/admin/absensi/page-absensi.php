@@ -33,7 +33,6 @@
 </div>
 
 <div class="box containerAbsensi">
-	<!-- /.box-header -->
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-6">
@@ -70,47 +69,92 @@
 									placeholder="Nama Karyawan">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label for="hadir">Hadir</label>
-								<input type="number" class="form-control required" name="hadir" max='31' min='28' id="hadir">
+								<input type="number" class="form-control required" name="hadir" id="hadir">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label for="absen">Absen</label>
 								<input type="number" class="form-control required" name="absen" id="absen">
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-							  <label for="lembur">Lembur</label>
-							  <select class="form-control" name="lembur" id="lembur">
-								<option value="" readonly selected="selected">- Pilih	 -</option>
-								<option value="001">Hari Raya</option>
-								<option value="002">Lembur Kerja</option>
-							  </select>
-							</div>
-						</div>
+						<div id="inputanLembur"></div>
+
 						<div class="col-md-12">
-							<button class="float-right btn btn-success mt-2" id="btn-tambah"><i class="mdi mdi-content-save"></i> Input Absensi</button>
+							<button class="float-right btn btn-success mt-2 ml-2" id="btnTambah"><i class="mdi mdi-content-save"></i> Input Absensi</button>
+							<button class="float-right btn btn-info mt-2" id="btnTambahLemburMdl"><i class="mdi mdi-plus-box-outline"></i> Input Lembur</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- /.box-body -->
+</div>
+
+<div class="modal fade" id="mdlLembur" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Input Lembur Karyawan</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="formLembur">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+							<label for="jenis_lembur">Jenis Lembur</label>
+							<select class="form-control" name="jenis_lembur" id="jenis_lembur">
+								<option value="" selected>-Pilih-</option>
+								<option value="001">Lembur Harian</option>
+								<option value="002">Hari Raya Waisak</option>
+							</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Tanggal Lembur</label>
+								<div class="input-group">
+									<input type="date" class="form-control"
+										id="tanggal_lembur" name="tanggal_lembur">
+									<div class="input-group-append">
+										<button class="btn btn-rounded btn-info btn-sm"
+											id="btnSimpanLembur">Tambah</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<table id="tblLembur" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+					<thead>
+						<tr>
+							<th>Jenis Lembur</th>
+							<th>Tanggal</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button class="float-right btn btn-success mt-2" id="btnSelesaiLembur"><i class="mdi mdi-plus-box-outline"></i> Selesai</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="box containerAbsensi">
 	<div class="box-header with-border">
-		<h6 class="box-subtitle">
-			<!-- <button class="float-right btn btn-info" id="btn-import"><i class="mdi mdi-file-import"></i> Import Data</button> -->
-		</h6>
-
+		<h3>Absensi Telah di Input </h3>
 	</div>
-	<!-- /.box-header -->
 	<div class="box-body">
 		<div class="table-responsive">
 			<table id="tbl-absensi" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
@@ -129,66 +173,19 @@
 			</table>
 		</div>
 	</div>
-	<!-- /.box-body -->
 </div>
-<!-- 
-<div class="modal fade" id="mdl-absensi" tabindex="-1">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title"><span id="act"></span> Absensi</h5>
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form ecntype="multipart/form-data" id="form-absensi">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="nik">Nama Karyawan</label>
-								<input type="text" class="form-control required" name="nik" id="nik" readonly
-									placeholder="Nama Karyawan">
-							</div>
-						</div>
-						<div class="col-md-8">
-							<input type="hidden" name="id_outlet" id="id_outlet" value="">
-							<input type="hidden" name="id_karyawan" id="id_karyawan" value="">
-							<div class="form-group">
-								<label>Nama Karyawan</label>
-								<div class="input-group">
-									<input type="text" class="form-control required" placeholder="Cari Karyawan"
-										id="nama" name="nama" readonly>
-									<div class="input-group-append">
-										<button class="btn btn-rounded btn-info btn-sm"
-											id="btn-cari-karyawan">Cari</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer modal-footer-uniform">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-				<button type="button" class="btn btn-primary float-right" id="btn-simpan">Simpan</button>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 <script>
 	let act = '';
 	let id_absensi = '';
 	$(document).ready(function () {
 		console.clear();
+
+		//note selesaikan input absensi
+		let dtTblLembur = $("#tblLembur").DataTable();
 		$(".containerAbsensi").hide();
 		$("#outlet_filter").select2();
-
 		//button action
-		$("#btn-import").click(function () {
-			$("#mdl-import").modal('show');
-		})
 		$("#btnFilter").click(function (e) {
 			e.preventDefault();
 			let periode_filter = $("#periode_filter").val();
@@ -201,12 +198,38 @@
 				a_error('Maaf!', 'Silahkan pilih Periode dan outlet dahulu!');
 			}
 		})
-		$("#btn-tambah").click(function () {
-			act = 'Tambah';
-			$(".id_absensi").hide();
-			$("#act").text(act);
-			$("form")[0].reset();
-			$("#mdl-absensi").modal('show');
+		$("#btnTambahLemburMdl").click(function (e) {
+			e.preventDefault();
+			dtTblLembur.clear().destroy();
+			$('#tblLembur').dataTable({
+				"autoWidth": false,
+				"columnDefs": [
+					{
+						"width": "94%",
+						"targets": 0
+					},
+					{
+						"width": "5%",
+						"targets": 1
+					},
+					{
+						"width": "1%",
+						"targets": 2
+					}
+				]
+			});
+			$("#mdlLembur").modal('show')
+		})
+		$("#btnSimpanLembur").click(function (e) {
+			e.preventDefault();
+			let jenis_lembur = $('#jenis_lembur').val();
+			let jenis_lembur_text = $('#jenis_lembur :selected').text();
+			let tanggal_lembur = $('#tanggal_lembur').val();
+			let form_lembur = jenis_lembur + ' - ' + jenis_lembur_text + '&' + tanggal_lembur;
+			let btnHapusLembur = '<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
+
+			//addKeTable
+			dtTblLembur.row.add([jenis_lembur + ' - ' + jenis_lembur_text, tanggal_lembur, btnHapusLembur]).draw();
 		})
 		$("#btn-simpan").click(function (e) {
 			e.preventDefault();
@@ -229,8 +252,50 @@
 				}
 			}
 		})
+		$("#btnSelesaiLembur").click(function (e) {
+			var heads = [];
+			let html = '';
+			let r = 0;
+
+			$("#tblLembur thead").find("th").each(function () {
+				heads.push($(this).text().replace(' ', ''));
+			});
+			var rows = [];
+			$("#tblLembur tbody tr").each(function () {
+				cur = {};
+				$(this).find("td").each(function(i, v) {
+					cur[heads[i]] = $(this).text().trim();
+				});
+				rows.push(cur);
+				cur = {};
+			});
+			for (let i = 0; i < rows.length; i++) {
+				r++;
+				html += `
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="lemburData">Jenis Lembur `+ r +`</label>
+							<input type="text" class="form-control required" name="lemburData[]" readonly value="`+ rows[i].JenisLembur +`">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="lemburData">Tanggal Lembur `+ r +`</label>
+							<input type="text" class="form-control required" name="lemburData[]" readonly value="`+ rows[i].Tanggal +`">
+						</div>
+					</div>
+				`;
+			}
+			$("#inputanLembur").after(html);
+			$("#mdlLembur").modal('hide');
+		})
 
 		//tbody button action
+		$("#tblLembur tbody").on("click", ".btnHapusLembur", function () {
+			dtTblLembur.row( $(this).parents('tr') )
+			.remove()
+			.draw();
+		})
 		$("#tbl-karyawan tbody").on("click", ".btnPilihKaryawan", function () {
 			id_outletdetail = $(this).data("id");
 			id_karyawan = $(this).data("id_karyawan");
@@ -257,6 +322,11 @@
 			hapus_absensi(id_absensi);
 		})
 	})
+
+	function addDataTable(data) {
+		let data_array = data.split('&')
+		$('#example').DataTable().row.add(data_array).draw();
+	}
 
 	function get_data_absensi(periode_filter, outlet_filter) {
 		$.ajax({
