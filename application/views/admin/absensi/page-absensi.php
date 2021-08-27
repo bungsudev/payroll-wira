@@ -193,6 +193,7 @@
 			if (periode_filter != '' && outlet_filter != '') {
 				getKaryawanOutlet(outlet_filter)
 				get_data_absensi(periode_filter, outlet_filter)
+				$(".delthis").remove();
 				$("#form-absensi")[0].reset();
 			} else {
 				a_error('Maaf!', 'Silahkan pilih Periode dan outlet dahulu!');
@@ -272,13 +273,13 @@
 			for (let i = 0; i < rows.length; i++) {
 				r++;
 				html += `
-					<div class="col-md-8">
+					<div class="col-md-8 delthis">
 						<div class="form-group">
 							<label for="lemburData">Jenis Lembur `+ r +`</label>
 							<input type="text" class="form-control required" name="lemburData[]" readonly value="`+ rows[i].JenisLembur +`">
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 delthis">
 						<div class="form-group">
 							<label for="lemburData">Tanggal Lembur `+ r +`</label>
 							<input type="text" class="form-control required" name="lemburData[]" readonly value="`+ rows[i].Tanggal +`">
