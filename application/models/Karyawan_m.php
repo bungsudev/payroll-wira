@@ -20,9 +20,28 @@ class Karyawan_m extends CI_Model {
         return $query->row();
     }
 
+    public function getIDKaryawan()
+    {
+        // Example KRYW201912130001;
+        $date = date("Ymd");
+        $queryLength = "SELECT id_absensi FROM absensi WHERE MID(id_absensi,5,8) = '$date'";
+        $curLength = ($this->db->query($queryLength)->num_rows()) + 1;
+        if ($curLength <= 9) {
+            $returnId = "KRYW" . $date . "000" . $curLength;
+        } else if ($curLength <= 99) {
+            $returnId = "KRYW" . $date . "00" . $curLength;
+        } else if ($curLength <= 99) {
+            $returnId = "KRYW" . $date . "0" . $curLength;
+        } else {
+            $returnId = "KRYW" . $date . $curLength;
+        }
+        return $returnId;
+    }
+
     public function simpan_karyawan($nama_gambar)
     {
         $data = [
+            "id_karyawan" => $this->getIDKaryawan(),
             "nik" => $this->input->post('nik'),
             "nama" => $this->input->post('nama'),
             "status" => $this->input->post('status'),
@@ -78,7 +97,7 @@ class Karyawan_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $data = [
-            "deleted" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "deleted" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         $this->db->where('id_karyawan', $id);

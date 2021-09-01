@@ -46,7 +46,7 @@ class Jabatan_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $data = [
-            "deleted" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "deleted" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         $this->db->where('id_jabatan', $id);

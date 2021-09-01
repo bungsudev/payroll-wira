@@ -26,6 +26,14 @@ class Absensi extends CI_Controller {
 		echo json_encode($this->Absensi_m->data_absensi());
 	}
 
+	public function getAbsensiDtl(){
+		echo json_encode($this->Absensi_m->getAbsensiDtl());
+	}
+
+	public function get_karyawanOutlet(){
+		echo json_encode($this->Absensi_m->get_karyawanOutlet());
+	}
+
 	public function total_karyawan_absensi($id){
 		echo json_encode($this->Absensi_m->total_karyawan_absensi($id));
 	}
@@ -44,11 +52,13 @@ class Absensi extends CI_Controller {
 					'res' => $this->Absensi_m->simpan_absensi(), 
 					'msg' =>  'Data di tambahkan'
 				]);
+				$this->Logs_m->save('tambah Absensi => id_karyawan : '.$_POST['id_karyawan']);
 		}else if ($act == 'Edit'){
 			echo json_encode([
 				'res' => $this->Absensi_m->edit_absensi($id), 
 				'msg' =>  'Data telah di edit'
 			]);
+			$this->Logs_m->save('edit Absensi => id_karyawan : '.$_POST['id_karyawan']);
 		}else{
 			echo json_encode([
 				'res' => false, 
@@ -58,7 +68,7 @@ class Absensi extends CI_Controller {
 	}
 
 	public function hapus_absensi(){
-		$this->Logs_m->save('hapus Karyawan => id : '.$_POST['id']);
+		$this->Logs_m->save('hapus Absensi => id : '.$_POST['id']);
 		echo json_encode($this->Absensi_m->hapus_absensi());
 	}
 

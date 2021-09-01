@@ -88,6 +88,24 @@ class Karyawan extends CI_Controller {
 		echo json_encode($this->Karyawan_m->hapus_karyawan());
 	}
 
+	public function getIDKaryawan()
+    {
+        // Example KRYW201912130001;
+        $date = date("Ymd");
+        $queryLength = "SELECT id_absensi FROM absensi WHERE MID(id_absensi,5,8) = '$date'";
+        $curLength = ($this->db->query($queryLength)->num_rows()) + 1;
+        if ($curLength <= 9) {
+            $returnId = "KRYW" . $date . "000" . $curLength;
+        } else if ($curLength <= 99) {
+            $returnId = "KRYW" . $date . "00" . $curLength;
+        } else if ($curLength <= 99) {
+            $returnId = "KRYW" . $date . "0" . $curLength;
+        } else {
+            $returnId = "KRYW" . $date . $curLength;
+        }
+        return $returnId;
+    }
+
 	function import_karyawan()
     {
         if (isset($_FILES["uploadFile"]["name"])) {
@@ -116,6 +134,7 @@ class Karyawan extends CI_Controller {
                   
                     if ($nik != ''  ) {
                         $data = [ 
+                            "id_karyawan" => $this->getIDKaryawan(),
                             "nik" => $nik,
 							"nama" => $nama,
 							"status" => $status,

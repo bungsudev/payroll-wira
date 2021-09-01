@@ -11,7 +11,21 @@ class Absensi_m extends CI_Model {
     {
         $periode = $this->input->post('periode');
         $id_outlet = $this->input->post('id_outlet');
-        $query = $this->db->query("SELECT * FROM absensi WHERE periode = '$periode' AND id_outlet = '$id_outlet' AND deleted IS NULL");
+        $query = $this->db->query("SELECT a.*, b.* FROM absensi a LEFT JOIN karyawan b on a.id_karyawan = b.id_karyawan WHERE periode = '$periode' AND id_outlet = '$id_outlet' AND a.deleted IS NULL");
+        return $query->result_array();
+    }
+
+    public function getAbsensiDtl()
+    {
+        $id_absensi = $this->input->post('id_absensi');
+        $query = $this->db->query("SELECT a.*, b.* FROM absensi a LEFT JOIN karyawan b on a.id_karyawan = b.id_karyawan WHERE id_absensi = '$id_absensi' AND a.deleted IS NULL");
+        return $query->row();
+    }
+
+    public function get_karyawanOutlet()
+    {
+        $id_outlet = $this->input->post('id_outlet');
+        $query = $this->db->query("SELECT a.*,b.*, c.*, d.*, a.id_karyawan AS idKaryawan, a.id_outlet AS idOutlet FROM outlet_detail a LEFT JOIN outlet b ON a.id_outlet = b.id_outlet LEFT JOIN karyawan c ON a.id_karyawan = c.id_karyawan LEFT JOIN absensi d ON a.id_karyawan = d.id_karyawan where a.id_outlet = '$id_outlet' AND d.id_absensi IS NULL AND a.deleted IS NULL AND b.deleted IS NULL AND c.deleted IS NULL AND d.deleted IS NULL GROUP BY a.id_outletdetail");
         return $query->result_array();
     }
 
@@ -24,27 +38,42 @@ class Absensi_m extends CI_Model {
 
     public function getIDAbsensi()
     {
-        // Example OUTL201912130001;
+        // Example ABSN201912130001;
         $date = date("Ymd");
         $queryLength = "SELECT id_absensi FROM absensi WHERE MID(id_absensi,5,8) = '$date'";
         $curLength = ($this->db->query($queryLength)->num_rows()) + 1;
         if ($curLength <= 9) {
-            $returnId = "OUTL" . $date . "000" . $curLength;
+            $returnId = "ABSN" . $date . "000" . $curLength;
         } else if ($curLength <= 99) {
-            $returnId = "OUTL" . $date . "00" . $curLength;
+            $returnId = "ABSN" . $date . "00" . $curLength;
         } else if ($curLength <= 99) {
-            $returnId = "OUTL" . $date . "0" . $curLength;
+            $returnId = "ABSN" . $date . "0" . $curLength;
         } else {
-            $returnId = "OUTL" . $date . $curLength;
+            $returnId = "ABSN" . $date . $curLength;
         }
         return $returnId;
     }
 
     public function simpan_absensi()
     {
+        if(!empty($this->input->post("jenisLembur"))){
+            foreach ($this->input->post("jenisLembur") as $key => $value) {
+                $lembur[$key] = $value."|".$_POST["tanggalLembur"][$key];
+            }
+            $lembur = implode(",",$lembur);
+        }else{
+            $lembur = '';
+        }
+
         $data = [
             "id_absensi" => $this->getIDAbsensi(),
-            "nama_absensi" => $this->input->post('nama_absensi'),
+            "id_outlet" => $this->input->post('id_outlet'),
+            "id_karyawan" => $this->input->post('id_karyawan'),
+            "bulan" => $this->input->post('bulan'),
+            "periode" => $this->input->post('periode'),
+            "hadir" => $this->input->post('hadir'),
+            "absen" => $this->input->post('absen'),
+            "lembur" => $lembur,
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('absensi', $data);
@@ -53,8 +82,22 @@ class Absensi_m extends CI_Model {
 
     public function edit_absensi($id)
     {
+        if(!empty($this->input->post("jenisLembur"))){
+            foreach ($this->input->post("jenisLembur") as $key => $value) {
+                $lembur[$key] = $value."|".$_POST["tanggalLembur"][$key];
+            }
+            $lembur = implode(",",$lembur);
+        }else{
+            $lembur = '';
+        }
         $data = [
-            "nama_absensi" => $this->input->post('nama_absensi'),
+            "id_outlet" => $this->input->post('id_outlet'),
+            "id_karyawan" => $this->input->post('id_karyawan'),
+            "bulan" => $this->input->post('bulan'),
+            "periode" => $this->input->post('periode'),
+            "hadir" => $this->input->post('hadir'),
+            "absen" => $this->input->post('absen'),
+            "lembur" => $lembur,
             "edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username')
         ];
 
@@ -67,7 +110,7 @@ class Absensi_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $data = [
-            "deleted" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "deleted" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         $this->db->where('id_absensi', $id);
@@ -127,7 +170,7 @@ class Absensi_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $data = [
-            "deleted" => date("d-m-Y H:i:s").$this->session->userdata('username'),
+            "deleted" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
 
         $this->db->where('id_absensidetail', $id);
