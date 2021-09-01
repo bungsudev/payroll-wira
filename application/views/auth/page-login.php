@@ -69,7 +69,8 @@
 										<div class="col-12 text-center">
 											<button type="submit" class="btn btn-primary btn-block mt-10">SIGN
 												IN</button>
-											<p class="mt-4 text-center">Copyright © <?= date('Y') ?>. All rights reserved</p>
+											<p class="mt-4 text-center">&copy; 2021 <a href="#">SIAB Payroll version 1.0</a>. All Rights Reserved.</p>
+											<!-- dev by alazmi07 -->
 										</div>
 										<!-- /.col -->
 									</div>

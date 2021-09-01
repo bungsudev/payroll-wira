@@ -9,7 +9,8 @@
 			</li>
 		</ul>
 	</div> -->
-	&copy; 2021 <a href="#">SIAB Payroll</a>. All Rights Reserved.
+	&copy; 2021 <a href="#">SIAB Payroll version 1.0</a>. All Rights Reserved.
+	<!-- dev by alazmi07 -->
 </footer>
 
 <div class="control-sidebar-bg"></div>

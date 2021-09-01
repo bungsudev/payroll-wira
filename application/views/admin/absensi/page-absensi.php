@@ -126,7 +126,8 @@
 							<div class="form-group">
 								<label>Tanggal Lembur</label>
 								<div class="input-group">
-									<input type="date" class="form-control requiredLembur" id="tanggal_lembur" name="tanggal_lembur">
+									<input type="date" class="form-control requiredLembur" id="tanggal_lembur"
+										name="tanggal_lembur">
 									<div class="input-group-append">
 										<button class="btn btn-rounded btn-info btn-sm"
 											id="btnSimpanLembur">Tambah</button>
@@ -182,6 +183,7 @@
 </div>
 
 <script>
+	///kerjakan master lembur
 	let act = '';
 	let id_absensi = '';
 	let periode_filter, outlet_filter = '';
@@ -250,7 +252,9 @@
 					'<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
 
 				//addKeTable
-				dtTblLembur.row.add([jenis_lembur + ' - ' + jenis_lembur_text, tanggal_lembur, btnHapusLembur]).draw();
+				dtTblLembur.row.add([jenis_lembur + ' - ' + jenis_lembur_text, tanggal_lembur,
+					btnHapusLembur
+				]).draw();
 			}
 		})
 		$("#btnTambah").click(function (e) {
@@ -297,7 +301,7 @@
 		$("#formAbsensi").on("click", ".btnHapusLemburX", function (e) {
 			e.preventDefault();
 			let id = $(this).data('id');
-			$("."+id).remove();
+			$("." + id).remove();
 		})
 		$("#tblLembur tbody").on("click", ".btnHapusLembur", function () {
 			dtTblLembur.row($(this).parents('tr'))
@@ -360,16 +364,20 @@
 					lembur = lembur.split(',');
 
 					let dataLembur = [];
-					$.each(lembur, function(i, val){
+					$.each(lembur, function (i, val) {
 						let lemburDtl = '';
 						lemburDtl = val.split('|');
-						dataLembur[i] = {"JenisLembur":lemburDtl[0],"Tanggal":lemburDtl[1]}
+						dataLembur[i] = {
+							"JenisLembur": lemburDtl[0],
+							"Tanggal": lemburDtl[1]
+						}
 
 						let btnHapusLembur =
 							'<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
 
 						//addKeTable
-						$('#tblLembur').DataTable().row.add([lemburDtl[0], lemburDtl[1], btnHapusLembur]).draw();
+						$('#tblLembur').DataTable().row.add([lemburDtl[0], lemburDtl[1],
+							btnHapusLembur]).draw();
 					})
 					appendInputLembur(dataLembur)
 				} else {
@@ -546,18 +554,18 @@
 			let classRnd = Math.floor(Math.random() * 999999999);
 			r++;
 			html += `
-				<div class="col-md-7 delthis `+ classRnd +`">
+				<div class="col-md-7 delthis ` + classRnd + `">
 					<div class="form-group">
 						<label for="jenisLembur">Jenis Lembur ` + r + `</label>
 						<input type="text" class="form-control" name="jenisLembur[]" readonly value="` + data[i].JenisLembur + `">
 					</div>
 				</div>
-				<div class="col-md-5 delthis `+ classRnd +`">
+				<div class="col-md-5 delthis ` + classRnd + `">
 					<label for="tanggalLembur">Tanggal Lembur ` + r + `</label>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" name="tanggalLembur[]" readonly value="` + data[i].Tanggal + `">
 						<div class="input-group-append">
-							<button class="btn btn-danger text-white btnHapusLemburX" data-id="`+ classRnd +`" style="cursor: pointer;"><i class="mdi mdi-playlist-remove"></i></button>
+							<button class="btn btn-danger text-white btnHapusLemburX" data-id="` + classRnd + `" style="cursor: pointer;"><i class="mdi mdi-playlist-remove"></i></button>
 						</div>
 					</div>
 				</div>
