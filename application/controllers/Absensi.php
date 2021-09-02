@@ -12,6 +12,7 @@ class Absensi extends CI_Controller {
 		$this->load->library('excel');
 		$this->load->model('Logs_m');
 		$this->load->model('Absensi_m');
+		$this->load->model('Lembur_m');
 		$this->load->model('Outlet_m');
 	}
 
@@ -45,6 +46,12 @@ class Absensi extends CI_Controller {
 	public function getIDAbsensi(){
 		echo json_encode($this->Absensi_m->getIDAbsensi());
 	}
+
+	//get data lembur
+	public function getLemburAktif(){
+		echo json_encode($this->Lembur_m->getLemburAktif());
+	}
+	//get data lembur
 
 	function simpan_absensi($act, $id = ''){
 		if ($act == 'Tambah') {

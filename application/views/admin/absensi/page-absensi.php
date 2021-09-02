@@ -85,7 +85,7 @@
 								<input type="number" class="form-control required" name="absen" id="absen">
 							</div>
 						</div>
-						<div id="inputanLembur"></div>
+						<div id="inputanLembur" class="row"></div>
 
 						<div class="col-md-12">
 							<button class="float-right btn btn-success mt-2 ml-2" id="btnTambah"><i
@@ -116,9 +116,9 @@
 							<div class="form-group">
 								<label for="jenis_lembur">Jenis Lembur</label>
 								<select class="form-control requiredLembur" name="jenis_lembur" id="jenis_lembur">
-									<option value="" selected>-Pilih-</option>
+									<!-- <option value="" selected>-Pilih-</option>
 									<option value="001">Lembur Harian</option>
-									<option value="002">Hari Raya Waisak</option>
+									<option value="002">Hari Raya Waisak</option> -->
 								</select>
 							</div>
 						</div>
@@ -227,10 +227,14 @@
 		})
 		$("#btnTambahLemburMdl").click(function (e) {
 			e.preventDefault();
-			if (act == 'Tambah') {
-				dtTblLembur.clear().draw();
+			if (act == 'Tambah' || act == 'Edit') {
+				if (act == 'Tambah') {
+					dtTblLembur.clear().draw();
+				}
+				getLemburAktif();
+			} else {
+				a_error('Terjadi Kesalahan!', 'Pilih Karyawan terlebih dahulu');
 			}
-			$("#mdlLembur").modal('show')
 		})
 		$("#btnSimpanLembur").click(function (e) {
 			e.preventDefault();
@@ -279,22 +283,33 @@
 			}
 		})
 		$("#btnSelesaiLembur").click(function (e) {
-			var heads = [];
-
-			$("#tblLembur thead").find("th").each(function () {
-				heads.push($(this).text().replace(' ', ''));
-			});
-			var rows = [];
-			$("#tblLembur tbody tr").each(function () {
-				cur = {};
-				$(this).find("td").each(function (i, v) {
-					cur[heads[i]] = $(this).text().trim();
+			e.preventDefault();
+			let check = true;
+			$('.requiredLembur').each(function () {
+				if (this.value.trim() !== '') {
+					$(this).removeClass('is-invalid');
+				} else {
+					$(this).addClass('is-invalid');
+					check = false;
+				}
+			})
+			if (check) {
+				var heads = [];
+				$("#tblLembur thead").find("th").each(function () {
+					heads.push($(this).text().replace(' ', ''));
 				});
-				rows.push(cur);
-				cur = {};
-			});
-			appendInputLembur(rows);
-			$("#mdlLembur").modal('hide');
+				var rows = [];
+				$("#tblLembur tbody tr").each(function () {
+					cur = {};
+					$(this).find("td").each(function (i, v) {
+						cur[heads[i]] = $(this).text().trim();
+					});
+					rows.push(cur);
+					cur = {};
+				});
+				appendInputLembur(rows);
+				$("#mdlLembur").modal('hide');
+			}
 		})
 
 		//tbody button action
@@ -330,6 +345,7 @@
 			$("#hadir").focus();
 			$("#formAbsensi")[0].reset();
 			$(".delthis").remove();
+			dtTblLembur.clear().draw();
 			id_absensi = $(this).data("id");
 			getAbsensiDtl(id_absensi)
 		})
@@ -338,6 +354,24 @@
 			hapus_absensi(id_absensi);
 		})
 	})
+
+	function getLemburAktif() {
+		$.ajax({
+			url: base_url + 'Absensi/getLemburAktif',
+			method: "POST",
+			dataType: "json",
+			success: function (data) {
+				let html = '<option value="" selected>-Pilih-</option>';
+				for (let i = 0; i < data.length; i++) {
+					html += `
+						<option value="`+ data[i].id_lembur +`">`+ data[i].nama +`</option>
+					`;
+				}
+				$("#jenis_lembur").html(html);
+				$("#mdlLembur").modal('show')
+			}
+		});
+	}
 
 	function getAbsensiDtl(id_absensi) {
 		$.ajax({
@@ -359,27 +393,27 @@
 					$("#hadir").val(data.hadir);
 					$("#absen").val(data.absen);
 					$("#txtTambah").text('Selesai Edit');
-
 					let lembur = data.lembur;
-					lembur = lembur.split(',');
-
-					let dataLembur = [];
-					$.each(lembur, function (i, val) {
-						let lemburDtl = '';
-						lemburDtl = val.split('|');
-						dataLembur[i] = {
-							"JenisLembur": lemburDtl[0],
-							"Tanggal": lemburDtl[1]
-						}
-
-						let btnHapusLembur =
-							'<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
-
-						//addKeTable
-						$('#tblLembur').DataTable().row.add([lemburDtl[0], lemburDtl[1],
-							btnHapusLembur]).draw();
-					})
-					appendInputLembur(dataLembur)
+					if(lembur){
+						lembur = lembur.split(',');
+						let dataLembur = [];
+						$.each(lembur, function (i, val) {
+							let lemburDtl = '';
+							lemburDtl = val.split('|');
+							dataLembur[i] = {
+								"JenisLembur": lemburDtl[0],
+								"Tanggal": lemburDtl[1]
+							}
+	
+							let btnHapusLembur =
+								'<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
+	
+							//addKeTable
+							$('#tblLembur').DataTable().row.add([lemburDtl[0], lemburDtl[1],
+								btnHapusLembur]).draw();
+						})
+						appendInputLembur(dataLembur)
+					}
 				} else {
 					a_error('Gagal!', 'Menghapus data');
 				}
@@ -571,6 +605,6 @@
 				</div>
 			`;
 		}
-		$("#inputanLembur").after(html);
+		$("#inputanLembur").html(html);
 	}
 </script>

@@ -12,7 +12,7 @@ class Auth extends CI_Controller {
 	public function index(){
 		if($this->session->userdata('username')){
 			$this->session->set_flashdata('message', 'Anda harus login terlebih dahulu.');
-			redirect('home');
+			redirect('dashboard');
 		}
 		$data['title'] = 'Login';
 		$this->load->view('auth/page-login',$data);
