@@ -41,6 +41,12 @@
 					<span>Karyawan</span>
 				</a>
 			</li>
+			<li class="<?php if($this->uri->segment(1)=="lembur"){echo "active";}?>">
+				<a href="<?= base_url(); ?>lembur">
+					<i class="mdi mdi-alarm-multiple"><span class="path1"></span><span class="path2"></span></i>
+					<span>Lembur</span>
+				</a>
+			</li>
 			<li class="<?php if($this->uri->segment(1)=="outlet"){echo "active";}?>">
 				<a href="<?= base_url(); ?>outlet">
 					<i class="mdi mdi-bank"><span class="path1"></span><span class="path2"></span></i>
