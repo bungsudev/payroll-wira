@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Outlet_m extends CI_Model {
+class PppSDM_m extends CI_Model {
 
     public function __construct()
     {
@@ -35,6 +35,32 @@ class Outlet_m extends CI_Model {
     {
         $id = $this->input->post('id');
         $query = $this->db->query("SELECT * FROM outlet WHERE id_outlet='$id' AND deleted IS NULL");
+        return $query->row();
+    }
+
+    //karyawan yang sudah di isi absensinya
+    public function get_karyawanOutlet()
+    {
+        $id = $this->input->post('id_outlet');
+        $periode = $this->input->post('periode');
+        $query = $this->db->query("SELECT a.*,b.nama, b.jabatan,b.nis,b.nik, b.tempat_lahir, b.tanggal_lahir, c.* FROM absensi a LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan LEFT JOIN karyawan_detail c ON a.id_karyawan = c.id_karyawan WHERE a.id_outlet = '$id' AND a.periode = '$periode' ORDER BY b.nama");
+        return $query->result_array();
+    }
+
+    public function dataDefault()
+    {
+        $query = $this->db->query("SELECT * FROM setting_default where id = '1'");
+        return $query->row();
+    }
+
+    public function json_dataPPP($periode, $id_karyawan)
+    {
+        $query = $this->db->query("SELECT * FROM ppp_sdm where periode = '$periode' AND id_karyawan = '$id_karyawan'");
+        return $query->row();
+    }
+    public function json_dataAbsensi($periode, $id_karyawan)
+    {
+        $query = $this->db->query("SELECT * FROM absensi where periode = '$periode' AND id_karyawan = '$id_karyawan'");
         return $query->row();
     }
 
@@ -111,6 +137,34 @@ class Outlet_m extends CI_Model {
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
+    public function update_detail_cek()
+    {
+        $input_type = $this->input->post('input_type');
+        if ($input_type == 'kbl') {
+            $data_input = $this->input->post('kbl');
+        }else if($input_type == 'lhk'){
+            $data_input = $this->input->post('lhk');
+        }else if($input_type == 'llr'){
+            $data_input = $this->input->post('llr');
+        }else if($input_type == 'sp'){
+            $data_input = $this->input->post('sp');
+        }else if($input_type == 'lbu'){
+            $data_input = $this->input->post('lbu');
+        }else if($input_type == 'lain'){
+            $data_input = $this->input->post('lain');
+        }
+
+        $data = [
+            $input_type => $data_input
+        ];
+        // print_r($this->input->post('nik'));
+        // print_r($data); die();
+        $this->db->where('id_karyawan', $this->input->post('id_karyawan'));
+        $this->db->where('periode', $this->input->post('periode'));
+        $this->db->update('ppp_sdm', $data);
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
     public function hapus_outlet()
     {
         $id = $this->input->post('id');
@@ -120,18 +174,6 @@ class Outlet_m extends CI_Model {
 
         $this->db->where('id_outlet', $id);
         $this->db->update('outlet', $data);
-        return ($this->db->affected_rows() != 1) ? false : true;
-    }
-
-    public function hapus_outlet_detail()
-    {
-        $id = $this->input->post('id');
-        $data = [
-            "deleted" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
-        ];
-
-        $this->db->where('id_outletdetail', $id);
-        $this->db->update('outlet_detail', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 

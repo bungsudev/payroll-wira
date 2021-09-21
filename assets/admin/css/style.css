@@ -23534,7 +23534,8 @@ img.away, img.busy, img.offline, img.online {
 
 .dataTables_wrapper .form-control {
   margin: 0 10px;
-  padding: 5px 30px 5px 15px; }
+  /* padding: 5px 30px 5px 15px;  */
+}
 
 @media all and (min-width: 1400px) {
   .proj-table {

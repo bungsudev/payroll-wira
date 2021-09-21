@@ -65,8 +65,10 @@ class Absensi_m extends CI_Model {
             $lembur = '';
         }
 
+        $id_absensi = $this->getIDAbsensi();
+
         $data = [
-            "id_absensi" => $this->getIDAbsensi(),
+            "id_absensi" => $id_absensi,
             "id_outlet" => $this->input->post('id_outlet'),
             "id_karyawan" => $this->input->post('id_karyawan'),
             "bulan" => $this->input->post('bulan'),
@@ -77,6 +79,29 @@ class Absensi_m extends CI_Model {
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('absensi', $data);
+
+        //create ppp_sdm
+        $data2 = [
+            "id_absensi" => $id_absensi,
+            "id_outlet" => $this->input->post('id_outlet'),
+            "id_karyawan" => $this->input->post('id_karyawan'),
+            "periode" => $this->input->post('periode'),
+            "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
+        ];
+        $this->db->insert('ppp_sdm', $data2);
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+    public function createPPPSdm($id_absensi)
+    {
+        $data2 = [
+            "id_absensi" => $id_absensi,
+            "id_outlet" => $this->input->post('id_outlet'),
+            "id_karyawan" => $this->input->post('id_karyawan'),
+            "periode" => $this->input->post('periode'),
+            "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
+        ];
+        $this->db->insert('ppp_sdm', $data2);
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 

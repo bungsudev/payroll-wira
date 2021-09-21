@@ -30,6 +30,10 @@ class Karyawan extends CI_Controller {
 		echo json_encode($this->Karyawan_m->data_karyawan_detail());
 	}
 
+	public function edit_settingDefault(){
+		echo json_encode($this->Karyawan_m->edit_settingDefault());
+	}
+
 	function simpan_karyawan($act, $id = ''){
 		$error = '';
         $config['upload_path']="./assets/img/karyawan";

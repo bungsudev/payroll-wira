@@ -23,12 +23,12 @@
 				</a>
 			</li>
 			<li class="header">Data Master</li>
-			<li class="<?php if($this->uri->segment(1)=="setting-default"){echo "active";}?>">
+			<!-- <li class="<?php if($this->uri->segment(1)=="setting-default"){echo "active";}?>">
 				<a href="<?= base_url(); ?>setting-default">
 					<i class="ti-settings"><span class="path1"></span><span class="path2"></span></i>
 					<span>Pengaturan Awal</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="<?php if($this->uri->segment(1)=="jabatan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>jabatan">
 					<i class="mdi mdi-certificate"><span class="path1"></span><span class="path2"></span></i>
@@ -67,12 +67,12 @@
 				</a>
 			</li>
 			<li class="header">================================</li>
-			<li class="<?php if($this->uri->segment(1)=="transfer_karyawan"){echo "active";}?>">
+			<!-- <li class="<?php if($this->uri->segment(1)=="transfer_karyawan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>transfer_karyawan">
 					<i class="mdi mdi-account-convert"><span class="path1"></span><span class="path2"></span></i>
 					<span>Transfer Karyawan</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="<?php if($this->uri->segment(1)=="ppp_sdm"){echo "active";}?>">
 				<a href="<?= base_url(); ?>ppp_sdm">
 					<i class="mdi mdi-counter"><span class="path1"></span><span class="path2"></span></i>

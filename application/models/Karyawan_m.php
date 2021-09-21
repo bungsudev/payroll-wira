@@ -20,6 +20,13 @@ class Karyawan_m extends CI_Model {
         return $query->row();
     }
 
+    public function edit_settingDefault()
+    {
+        $id = $this->input->post('id');
+        $query = $this->db->query("SELECT * FROM karyawan_detail WHERE id_karyawan='$id' AND deleted IS NULL");
+        return $query->row();
+    }
+
     public function getIDKaryawan()
     {
         // Example KRYW201912130001;
@@ -40,8 +47,9 @@ class Karyawan_m extends CI_Model {
 
     public function simpan_karyawan($nama_gambar)
     {
+        $id_karyawan = $this->getIDKaryawan();
         $data = [
-            "id_karyawan" => $this->getIDKaryawan(),
+            "id_karyawan" => $id_karyawan,
             "nik" => $this->input->post('nik'),
             "nama" => $this->input->post('nama'),
             "status" => $this->input->post('status'),
@@ -61,6 +69,10 @@ class Karyawan_m extends CI_Model {
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('karyawan', $data);
+
+        //simpan/edit data ke karyawan_detail
+        $this->simpan_karyawanDetail($id_karyawan);
+
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
@@ -68,6 +80,7 @@ class Karyawan_m extends CI_Model {
     {
         $data = [
             "nik" => $this->input->post('nik'),
+            "nis" => $this->input->post('nis'),
             "nama" => $this->input->post('nama'),
             "status" => $this->input->post('status'),
             "tempat_lahir" => $this->input->post('tempat_lahir'),
@@ -88,9 +101,47 @@ class Karyawan_m extends CI_Model {
         //cek update tanpa gambar
         (!empty($nama_gambar))? $data = array_merge($data, ["foto" => $nama_gambar]): '';
 
+        //simpan/edit data ke karyawan_detail
+        $this->simpan_karyawanDetail($id);
+
         $this->db->where('id_karyawan', $id);
         $this->db->update('karyawan', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+    public function simpan_karyawanDetail($id_karyawan)
+    {
+        $check_karyawanDetail = $this->db->query("SELECT * FROM karyawan_detail WHERE id_karyawan='$id_karyawan' AND deleted IS NULL")->num_rows();
+
+        $data = [
+            "id_karyawan" => $id_karyawan,
+            "shift_outlet" => $this->input->post('shift_outlet'),
+            "b_spkwt" => $this->input->post('b_spkwt'),
+            "g_pkk" => $this->input->post('g_pkk'),
+            "t_jbt" => $this->input->post('t_jbt'),
+            "t_trans" => $this->input->post('t_trans'),
+            "t_ot" => $this->input->post('t_ot'),
+            "lhk" => $this->input->post('lhk'),
+            "lbu" => $this->input->post('lbu'),
+            "llr" => $this->input->post('llr'),
+            "jst" => $this->input->post('jst'),
+            "dpst" => $this->input->post('dpst'),
+            "srg" => $this->input->post('srg'),
+            "bpdd" => $this->input->post('bpdd'),
+            "dab" => $this->input->post('dab'),
+            "diz" => $this->input->post('diz'),
+            "dis" => $this->input->post('dis'),
+            "lain" => $this->input->post('lain'),
+        ];
+
+        if ($check_karyawanDetail > 0) {
+            array_merge($data, ["edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username')]);
+            $this->db->where('id_karyawan', $id_karyawan)
+                    ->update('karyawan_detail', $data);
+        }else{
+            array_merge($data, ["created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username')]);
+            $this->db->insert('karyawan_detail', $data);
+        }
     }
 
     public function hapus_karyawan()

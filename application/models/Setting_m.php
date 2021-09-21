@@ -22,6 +22,10 @@ class Setting_m extends CI_Model {
     public function edit_setting()
     {
         $data = [
+            "bpjs_kesehatan" => $this->input->post('bpjs_kesehatan'),
+            "bpjs_tk" => $this->input->post('bpjs_tk'),
+            "bpjs_jp" => $this->input->post('bpjs_jp'),
+            "t_urine" => $this->input->post('t_urine'),
             "shift_outlet" => $this->input->post('shift_outlet'),
             "g_pkk" => $this->input->post('g_pkk'),
             "t_jbt" => $this->input->post('t_jbt'),

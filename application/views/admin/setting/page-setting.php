@@ -9,6 +9,39 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group">
+						<label for="bpjs_kesehatan">BPJS Kesehatan</label>
+						<input type="number" class="form-control required" name="bpjs_kesehatan" id="bpjs_kesehatan"
+							value="0">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="bpjs_tk">BPJS Ketenaga Kerjaan</label>
+						<input type="number" class="form-control required" name="bpjs_tk" id="bpjs_tk" value="0">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="bpjs_jp">BPJS JP</label>
+						<input type="number" class="form-control required" name="bpjs_jp" id="bpjs_jp" value="0">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="t_urine">Tes Urine</label>
+						<input type="number" class="form-control required" name="t_urine" id="t_urine" value="0">
+					</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<button class="btn btn-warning ml-2" id="btn-batal"><i class="mdi mdi-reload"></i>
+						Batal</button>
+					<button class="btn btn-success ml-2" id="btn-simpan"><i class="mdi mdi-content-save-settings"></i>
+						Simpan</button>
+				</div>
+			</div>
+			<div class="row d-none">
+				<div class="col-md-3">
+					<div class="form-group">
 						<label for="shift_outlet">Jam Kerja</label>
 						<select class="form-control" name="shift_outlet" id="shift_outlet">
 							<option value="">-Pilih-</option>
@@ -43,21 +76,21 @@
 					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="form-group">
+					<div class="form-group d-none">
 						<label for="lhk">Lembur HK</label>
 						<input type="number" class="form-control required" name="lhk" id="lhk" value="0">
 					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="form-group">
+					<div class="form-group d-none">
 						<label for="lbu">Lembur Back Up</label>
 						<input type="number" class="form-control required" name="lbu" id="lbu" value="0">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 d-none">
 					<div class="form-group">
 						<label for="llr">Lembur Libur</label>
-						<input type="number" class="form-control required" name="llr" id="llr" value="0">
+						<input type="number" class="form-control" name="llr" id="llr" value="0">
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -108,14 +141,12 @@
 						<input type="number" class="form-control required" name="lain" id="lain" value="0">
 					</div>
 				</div>
-				<div class="col-md-12 text-center">
-					<button class="btn btn-warning ml-2" id="btn-batal"><i
-							class="mdi mdi-reload"></i>
+				<!-- <div class="col-md-12 text-center">
+					<button class="btn btn-warning ml-2" id="btn-batal"><i class="mdi mdi-reload"></i>
 						Batal</button>
-					<button class="btn btn-success ml-2" id="btn-simpan"><i
-							class="mdi mdi-content-save-settings"></i>
+					<button class="btn btn-success ml-2" id="btn-simpan"><i class="mdi mdi-content-save-settings"></i>
 						Simpan</button>
-				</div>
+				</div> -->
 			</div>
 		</form>
 	</div>
@@ -161,6 +192,7 @@
 			}
 		})
 	})
+
 	function simpan(act) {
 		if (confirm('Apakah kamu yakin?')) {
 			$.ajax({
@@ -196,6 +228,10 @@
 			dataType: "json",
 			success: function (data) {
 				if (data) {
+					$("#bpjs_kesehatan").val(data.bpjs_kesehatan)
+					$("#bpjs_tk").val(data.bpjs_tk)
+					$("#bpjs_jp").val(data.bpjs_jp)
+					$("#t_urine").val(data.t_urine)
 					$("#shift_outlet").val(data.shift_outlet)
 					$("#g_pkk").val(data.g_pkk)
 					$("#t_jbt").val(data.t_jbt)
@@ -243,4 +279,5 @@
 			}
 		});
 	}
+
 </script>

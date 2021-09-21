@@ -186,6 +186,7 @@
 		})
 		$("#tbl-outlet tbody").on("click", "#btn-hapus", function () {
 			id_outletdetail = $(this).data("id");
+			console.log(id_outletdetail);
 			hapus_outlet(id_outletdetail)
 		})
 	})
@@ -224,7 +225,7 @@
 	function hapus_outlet(id_outletdetail) {
 		if (confirm('Apakah kamu yakin?')) {
 			$.ajax({
-				url: base_url + 'Outlet/hapus_outlet',
+				url: base_url + 'Outlet/hapus_outlet_detail',
 				data: {
 					id: id_outletdetail
 				},
@@ -232,7 +233,7 @@
 				dataType: "json",
 				success: function (data) {
 					if (data) {
-						get_outlet(id_outletid_outlet);
+						get_outlet(id_outletdetail);
 						a_ok('Berhasil!', 'Data dihapus');
 					} else {
 						a_error('Gagal!', 'Menghapus data');

@@ -256,7 +256,7 @@
 					'<button class="btn btn-rounded btn-danger btn-sm btnHapusLembur"><i class="mdi mdi-playlist-remove"></i></button>';
 
 				//addKeTable
-				dtTblLembur.row.add([jenis_lembur + ' - ' + jenis_lembur_text, tanggal_lembur,
+				dtTblLembur.row.add([jenis_lembur, tanggal_lembur,
 					btnHapusLembur
 				]).draw();
 			}

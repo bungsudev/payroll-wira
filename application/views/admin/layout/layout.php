@@ -4,7 +4,6 @@
 <?php $this->load->view('admin/components/head') ?>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary">
-
 	<div class="wrapper">
 
 		<!-- top menu -->

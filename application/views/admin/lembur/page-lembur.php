@@ -1,8 +1,8 @@
 <div class="box">
 	<div class="box-header with-border">
 		<h6 class="box-subtitle">
-			<button class="float-right btn btn-success ml-2" id="btnTambah"><i class="mdi mdi-plus-box-outline"></i>
-				Tambah</button>
+			<!-- <button class="float-right btn btn-success ml-2" id="btnTambah"><i class="mdi mdi-plus-box-outline"></i>
+				Tambah</button> -->
 			<!-- <button class="float-right btn btn-info" id="btn-import"><i class="mdi mdi-file-import"></i> Import Data</button> -->
 		</h6>
 
@@ -15,7 +15,7 @@
 					<tr>
 						<th>ID Lembur</th>
 						<th>Nama Lembur</th>
-						<th>Nilai</th>
+						<!-- <th>Nilai</th> -->
 						<th>Keterangan</th>
 						<th>Status</th>
 						<th></th>
@@ -42,14 +42,14 @@
 			<div class="modal-body">
 				<form ecntype="multipart/form-data">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-9">
 							<div class="form-group">
 								<label for="nama">Nama Lembur</label>
 								<input type="text" class="form-control required required" name="nama" id="nama"
-									placeholder="">
+									placeholder="" readonly>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4 d-none">
 							<div class="form-group">
 							  <label for="jenis_nilai">Perhitungan</label>
 							  <select class="form-control required" name="jenis_nilai" id="jenis_nilai">
@@ -59,7 +59,7 @@
 							  </select>
 							</div>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5 d-none">
 							<div class="form-group">
 								<label for="nilai">Nilai Lembur</label>
 								<input type="number" class="form-control required required" name="nilai" id="nilai" readonly>
@@ -227,16 +227,16 @@
 						<tr>
 							<td>`+ data[i].id_lembur +`</td>
 							<td>`+ data[i].nama +`</td>
-							<td>`+ jenis_nilai +`</td>
 							<td>`+ data[i].keterangan +`</td>
 							<td><span class="badge badge-`+ btn_warna +`">`+ data[i].status +`</span></td>
 							<td align="center">
 								<button type="button" id="btn-edit" data-id="` + data[i].id_lembur + `" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</button>
-								<button type="button" id="btn-hapus" data-id="` + data[i].id_lembur + `" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
 							</td>
 						</tr>
 					`;
 				}
+				
+				// <button type="button" id="btn-hapus" data-id="` + data[i].id_lembur + `" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
 				$('#tblLembur').DataTable().clear().destroy();
 				$("#tblLembur tbody").html(html);
 				$('#tblLembur').DataTable({
@@ -244,10 +244,6 @@
 					"columnDefs": [{
 							"width": "10%",
 							"targets": 0
-						},
-						{
-							"width": "5%",
-							"targets": 2
 						},
 						{
 							"width": "5%",

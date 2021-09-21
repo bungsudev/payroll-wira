@@ -59,6 +59,10 @@ class Outlet extends CI_Controller {
 		$this->Logs_m->save('hapus Karyawan => id : '.$_POST['id']);
 		echo json_encode($this->Outlet_m->hapus_outlet());
 	}
+	public function hapus_outlet_detail(){
+		$this->Logs_m->save('hapus Karyawan Detail => id : '.$_POST['id']);
+		echo json_encode($this->Outlet_m->hapus_outlet_detail());
+	}
 
 	function import_outlet()
     {
