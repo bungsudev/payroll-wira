@@ -80,8 +80,8 @@
 				</a>
 			</li>
 			<li class="header">Laporan</li>
-			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
-				<a href="<?= base_url(); ?>laporan">
+			<li class="<?php if($this->uri->segment(1)=="slip"){echo "active";}?>">
+				<a href="<?= base_url(); ?>slip">
 					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>Slip Gaji</span>
 				</a>
