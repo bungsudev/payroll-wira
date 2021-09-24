@@ -37,15 +37,15 @@ class Ppp_sdm extends CI_Controller {
 		$data['data'] = $this->dataLaporanPPP($id_outlet, $periode);
 		$data['data_default'] = $this->PppSDM_m->dataDefault();
 		$html = $this->load->view('admin/ppp/print-ppp',$data,true);
-		$mpdf->SetTitle('Perhitungan Penghasilan dan Pengeluaran SDM - '.$this->input->get('id_outlet'));
+		$mpdf->SetTitle('Perhitungan Penghasilan dan Pengeluaran SDM - '.$id_outlet);
 		$mpdf->WriteHTML($html);
-		$mpdf->Output();
+		$mpdf->Output('Perhitungan Penghasilan dan Pengeluaran SDM ('.$periode.') - '.$id_outlet.'.pdf', 'I');
     }
 
 	public function dataLaporanPPP($id_outlet, $periode){
 		// $id_outlet = 'OUTL202108260001';
 		// $periode = '2021-09';
-		$data_absen = $this->db->query("SELECT a.*,b.nama, b.jabatan,b.nis, c.* FROM absensi a LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan LEFT JOIN karyawan_detail c ON a.id_karyawan = c.id_karyawan WHERE a.id_outlet = 'OUTL202108260001' AND a.periode = '2021-09' ORDER BY b.nama")->result_array();
+		$data_absen = $this->db->query("SELECT a.*,b.nama, b.jabatan,b.nis, c.* FROM absensi a LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan LEFT JOIN karyawan_detail c ON a.id_karyawan = c.id_karyawan WHERE a.id_outlet = '$id_outlet' AND a.periode = '$periode' ORDER BY b.nama")->result_array();
 		
 		//ambil id_lembur
 		$id_lembur_arr = [];
