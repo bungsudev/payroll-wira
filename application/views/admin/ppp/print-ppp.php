@@ -90,6 +90,9 @@
 		<tbody>
 			<?php
 				$this->load->model('PppSDM_m');
+
+				$this->load->helper('dayCount');
+
 				foreach ($data as $key => $val): 
 					$ppp = $this->PppSDM_m->json_dataPPP($val['periode'],$val['id_karyawan']);
 					$lhk = 0;
@@ -123,6 +126,7 @@
 					$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
 					$saldo = $penghasilan - $potongan;
+					$dab = ($val['g_pkk']/20) * $val['absen'];
 				?>
 			<tr>
 				<td><?= $key + 1?></td>
@@ -143,7 +147,7 @@
 				<td><?= number_format($data_default->bpjs_jp) ?></td>
 				<td><?= number_format($val['dpst']) ?></td>
 				<td><?= number_format($val['bpdd']) ?></td>
-				<td><?= number_format($val['dab']) ?></td>
+				<td><?= number_format($dab) ?></td>
 				<td><?= number_format($val['diz']) ?></td>
 				<td><?= number_format($data_default->t_urine) ?></td>
 				<td><?= number_format($ppp->lain) ?></td>

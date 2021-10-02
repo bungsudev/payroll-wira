@@ -188,11 +188,14 @@
 				<td width="1%">Rp. </td>
 				<td width="34%" align="right"><?= number_format($data_default->bpjs_jp) ?></td>
 			</tr>
+			<?php 
+				$dab = ($val['g_pkk']/20) * $val['absen'];
+			?>
 			<tr>
 				<td width="5%">&nbsp;</td>
 				<td width="60%">Absen</td>
 				<td width="1%"></td>
-				<td width="34%" align="right"><?= $val['absen'] ?></td>
+				<td width="34%" align="right"><?= number_format($dab) ?></td>
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
@@ -211,7 +214,7 @@
 				<td width="60%" align="right"><b>Jumlah potong</b> &nbsp;&nbsp;</td>
 				<td width="1%">Rp. </td>
 				<?php 
-					$jumlahB = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['absen'] + $val['dpst'];
+					$jumlahB = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $dab + $val['dpst'];
 				?>
 				<td width="34%" align="right"><?= number_format($jumlahB) ?></td>
 			</tr>

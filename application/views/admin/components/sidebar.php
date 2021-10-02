@@ -86,7 +86,7 @@
 					<span>Slip Gaji</span>
 				</a>
 			</li>
-			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
+			<!-- <li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
 					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>PPP SDM</span>
@@ -103,7 +103,7 @@
 					<i class="mdi mdi-printer"><span class="path1"></span><span class="path2"></span></i>
 					<span>Outlet</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="header">Pengaturan</li>
 			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">

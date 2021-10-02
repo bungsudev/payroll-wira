@@ -7,7 +7,7 @@ $autoload['libraries'] = array('database','session','form_validation', 'image_li
 
 $autoload['drivers'] = array();
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','dayCount_helper');
 
 $autoload['config'] = array();
 
