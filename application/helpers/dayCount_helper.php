@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-if ( ! function_exists('dayCount_helper'))
+if ( ! function_exists('daycount_helper'))
 {
     function dayCount($from, $to, $day = 5) {
 		$from = new DateTime($from);

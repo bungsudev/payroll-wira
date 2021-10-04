@@ -91,7 +91,7 @@
 			<?php
 				$this->load->model('PppSDM_m');
 
-				$this->load->helper('dayCount_helper');
+				$this->load->helper('daycount_helper');
 
 				foreach ($data as $key => $val): 
 					$ppp = $this->PppSDM_m->json_dataPPP($val['periode'],$val['id_karyawan']);
