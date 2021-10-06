@@ -16,10 +16,14 @@
 	<script src="<?= base_url() ?>assets/admin/js/pages/data-table.js"></script>
 	<script src="<?= base_url() ?>assets/js/iziToast.min.js"></script>	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="<?= base_url() ?>assets/js/jquerynumber.js"></script>	
 	<!-- <script src="<?= base_url() ?>assets/admin/vendor_components/formatter/formatter.js"></script>
 	<script src="<?= base_url() ?>assets/admin/vendor_components/formatter/jquery.formatter.js"></script> -->
 
 	<script>
+		function formatBackNumber(number){
+			return number.toString().replace(/[ ,.]/g,"");
+		}
 		function ct(data){
 			return console.table(data)
 		}
@@ -27,7 +31,7 @@
 			return console.log(data)
 		}
 		function numberFormat(number){
-			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
 		}
 		function a_ok(title, text){
 			iziToast.success({

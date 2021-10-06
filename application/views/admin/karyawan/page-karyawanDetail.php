@@ -22,90 +22,90 @@
 <div class="col-md-3">
     <div class="form-group">
         <label for="g_pkk">Gaji Pokok</label>
-        <input type="number" class="form-control required" name="g_pkk" id="g_pkk" value="0">
+        <input type="text" class="number form-control required" name="g_pkk" id="g_pkk" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="t_jbt">Tunjangan Jabatan</label>
-        <input type="number" class="form-control required" name="t_jbt" id="t_jbt" value="0">
+        <input type="text" class="number form-control required" name="t_jbt" id="t_jbt" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="t_trans">Tunjangan Transportasi</label>
-        <input type="number" class="form-control required" name="t_trans" id="t_trans" value="0">
+        <input type="text" class="number form-control required" name="t_trans" id="t_trans" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="t_ot">Tunjangan Outlet</label>
-        <input type="number" class="form-control required" name="t_ot" id="t_ot" value="0">
+        <input type="text" class="number form-control required" name="t_ot" id="t_ot" value="0">
     </div>
 </div>
 <div class="col-md-3 d-none">
     <div class="form-group">
         <label for="lhk">Lembur HK</label>
-        <input type="number" class="form-control required" name="lhk" id="lhk" value="0">
+        <input type="text" class="number form-control required" name="lhk" id="lhk" value="0">
     </div>
 </div>
 <div class="col-md-3 d-none">
     <div class="form-group">
         <label for="lbu">Lembur Back Up</label>
-        <input type="number" class="form-control required" name="lbu" id="lbu" value="0">
+        <input type="text" class="number form-control required" name="lbu" id="lbu" value="0">
     </div>
 </div>
 <div class="col-md-3 d-none">
     <div class="form-group">
         <label for="llr">Lembur Libur</label>
-        <input type="number" class="form-control" name="llr" id="llr" value="0">
+        <input type="text" class="number form-control" name="llr" id="llr" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="jst">Jamsostek</label>
-        <input type="number" class="form-control required" name="jst" id="jst" value="0">
+        <input type="text" class="number form-control required" name="jst" id="jst" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="dpst">Deposito Perlengkapan</label>
-        <input type="number" class="form-control required" name="dpst" id="dpst" value="0">
+        <input type="text" class="number form-control required" name="dpst" id="dpst" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="srg">Seragam</label>
-        <input type="number" class="form-control required" name="srg" id="srg" value="0">
+        <input type="text" class="number form-control required" name="srg" id="srg" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="bpdd">Biaya Pendidikan</label>
-        <input type="number" class="form-control required" name="bpdd" id="bpdd" value="0">
+        <input type="text" class="number form-control required" name="bpdd" id="bpdd" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="dab">Denda Absen</label>
-        <input type="number" class="form-control required" name="dab" id="dab" value="0">
+        <input type="text" class="number form-control required" name="dab" id="dab" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="diz">Denda Izin</label>
-        <input type="number" class="form-control required" name="diz" id="diz" value="0">
+        <input type="text" class="number form-control required" name="diz" id="diz" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="dis">Denda Sakit</label>
-        <input type="number" class="form-control required" name="dis" id="dis" value="0">
+        <input type="text" class="number form-control required" name="dis" id="dis" value="0">
     </div>
 </div>
 <div class="col-md-3">
     <div class="form-group">
         <label for="lain">Lainnya</label>
-        <input type="number" class="form-control required" name="lain" id="lain" value="0">
+        <input type="text" class="number form-control required" name="lain" id="lain" value="0">
     </div>
 </div>

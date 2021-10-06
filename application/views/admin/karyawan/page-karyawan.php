@@ -173,9 +173,7 @@
 									placeholder="75">
 							</div>
 						</div>
-						<div class="col-md-3">
-						</div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label for="alamat">Alamat</label>
 								<textarea name="alamat" id="alamat" cols="10" rows="3"
@@ -267,15 +265,17 @@
 <script>
 	let act = '';
 	let id_karyawan = '';
+	document.getElementById('nik').onblur = function (event) {
+		let valString = Number(event.target.value).toString();
+		if (valString.length === 16 || valString.length === 16) return;
+		event.target.value = valString.length > 16 ?
+			valString.substr(0, 16) :
+			(valString.length > 16 ? valString.substr(0, 16) : valString.substr(0, 16));
+	}
 	$(document).ready(function () {
 		get_karyawan();
-		document.getElementById('nik').onblur = function (event) {
-			let valString = Number(event.target.value).toString();
-			if (valString.length === 16 || valString.length === 16) return;
-			event.target.value = valString.length > 16 ?
-				valString.substr(0, 16) :
-				(valString.length > 16 ? valString.substr(0, 16) : valString.substr(0, 16));
-		}
+		
+		
 		$('#tbl-karyawan').DataTable({
 			// dom: 'Bfrtip',
 			// buttons: [
@@ -342,6 +342,9 @@
 				}
 			})
 			if (check) {
+				$('input.number').each(function(event) {
+					$(this).val(formatBackNumber($(this).val()));
+				});
 				if (act == 'Tambah') {
 					simpan(act, '');
 				} else if (act == 'Edit') {
@@ -372,6 +375,9 @@
 			get_settingDefault()
 			//timpa dengan setting manual
 			edit_settingDefault(id_karyawan);
+			$('input.number').each(function(event) {
+				$(this).val(numberFormat($(this).val()));
+			});
 		})
 		$("#tbl-karyawan tbody").on("click", "#btn-hapus", function () {
 			id_karyawan = $(this).data("id");
@@ -445,7 +451,9 @@
 			success: function (data) {
 				if (data) {
 					$("#nik").val(data.nik)
+					$("#nis").val(data.nis)
 					$("#nama").val(data.nama)
+					$("#jekel").val(data.jekel)
 					$("#status").val(data.status)
 					$("#tempat_lahir").val(data.tempat_lahir)
 					$("#tanggal_lahir").val(data.tanggal_lahir)
@@ -510,7 +518,6 @@
 			async: false,
 			success: function (data) {
 				if (data) {
-					$("#nis").val(data.nis)
 					$("#shift_outlet").val(data.shift_outlet)
 					$("#g_pkk").val(data.g_pkk)
 					$("#b_spkwt").val(data.b_spkwt)
