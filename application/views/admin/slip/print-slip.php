@@ -61,25 +61,25 @@
 			}else if($val['shift_outlet'] == 3){
 				$shift = 26;
 			}
-			foreach ($data_lembur as $k => $lembur){
-				$detail_lembur = explode("|", $lembur);
-				$id = trim($detail_lembur[0]);
+			// foreach ($data_lembur as $k => $lembur){
+			// 	$detail_lembur = explode("|", $lembur);
+			// 	$id = trim($detail_lembur[0]);
 
-				$qry = $this->db->query("SELECT * FROM lembur where id_lembur = '$id'")->row();
-				if ($qry) {
-					if ($qry->id_lembur == 'LMBR202109030001') {
-						//Lembur HK
-						$lhk = $lhk + $qry->nilai;
-					}else if($qry->id_lembur == 'LMBR202109030002'){
-						// Lembur Backup
-						$lbu = $lbu + $val['g_pkk']/$shift;
-					}else if($qry->id_lembur == 'LMBR202109030003'){
-						// Lembur Libur
-						$llr = $llr + $qry->nilai;
-					}
-				}
-			}
-			$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $val['lhk'] + $lbu;
+			// 	$qry = $this->db->query("SELECT * FROM lembur where id_lembur = '$id'")->row();
+			// 	if ($qry) {
+			// 		if ($qry->id_lembur == 'LMBR202109030001') {
+			// 			//Lembur HK
+			// 			$lhk = $lhk + $qry->nilai;
+			// 		}else if($qry->id_lembur == 'LMBR202109030002'){
+			// 			// Lembur Backup
+			// 			$lbu = $lbu + $val['g_pkk']/$shift;
+			// 		}else if($qry->id_lembur == 'LMBR202109030003'){
+			// 			// Lembur Libur
+			// 			$llr = $llr + $qry->nilai;
+			// 		}
+			// 	}
+			// }
+			$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
 			$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
 			$saldo = $penghasilan - $potongan;
@@ -128,7 +128,7 @@
 				<td width="5%">&nbsp;</td>
 				<td width="60%">Lembur LHK</td>
 				<td width="1%">Rp. </td>
-				<td width="34%" align="right"><?= number_format($val['lhk']) ?></td>
+				<td width="34%" align="right"><?= number_format($ppp->lhk) ?></td>
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
@@ -159,7 +159,7 @@
 				<td width="60%" align="right"><b>Jumlah</b> &nbsp;&nbsp;</td>
 				<td width="1%">Rp. </td>
 				<?php 
-					$jumlahA = $val['g_pkk'] + $val['t_jbt'] + $val['lhk'] + $ppp->llr + $ppp->lbu + $val['t_trans'];
+					$jumlahA = $val['g_pkk'] + $val['t_jbt'] + $ppp->lhk + $ppp->llr + $ppp->lbu + $val['t_trans'];
 				?>
 				<td width="34%" align="right"><?= number_format($jumlahA) ?></td>
 			</tr>

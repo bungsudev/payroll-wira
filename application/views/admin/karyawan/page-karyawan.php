@@ -64,8 +64,8 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="nik">NIK</label>
-								<input type="text" class="form-control requiredSec1" name="nik" id="nik"
-									placeholder="16 Digit NIK">
+								<input type="number" class="form-control requiredSec1" name="nik" id="nik"
+									placeholder="16 Digit NIK" max="9999999999999999" title="NIK Harus berjumlah 16">
 							</div>
 						</div>
 						<div class="col-md-8">
@@ -80,6 +80,19 @@
 								<label for="nis">NIS Karyawan</label>
 								<input type="text" class="form-control requiredSec1" name="nis" id="nis"
 									placeholder="Nama Karyawan">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="jekel">Jenis Kelamin</label>
+								<select class="form-control required" name="jekel" id="jekel" required="">
+									<option value="">-- Jenis Kelamin --</option>
+									<option value="LAKI-LAKI">LAKI-LAKI</option>
+									<option value="PEREMPUAN">PEREMPUAN</option>
+								</select>
+								<div class="invalid-feedback">
+									Form tidak boleh kosong!
+								</div>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -105,9 +118,20 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="agama">Agama</label>
-								<input type="text" class="form-control requiredSec1" name="agama" id="agama"
-									placeholder="Agama">
+								<label for="agama">Agama </label>
+								<select class="form-control required" name="agama" id="agama" required="">
+									<option value="">-- Agama --</option>
+									<option value="ISLAM">ISLAM</option>
+									<option value="KRISTEN">KRISTEN</option>
+									<option value="KATHOLIK">KATHOLIK</option>
+									<option value="HINDU">HINDU</option>
+									<option value="BUDHA">BUDHA</option>
+									<option value="KHONGHUCU">KHONGHUCU</option>
+									<option value="KEPERCAYAAN TERHADAP TUHAN YME / LAINNYA">KEPERCAYAAN TERHADAP TUHAN YME / LAINNYA</option>
+								</select>
+								<div class="invalid-feedback">
+									Form tidak boleh kosong!
+								</div>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -245,6 +269,13 @@
 	let id_karyawan = '';
 	$(document).ready(function () {
 		get_karyawan();
+		document.getElementById('nik').onblur = function (event) {
+			let valString = Number(event.target.value).toString();
+			if (valString.length === 16 || valString.length === 16) return;
+			event.target.value = valString.length > 16 ?
+				valString.substr(0, 16) :
+				(valString.length > 16 ? valString.substr(0, 16) : valString.substr(0, 16));
+		}
 		$('#tbl-karyawan').DataTable({
 			// dom: 'Bfrtip',
 			// buttons: [
@@ -257,7 +288,6 @@
 			$("#mdl-import").modal('show');
 		})
 		$("#btnKembali").click(function () {
-			cl($(this).text());
 			if($(this).text() == 'Kembali'){
 				$("#secAwal").show();
 				$("#secKedua").hide();

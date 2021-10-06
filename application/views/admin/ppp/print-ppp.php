@@ -122,7 +122,7 @@
 							}
 						}
 					}
-					$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $val['lhk'] + $lbu;
+					$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
 					$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
 					$saldo = $penghasilan - $potongan;
@@ -137,7 +137,7 @@
 				<td><?= number_format($val['g_pkk']) ?></td>
 				<td><?= number_format($val['t_jbt']) ?></td>
 				<td><?= number_format($ppp->kbl) ?></td>
-				<td><?= number_format($val['lhk']) ?></td>
+				<td><?= number_format($ppp->lhk) ?></td>
 				<td><?= number_format($ppp->lbu) ?></td>
 				<td><?= number_format($ppp->llr) ?></td>
 				<td><?= number_format($penghasilan) ?></td>
