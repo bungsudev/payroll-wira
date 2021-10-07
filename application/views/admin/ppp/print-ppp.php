@@ -122,11 +122,11 @@
 							}
 						}
 					}
+					$dab = ($val['g_pkk']/20) * $val['absen'];
 					$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-					$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
+					$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
 					$saldo = $penghasilan - $potongan;
-					$dab = ($val['g_pkk']/20) * $val['absen'];
 				?>
 			<tr>
 				<td><?= $key + 1?></td>
