@@ -8,6 +8,7 @@
 						class="avatar avatar-lg bg-primary-light" alt="User Image">
 				</div>
 				<div class="info ml-10">
+
 					<p class="mb-0">Welcome</p>
 					<h5 class="mb-0 text-capitalize"><?php echo $this->session->userdata('nama') ?></h5>
 				</div>
@@ -104,13 +105,13 @@
 					<span>Outlet</span>
 				</a>
 			</li> -->
-			<li class="header">Pengaturan</li>
-			<li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
+			<!-- <li class="header">Pengaturan</li> -->
+			<!-- <li class="<?php if($this->uri->segment(1)=="laporan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>laporan">
 					<i class="mdi mdi-account-edit"><span class="path1"></span><span class="path2"></span></i>
 					<span>User Akses</span>
 				</a>
-			</li>
+			</li> -->
 			<!-- <li class="<?php if($this->uri->segment(1)=="registrasi"){echo "active";}?>">
 				<a href="<?= base_url(); ?>registrasi">
 					<i class="icon-Incoming-mail"><span class="path1"></span><span class="path2"></span></i>

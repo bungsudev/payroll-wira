@@ -35,6 +35,7 @@ class Ppp_sdm extends CI_Controller {
 		$mpdf= new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'Legal-L','margin_left' => 10,'margin_right' => 10,'margin_top' => 8,'margin_bottom' => 15,'margin_header' => 0,'margin_footer' => 0]); 
 		$data['title'] = 'Perhitungan Penghasilan dan Pengeluaran SDM';
 		$data['data'] = $this->dataLaporanPPP($id_outlet, $periode);
+		$data['outlet'] = $this->PppSDM_m->data_outlet_detail_wParam($id_outlet);
 		$data['data_default'] = $this->PppSDM_m->dataDefault();
 		$html = $this->load->view('admin/ppp/print-ppp',$data,true);
 		$mpdf->SetTitle('Perhitungan Penghasilan dan Pengeluaran SDM - '.$id_outlet);

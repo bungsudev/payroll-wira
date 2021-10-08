@@ -61,6 +61,7 @@ class Outlet_m extends CI_Model {
         $data = [
             "id_outlet" => $this->getIDOutlet(),
             "nama_outlet" => $this->input->post('nama_outlet'),
+            "alamat" => $this->input->post('nama_outlet'),
             "shift_outlet" => $this->input->post('shift_outlet'),
             "g_pkk" => $this->input->post('g_pkk'),
             "t_jbt" => $this->input->post('t_jbt'),
@@ -87,6 +88,7 @@ class Outlet_m extends CI_Model {
     {
         $data = [
             "nama_outlet" => $this->input->post('nama_outlet'),
+            "alamat" => $this->input->post('alamat'),
             "shift_outlet" => $this->input->post('shift_outlet'),
             "g_pkk" => $this->input->post('g_pkk'),
             "t_jbt" => $this->input->post('t_jbt'),

@@ -46,10 +46,17 @@
 									readonly>
 							</div>
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label for="nama_outlet">Nama Outlet</label>
 								<input type="text" class="form-control required" name="nama_outlet" id="nama_outlet"
+									placeholder="">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="alamat">Alamat Outlet</label>
+								<input type="text" class="form-control required" name="alamat" id="alamat"
 									placeholder="">
 							</div>
 						</div>
@@ -182,6 +189,7 @@
 				if (data) {
 					$("#id_outlet").val(data.id_outlet)
 					$("#nama_outlet").val(data.nama_outlet)
+					$("#alamat").val(data.alamat)
 					$("#shift_outlet").val(data.shift_outlet)
 					$("#g_pkk").val(data.g_pkk)
 					$("#b_spkwt").val(data.b_spkwt)
