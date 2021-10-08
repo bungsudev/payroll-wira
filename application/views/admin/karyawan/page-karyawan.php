@@ -65,7 +65,7 @@
 							<div class="form-group">
 								<label for="nik">NIK</label>
 								<input type="number" class="form-control requiredSec1" name="nik" id="nik"
-									placeholder="16 Digit NIK" max="9999999999999999" title="NIK Harus berjumlah 16">
+									placeholder="16 Digit NIK" title="NIK Harus berjumlah 16">
 							</div>
 						</div>
 						<div class="col-md-8">
@@ -265,16 +265,25 @@
 <script>
 	let act = '';
 	let id_karyawan = '';
-	document.getElementById('nik').onblur = function (event) {
-		let valString = Number(event.target.value).toString();
-		if (valString.length === 16 || valString.length === 16) return;
-		event.target.value = valString.length > 16 ?
-			valString.substr(0, 16) :
-			(valString.length > 16 ? valString.substr(0, 16) : valString.substr(0, 16));
-	}
+	
 	$(document).ready(function () {
 		get_karyawan();
-		
+		$("#nik").keyup(function () {
+			let jlh = $(this).val().length;
+			let data = $(this).val()
+			if (jlh > 16 || jlh < 16) {
+				$(this).addClass('is-invalid');
+				$(this).val(data.substr(0,16))
+				if (jlh == 17) {
+					$(this).removeClass('is-invalid');
+					$(this).addClass('is-valid');
+				}
+			}else{
+				$(this).val(data)
+				$(this).addClass('is-valid');
+				$(this).removeClass('is-invalid');
+			}
+		})
 		
 		$('#tbl-karyawan').DataTable({
 			// dom: 'Bfrtip',
@@ -365,10 +374,10 @@
 			$("#btnSimpan").hide();
 			$("#btnKembali").text('Tutup');
 			$("#mdlKaryawan").modal({
-                        backdrop: 'static',
-                        keyboard: true, 
-                        show: true
-                });
+				backdrop: 'static',
+				keyboard: true, 
+				show: true
+			});
 			id_karyawan = $(this).data("id");
 			get_karyawan_detail(id_karyawan)
 			//ambil setting default
@@ -493,16 +502,9 @@
 					if(data.t_jbt != 0 ){$("#t_jbt").val(data.t_jbt)}
 					if(data.t_trans != 0 ){$("#t_trans").val(data.t_trans)}
 					if(data.t_ot != 0 ){$("#t_ot").val(data.t_ot)}
-					if(data.lhk != 0 ){$("#lhk").val(data.lhk)}
-					if(data.lbu != 0 ){$("#lbu").val(data.lbu)}
-					if(data.llr != 0 ){$("#llr").val(data.llr)}
 					if(data.jst != 0 ){$("#jst").val(data.jst)}
 					if(data.dpst != 0 ){$("#dpst").val(data.dpst)}
 					if(data.bpdd != 0 ){$("#bpdd").val(data.bpdd)}
-					if(data.dab != 0 ){$("#dab").val(data.dab)}
-					if(data.diz != 0 ){$("#diz").val(data.diz)}
-					if(data.dis != 0 ){$("#dis").val(data.dis)}
-					if(data.lain != 0 ){$("#lain").val(data.lain)}
 				} else {
 					get_settingDefault()
 				}
@@ -524,17 +526,10 @@
 					$("#t_jbt").val(data.t_jbt)
 					$("#t_trans").val(data.t_trans)
 					$("#t_ot").val(data.t_ot)
-					$("#lhk").val(data.lhk)
-					$("#lbu").val(data.lbu)
-					$("#llr").val(data.llr)
 					$("#jst").val(data.jst)
 					$("#dpst").val(data.dpst)
 					$("#srg").val(data.srg)
 					$("#bpdd").val(data.bpdd)
-					$("#dab").val(data.dab)
-					$("#diz").val(data.diz)
-					$("#dis").val(data.dis)
-					$("#lain").val(data.lain)
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}

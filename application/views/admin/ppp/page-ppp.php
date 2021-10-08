@@ -127,7 +127,10 @@
 		$("#btnTambah").click(function () {
 			let periode = $("#periode_filter").val();
 			id_outlet = $("#outlet_filter").val();
-			$('#tblCekPrint').find('input[type=number]').each(function () {
+			$('input.number').each(function(event) {
+				$(this).val(formatBackNumber($(this).val()));
+			});
+			$('#tblCekPrint').find('input[type=text]').each(function () {
 				let data = [];
 				let data_input = $(this).attr('name').split('_');
 				let input_type = data_input[0];
@@ -181,6 +184,9 @@
 			a_ok('Berhasil!', 'Berhasil menyimpan dan mencetak data');
 			let link = base_url + 'ppp_sdm/print/'+ id_outlet +'/' + periode;
 			window.open(link, link);
+			$('input.number').each(function(event) {
+				$(this).val(numberFormat($(this).val()));
+			});
 		})
 		$("#btnFilter").click(function (e) {
 			e.preventDefault();
@@ -200,6 +206,15 @@
 			// console.log(id_outlet)
 			getKaryawanOutlet(id_outlet)
 			$("#mdlCek").modal('show');
+		})
+		$("#tblCekPrint tbody").on("keyup", "input.number", function () {
+			if(event.which >= 37 && event.which <= 40) return;
+			// format number
+			$(this).val(function(index, value) {
+				return value
+				.replace(/\D/g, "")
+				.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+			});
 		})
 	})
 
@@ -276,42 +291,42 @@
 									<td>
 										<div class="form-group mr-4">
 											<label for="lbu_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="lbu_` + data[i].id_karyawan + `" id="lbu_` +
+											<input type="text" class="number form-control" name="lbu_` + data[i].id_karyawan + `" id="lbu_` +
 									data[i].id_karyawan + `" value="` + lbu + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
 											<label for="lhk_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="lhk_` + data[i].id_karyawan + `" id="lhk_` +
+											<input type="text" class="number form-control" name="lhk_` + data[i].id_karyawan + `" id="lhk_` +
 									data[i].id_karyawan + `" value="` + lhk + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
 											<label for="llr_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="llr_` + data[i].id_karyawan + `" id="llr_` +
+											<input type="text" class="number form-control" name="llr_` + data[i].id_karyawan + `" id="llr_` +
 									data[i].id_karyawan + `" value="` + llr + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
 											<label for="kbl_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="kbl_` + data[i].id_karyawan + `" id="kbl_` + data[
+											<input type="text" class="number form-control" name="kbl_` + data[i].id_karyawan + `" id="kbl_` + data[
 										i].id_karyawan + `" value="` + kbl + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
 											<label for="sp_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="sp_` + data[i].id_karyawan + `" id="sp_` + data[i]
+											<input type="text" class="number form-control" name="sp_` + data[i].id_karyawan + `" id="sp_` + data[i]
 									.id_karyawan + `" value="` + sp + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
 											<label for="lain_` + data[i].id_karyawan + `"></label>
-											<input type="number" class="form-control" name="lain_` + data[i].id_karyawan + `" id="lain_` +
+											<input type="text" class="number form-control" name="lain_` + data[i].id_karyawan + `" id="lain_` +
 									data[i].id_karyawan + `" value="` + lain + `">
 										</div>
 									</td>

@@ -53,107 +53,7 @@
 									placeholder="">
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="shift_outlet">Jam Kerja</label>
-								<select class="form-control" name="shift_outlet" id="shift_outlet">
-									<option value="">-Pilih-</option>
-									<option value="1">1 Shift</option>
-									<option value="2">2 Shift</option>
-									<option value="3">3 Shift</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="g_pkk">Gaji Pokok</label>
-								<input type="number" class="form-control required" name="g_pkk" id="g_pkk" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="t_jbt">Tunjangan Jabatan</label>
-								<input type="number" class="form-control required" name="t_jbt" id="t_jbt" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="t_trans">Tunjangan Transportasi</label>
-								<input type="number" class="form-control required" name="t_trans" id="t_trans" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="t_ot">Tunjangan Outlet</label>
-								<input type="number" class="form-control required" name="t_ot" id="t_ot" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="lhk">Lembur HK</label>
-								<input type="number" class="form-control required" name="lhk" id="lhk" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="lbu">Lembur Back Up</label>
-								<input type="number" class="form-control required" name="lbu" id="lbu" value="0">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="llr">Lembur Libur</label>
-								<input type="number" class="form-control required" name="llr" id="llr" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="jst">Jamsostek</label>
-								<input type="number" class="form-control required" name="jst" id="jst" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="dpst">Deposito Perlengkapan</label>
-								<input type="number" class="form-control required" name="dpst" id="dpst" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="srg">Seragam</label>
-								<input type="number" class="form-control required" name="srg" id="srg" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="bpdd">Biaya Pendidikan</label>
-								<input type="number" class="form-control required" name="bpdd" id="bpdd" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="dab">Denda Absen</label>
-								<input type="number" class="form-control required" name="dab" id="dab" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="diz">Denda Izin</label>
-								<input type="number" class="form-control required" name="diz" id="diz" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="dis">Denda Sakit</label>
-								<input type="number" class="form-control required" name="dis" id="dis" value="0">
-							</div>
-						</div>	
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="lain">Lainnya</label>
-								<input type="number" class="form-control required" name="lain" id="lain" value="0">
-							</div>
-						</div>	
+						<?php $this->load->view('admin/karyawan/page-karyawanDetail'); ?>
 					</div>
 				</form>
 			</div>
@@ -194,6 +94,9 @@
 				}
 			})
 			if (check) {
+				$('input.number').each(function(event) {
+					$(this).val(formatBackNumber($(this).val()));
+				});
 				if (act == 'Tambah') {
 					simpan(act, '');
 				} else if (act == 'Edit') {
@@ -213,6 +116,9 @@
 			$("#mdl-outlet").modal('show');
 			id_outlet = $(this).data("id");
 			get_outlet_detail(id_outlet)
+			$('input.number').each(function(event) {
+				$(this).val(numberFormat($(this).val()));
+			});
 		})
 		$("#tbl-outlet tbody").on("click", "#btn-hapus", function () {
 			id_outlet = $(this).data("id");
@@ -271,12 +177,21 @@
 			},
 			method: "POST",
 			dataType: "json",
+			async:false,
 			success: function (data) {
 				if (data) {
 					$("#id_outlet").val(data.id_outlet)
 					$("#nama_outlet").val(data.nama_outlet)
 					$("#shift_outlet").val(data.shift_outlet)
+					$("#g_pkk").val(data.g_pkk)
+					$("#b_spkwt").val(data.b_spkwt)
+					$("#t_jbt").val(data.t_jbt)
+					$("#t_trans").val(data.t_trans)
 					$("#t_ot").val(data.t_ot)
+					$("#jst").val(data.jst)
+					$("#dpst").val(data.dpst)
+					$("#srg").val(data.srg)
+					$("#bpdd").val(data.bpdd)
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}
