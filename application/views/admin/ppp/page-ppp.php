@@ -349,6 +349,9 @@
 						}]
 					});
 					$("#secTbl").show();
+					$('input.number').each(function(event) {
+						$(this).val(numberFormat($(this).val()));
+					});
 				} else {
 					$("#secTbl").hide();
 					a_error('Maaf!', 'Tidak ada data absensi karyawan yang sudah di input!');

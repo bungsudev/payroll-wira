@@ -64,7 +64,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="nik">NIK</label>
-								<input type="number" class="form-control requiredSec1" name="nik" id="nik"
+								<input type="text" class="form-control requiredSec1" name="nik" id="nik"
 									placeholder="16 Digit NIK" title="NIK Harus berjumlah 16">
 							</div>
 						</div>
