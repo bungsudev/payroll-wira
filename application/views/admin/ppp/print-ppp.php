@@ -280,9 +280,9 @@ function numberToRomanRepresentation($number) {
 				<td height="100px">&nbsp;</td>
 			</tr>
 			<tr>
-				<td>(___________________________)</td>
-				<td>(___________________________)</td>
-				<td>(___________________________)</td>
+				<td>(LISA)</td>
+				<td>(ELISA)</td>
+				<td>(ANDRIASAN S.S,Mn,MM)</td>
 			</tr>
 		</table>
 	</div>
