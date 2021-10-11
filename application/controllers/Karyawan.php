@@ -124,7 +124,7 @@ class Karyawan extends CI_Controller {
             foreach ($object->getWorksheetIterator() as $worksheet) {
                 $highestRow = $worksheet->getHighestRow();
                 $highestColumn = $worksheet->getHighestColumn();
-                for ($row = 2; $row <= $highestRow; $row++) {
+                for ($row = 3; $row <= $highestRow; $row++) {
                     // $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                     // $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     // $jekel = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
