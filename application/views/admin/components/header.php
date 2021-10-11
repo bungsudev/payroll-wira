@@ -36,30 +36,8 @@
 		</div>
 
 		<div class="navbar-custom-menu r-side">
-			<ul class="nav navbar-nav">
-				<!-- Notifications -->
-				<!--  -->
+			<a href="<?= base_url();?>auth/logout" style="font-size: 22px;"><i class="mdi mdi-logout text-muted mr-2"></i></a>
 
-				<!-- User Account-->
-				<li class="dropdown user user-menu">
-					<a href="#" class="waves-effect waves-light dropdown-toggle" data-toggle="dropdown" title="User">
-						<i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
-					</a>
-					<ul class="dropdown-menu animated flipInX">
-						<li class="user-body">
-							<a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i>
-								Profile</a>
-							<a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i>
-								Settings</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="<?= base_url();?>auth/logout"><i class="ti-lock text-muted mr-2"></i> Logout</a>
-						</li>
-					</ul>
-				</li>
-
-				<!-- Control Sidebar Toggle Button -->
-
-			</ul>
 		</div>
 	</nav>
 </header>

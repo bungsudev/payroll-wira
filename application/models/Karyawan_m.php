@@ -31,7 +31,7 @@ class Karyawan_m extends CI_Model {
     {
         // Example KRYW201912130001;
         $date = date("Ymd");
-        $queryLength = "SELECT id_absensi FROM absensi WHERE MID(id_absensi,5,8) = '$date'";
+        $queryLength = "SELECT id_karyawan FROM karyawan WHERE MID(id_karyawan,5,8) = '$date'";
         $curLength = ($this->db->query($queryLength)->num_rows()) + 1;
         if ($curLength <= 9) {
             $returnId = "KRYW" . $date . "000" . $curLength;
@@ -66,9 +66,12 @@ class Karyawan_m extends CI_Model {
             "pendidikan" => $this->input->post('pendidikan'),
             "pengalaman" => $this->input->post('pengalaman'),
             "pelatihan" => $this->input->post('pelatihan'),
-            "foto" => $nama_gambar,
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
+
+        //cek update tanpa gambar
+        (!empty($nama_gambar))? $data = array_merge($data, ["foto" => $nama_gambar]): $data = array_merge($data, ["foto" => 'default.png']);
+
         $this->db->insert('karyawan', $data);
 
         //simpan/edit data ke karyawan_detail

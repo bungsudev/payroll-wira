@@ -86,7 +86,7 @@
 							<div class="form-group">
 								<label for="jekel">Jenis Kelamin</label>
 								<select class="form-control required" name="jekel" id="jekel" required="">
-									<option value="">-- Jenis Kelamin --</option>
+									<option value="" disabled selected>Jenis Kelamin</option>
 									<option value="LAKI-LAKI">LAKI-LAKI</option>
 									<option value="PEREMPUAN">PEREMPUAN</option>
 								</select>
@@ -98,36 +98,44 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="status">Status Kawin</label>
-								<input type="text" class="form-control requiredSec1" name="status" id="status"
-									placeholder="Status">
+								<label for=""></label>
+								<select class="form-control required" name="status" id="status"
+									required="">
+									<option value="" disabled selected>Status Perkawinan</option>
+									<option value="BELUM KAWIN">BELUM KAWIN</option>
+									<option value="KAWIN">KAWIN</option>
+									<option value="CERAI HIDUP">CERAI HIDUP</option>
+									<option value="CERAI MATI">CERAI MATI</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="tempat_lahir">Tempat Lahir</label>
-								<input type="text" class="form-control requiredSec1" name="tempat_lahir" id="tempat_lahir"
-									placeholder="Tempat Lahir">
+								<input type="text" class="form-control requiredSec1" name="tempat_lahir"
+									id="tempat_lahir" placeholder="Tempat Lahir">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="tanggal_lahir">Tanggal Lahir</label>
-								<input type="date" class="form-control requiredSec1" name="tanggal_lahir" id="tanggal_lahir"
-									placeholder="Tanggal Lahir">
+								<input type="date" class="form-control requiredSec1" name="tanggal_lahir"
+									id="tanggal_lahir" placeholder="Tanggal Lahir">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="agama">Agama </label>
 								<select class="form-control required" name="agama" id="agama" required="">
-									<option value="">-- Agama --</option>
+									<option value="" disabled selected>Agama</option>
 									<option value="ISLAM">ISLAM</option>
 									<option value="KRISTEN">KRISTEN</option>
 									<option value="KATHOLIK">KATHOLIK</option>
 									<option value="HINDU">HINDU</option>
 									<option value="BUDHA">BUDHA</option>
 									<option value="KHONGHUCU">KHONGHUCU</option>
-									<option value="KEPERCAYAAN TERHADAP TUHAN YME / LAINNYA">KEPERCAYAAN TERHADAP TUHAN YME / LAINNYA</option>
+									<option value="KEPERCAYAAN TERHADAP TUHAN YME / LAINNYA">KEPERCAYAAN TERHADAP TUHAN
+										YME / LAINNYA</option>
 								</select>
 								<div class="invalid-feedback">
 									Form tidak boleh kosong!
@@ -150,13 +158,13 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-							  <label for="jabatan">Jabatan</label>
-							  <select class="form-control requiredSec1" name="jabatan" id="jabatan">
-								<option value="" seleced="selected">--Pilih--</option>
-								<?php foreach ($jabatan as $key => $val): ?>
+								<label for="jabatan">Jabatan</label>
+								<select class="form-control requiredSec1" name="jabatan" id="jabatan">
+									<option value="" disabled seleced="selected">Jabatan</option>
+									<?php foreach ($jabatan as $key => $val): ?>
 									<option value="<?= $val['jabatan'] ?>"><?= $val['jabatan'] ?></option>
-								<?php endforeach; ?>
-							  </select>
+									<?php endforeach; ?>
+								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -223,7 +231,8 @@
 			<div class="modal-footer modal-footer-uniform">
 				<button type="button" class="btn btn-secondary" id="btnKembali">Tutup</button>
 				<button type="button" class="btn btn-info float-right" id="btnSelenjutnya">Selanjutnya</button>
-				<button type="button" class="btn btn-primary float-right" id="btnSimpan" style="display: none;">Simpan</button>
+				<button type="button" class="btn btn-primary float-right" id="btnSimpan"
+					style="display: none;">Simpan</button>
 			</div>
 		</div>
 	</div>
@@ -265,7 +274,7 @@
 <script>
 	let act = '';
 	let id_karyawan = '';
-	
+
 	$(document).ready(function () {
 		get_karyawan();
 		$("#nik").keyup(function () {
@@ -273,18 +282,18 @@
 			let data = $(this).val()
 			if (jlh > 16 || jlh < 16) {
 				$(this).addClass('is-invalid');
-				$(this).val(data.substr(0,16))
+				$(this).val(data.substr(0, 16))
 				if (jlh == 17) {
 					$(this).removeClass('is-invalid');
 					$(this).addClass('is-valid');
 				}
-			}else{
+			} else {
 				$(this).val(data)
 				$(this).addClass('is-valid');
 				$(this).removeClass('is-invalid');
 			}
 		})
-		
+
 		$('#tbl-karyawan').DataTable({
 			// dom: 'Bfrtip',
 			// buttons: [
@@ -297,13 +306,13 @@
 			$("#mdl-import").modal('show');
 		})
 		$("#btnKembali").click(function () {
-			if($(this).text() == 'Kembali'){
+			if ($(this).text() == 'Kembali') {
 				$("#secAwal").show();
 				$("#secKedua").hide();
 				$("#btnSelenjutnya").show();
 				$("#btnSimpan").hide();
 				$(this).text('Tutup');
-			}else{
+			} else {
 				$("#secAwal").show();
 				$("#secKedua").hide();
 				$('#mdlKaryawan').modal('hide');
@@ -335,9 +344,9 @@
 			$('.custom-file-label').html('Pilih Gambar');
 			$("#img-prev").attr('src', '');
 			$("#mdlKaryawan").modal({
-					backdrop: 'static',
-					keyboard: true, 
-					show: true
+				backdrop: 'static',
+				keyboard: true,
+				show: true
 			});
 		})
 		$("#btnSimpan").click(function () {
@@ -351,7 +360,7 @@
 				}
 			})
 			if (check) {
-				$('input.number').each(function(event) {
+				$('input.number').each(function (event) {
 					$(this).val(formatBackNumber($(this).val()));
 				});
 				if (act == 'Tambah') {
@@ -375,7 +384,7 @@
 			$("#btnKembali").text('Tutup');
 			$("#mdlKaryawan").modal({
 				backdrop: 'static',
-				keyboard: true, 
+				keyboard: true,
 				show: true
 			});
 			id_karyawan = $(this).data("id");
@@ -384,7 +393,7 @@
 			get_settingDefault()
 			//timpa dengan setting manual
 			edit_settingDefault(id_karyawan);
-			$('input.number').each(function(event) {
+			$('input.number').each(function (event) {
 				$(this).val(numberFormat($(this).val()));
 			});
 		})
@@ -496,15 +505,33 @@
 			async: false,
 			success: function (data) {
 				if (data) {
-					if(data.shift_outlet != 0 ){$("#shift_outlet").val(data.shift_outlet)}
-					if(data.g_pkk != 0 ){$("#g_pkk").val(data.g_pkk)}
-					if(data.b_spkwt != 0 ){$("#b_spkwt").val(data.b_spkwt)}
-					if(data.t_jbt != 0 ){$("#t_jbt").val(data.t_jbt)}
-					if(data.t_trans != 0 ){$("#t_trans").val(data.t_trans)}
-					if(data.t_ot != 0 ){$("#t_ot").val(data.t_ot)}
-					if(data.jst != 0 ){$("#jst").val(data.jst)}
-					if(data.dpst != 0 ){$("#dpst").val(data.dpst)}
-					if(data.bpdd != 0 ){$("#bpdd").val(data.bpdd)}
+					if (data.shift_outlet != 0) {
+						$("#shift_outlet").val(data.shift_outlet)
+					}
+					if (data.g_pkk != 0) {
+						$("#g_pkk").val(data.g_pkk)
+					}
+					if (data.b_spkwt != 0) {
+						$("#b_spkwt").val(data.b_spkwt)
+					}
+					if (data.t_jbt != 0) {
+						$("#t_jbt").val(data.t_jbt)
+					}
+					if (data.t_trans != 0) {
+						$("#t_trans").val(data.t_trans)
+					}
+					if (data.t_ot != 0) {
+						$("#t_ot").val(data.t_ot)
+					}
+					if (data.jst != 0) {
+						$("#jst").val(data.jst)
+					}
+					if (data.dpst != 0) {
+						$("#dpst").val(data.dpst)
+					}
+					if (data.bpdd != 0) {
+						$("#bpdd").val(data.bpdd)
+					}
 				} else {
 					get_settingDefault()
 				}

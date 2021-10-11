@@ -257,6 +257,35 @@ function numberToRomanRepresentation($number) {
 			</tr>
 		</table>
 	</div>
+
+	<div style="margin-top:30px;">
+		<table style="font-size:12px;" width='100%'>
+			<tr>
+				<td>
+					Diperiksa Oleh, <br>
+					Ke Pembukuan
+				</td>
+				<td>
+					Dibuat Oleh, <br>
+					Adm Penggajian
+				</td>
+				<td>
+					Diketahui Oleh, <br>
+					Direktur
+				</td>
+			</tr>
+			<tr>
+				<td height="100px">&nbsp;</td>
+				<td height="100px">&nbsp;</td>
+				<td height="100px">&nbsp;</td>
+			</tr>
+			<tr>
+				<td>(___________________________)</td>
+				<td>(___________________________)</td>
+				<td>(___________________________)</td>
+			</tr>
+		</table>
+	</div>
 </body>
 
 </html>

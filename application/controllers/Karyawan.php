@@ -44,11 +44,16 @@ class Karyawan extends CI_Controller {
 		$this->load->library('upload', $config);
 		if ($act == 'Tambah') {
 			if ( ! $this->upload->do_upload('gambar_karyawan')){
-				$error = $this->upload->display_errors();
+				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
 				echo json_encode([
-					'res' => false,
-					'msg' => $error
+					'res' => $this->Karyawan_m->simpan_karyawan(''), 
+					'msg' =>  'Data di tambahkan'
 				]);
+				// $error = $this->upload->display_errors();
+				// echo json_encode([
+				// 	'res' => false,
+				// 	'msg' => $error
+				// ]);
 			}else{
 				$data = $this->upload->data();
 				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
@@ -96,7 +101,7 @@ class Karyawan extends CI_Controller {
     {
         // Example KRYW201912130001;
         $date = date("Ymd");
-        $queryLength = "SELECT id_absensi FROM absensi WHERE MID(id_absensi,5,8) = '$date'";
+        $queryLength = "SELECT id_karyawan FROM karyawan WHERE MID(id_karyawan,5,8) = '$date'";
         $curLength = ($this->db->query($queryLength)->num_rows()) + 1;
         if ($curLength <= 9) {
             $returnId = "KRYW" . $date . "000" . $curLength;
@@ -120,41 +125,50 @@ class Karyawan extends CI_Controller {
                 $highestRow = $worksheet->getHighestRow();
                 $highestColumn = $worksheet->getHighestColumn();
                 for ($row = 2; $row <= $highestRow; $row++) {
-                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    // $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    // $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    // $jekel = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    // $status = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    // $tempat_lahir = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    // $tanggal_lahir = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    // $agama = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    // $tinggi = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                    // $berat = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                    // $suku = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                    // $alamat = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                    // $handphone = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                    // $pendidikan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                    // $pengalaman = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                    // $pelatihan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+
+					$nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                     $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $jekel = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $status = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $tempat_lahir = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $tanggal_lahir = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-                    $agama = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-                    $tinggi = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-                    $berat = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-                    $suku = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                    $alamat = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-                    $handphone = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-                    $pendidikan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                    $pengalaman = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-                    $pelatihan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-                  
+                    $tempat_lahir = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $tanggal_lahir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $alamat = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $pendidikan = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+					$tanggal_lahir = date('Y-m-d', strtotime($tanggal_lahir));
+					// echo $tanggal_lahir; die();
                     if ($nik != ''  ) {
                         $data = [ 
                             "id_karyawan" => $this->getIDKaryawan(),
                             "nik" => $nik,
 							"nama" => $nama,
-							"status" => $status,
 							"tempat_lahir" => $tempat_lahir,
 							"tanggal_lahir" => $tanggal_lahir,
-							"agama" => $agama,
-							"suku" => $suku,
-							"handphone" => $handphone,
-							"tinggi" => $tinggi,
-							"berat" => $berat,
+							// "status" => $status,
+							// "agama" => $agama,
+							// "suku" => $suku,
+							// "handphone" => $handphone,
+							// "tinggi" => $tinggi,
+							// "berat" => $berat,
 							"alamat" => $alamat,
 							"pendidikan" => $pendidikan,
-							"pengalaman" => $pengalaman,
-							"pelatihan" => $pelatihan,
+							"jabatan" => '',
+							// "pengalaman" => $pengalaman,
+							// "pelatihan" => $pelatihan,
 							"foto" => 'default.png',
-							"created" => date('Y-m-d H:i:s'),
+							"created" => date('Y-m-d H:i:s').$this->session->userdata('nama'),
                         ];
                         $this->db->insert("karyawan",$data);
                     }
