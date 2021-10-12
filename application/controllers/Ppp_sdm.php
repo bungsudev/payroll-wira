@@ -50,25 +50,26 @@ class Ppp_sdm extends CI_Controller {
 		
 		//ambil id_lembur
 		$id_lembur_arr = [];
-		foreach ($data_absen as $key => $val) {			
-			$sett_default = $this->db->query("SELECT * FROM outlet WHERE id_outlet ='$id_outlet'")->row();
-			(!empty($val[$key]['shift_outlet']))?$data_absen[$key]['shift_outlet'] = $sett_default->shift_outlet : '';
-			(!empty($val[$key]['b_spkwt']))?$data_absen[$key]['b_spkwt'] = $sett_default->b_spkwt : '';
-			(!empty($val[$key]['g_pkk']))?$data_absen[$key]['g_pkk'] = $sett_default->g_pkk : '';
-			(!empty($val[$key]['t_jbt']))?$data_absen[$key]['t_jbt'] = $sett_default->t_jbt : '';
-			(!empty($val[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
-			(!empty($val[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
-			(!empty($val[$key]['lhk']))?$data_absen[$key]['lhk'] = $sett_default->lhk : '';
-			(!empty($val[$key]['lbu']))?$data_absen[$key]['lbu'] = $sett_default->lbu : '';
-			(!empty($val[$key]['llr']))?$data_absen[$key]['llr'] = $sett_default->llr : '';
-			(!empty($val[$key]['jst']))?$data_absen[$key]['jst'] = $sett_default->jst : '';
-			(!empty($val[$key]['dpst']))?$data_absen[$key]['dpst'] = $sett_default->dpst : '';
-			(!empty($val[$key]['srg']))?$data_absen[$key]['srg'] = $sett_default->srg : '';
-			(!empty($val[$key]['bpdd']))?$data_absen[$key]['bpdd'] = $sett_default->bpdd : '';
-			(!empty($val[$key]['dab']))?$data_absen[$key]['dab'] = $sett_default->dab : '';
-			(!empty($val[$key]['diz']))?$data_absen[$key]['diz'] = $sett_default->diz : '';
-			(!empty($val[$key]['dis']))?$data_absen[$key]['dis'] = $sett_default->dis : '';
-			(!empty($val[$key]['lain']))?$data_absen[$key]['lain'] = $sett_default->lain : '';
+		$sett_default = $this->db->query("SELECT * FROM outlet WHERE id_outlet ='$id_outlet'")->row();
+		foreach ($data_absen as $key => $val) {		
+			// echo $data_absen[$key]['g_pkk']; die();	
+			(empty($data_absen[$key]['shift_outlet']))?$data_absen[$key]['shift_outlet'] = $sett_default->shift_outlet : '';
+			(empty($data_absen[$key]['b_spkwt']))?$data_absen[$key]['b_spkwt'] = $sett_default->b_spkwt : '';
+			(empty($data_absen[$key]['g_pkk']))?$data_absen[$key]['g_pkk'] = $sett_default->g_pkk : '';
+			(empty($data_absen[$key]['t_jbt']))?$data_absen[$key]['t_jbt'] = $sett_default->t_jbt : '';
+			(empty($data_absen[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
+			(empty($data_absen[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
+			(empty($data_absen[$key]['lhk']))?$data_absen[$key]['lhk'] = $sett_default->lhk : '';
+			(empty($data_absen[$key]['lbu']))?$data_absen[$key]['lbu'] = $sett_default->lbu : '';
+			(empty($data_absen[$key]['llr']))?$data_absen[$key]['llr'] = $sett_default->llr : '';
+			(empty($data_absen[$key]['jst']))?$data_absen[$key]['jst'] = $sett_default->jst : '';
+			(empty($data_absen[$key]['dpst']))?$data_absen[$key]['dpst'] = $sett_default->dpst : '';
+			(empty($data_absen[$key]['srg']))?$data_absen[$key]['srg'] = $sett_default->srg : '';
+			(empty($data_absen[$key]['bpdd']))?$data_absen[$key]['bpdd'] = $sett_default->bpdd : '';
+			(empty($data_absen[$key]['dab']))?$data_absen[$key]['dab'] = $sett_default->dab : '';
+			(empty($data_absen[$key]['diz']))?$data_absen[$key]['diz'] = $sett_default->diz : '';
+			(empty($data_absen[$key]['dis']))?$data_absen[$key]['dis'] = $sett_default->dis : '';
+			(empty($data_absen[$key]['lain']))?$data_absen[$key]['lain'] = $sett_default->lain : '';
 
 			// $lhk = 0;
 			// $lbu = 0;
