@@ -206,7 +206,17 @@
 			]
 		});
 
-		//note selesaikan input absensi
+		$("#absen").prop("readonly", true);
+		$("#hadir").keyup(function () {
+			let jlh_hadir = $(this).val();
+			if (jlh_hadir < 0 || jlh_hadir > 20) {
+				$(this).val(0)
+				a_warning('Maaf!', 'Maksimal Hadir 20');
+			}else{
+				$("#absen").val(20 - jlh_hadir);
+			}
+		})
+		
 		let dtTblLembur = $("#tblLembur").DataTable();
 		$(".containerAbsensi").hide();
 		$("#outlet_filter").select2();
@@ -217,7 +227,7 @@
 			outlet_filter = $("#outlet_filter").val();
 			if (periode_filter != '' && outlet_filter != '') {
 				$('#tblAbsensi').DataTable().clear().destroy();
-				getKaryawanOutlet(outlet_filter)
+				getKaryawanOutlet(outlet_filter, periode_filter)
 				getAbsensi(periode_filter, outlet_filter)
 				$(".delthis").remove();
 				$("#formAbsensi")[0].reset();
@@ -382,7 +392,7 @@
 			method: "POST",
 			dataType: "json",
 			success: function (data) {
-				console.log(data)
+				
 				if (data) {
 					$("#id_outlet").val(data.id_outlet);
 					$("#id_karyawan").val(data.id_karyawan);
@@ -483,38 +493,59 @@
 		});
 	}
 
-	function getKaryawanOutlet(id_outlet) {
+	function getKaryawanOutlet(outlet_filter, periode_filter) {
 		$.ajax({
 			url: base_url + 'Absensi/get_karyawanOutlet',
 			data: {
-				id_outlet: id_outlet
+				outlet_filter: outlet_filter,
+				periode_filter: periode_filter,
 			},
 			method: "POST",
 			dataType: "json",
+			async: false,
 			success: function (data) {
 				let html = '';
 				let r = 0;
 				for (let i = 0; i < data.length; i++) {
 					r = i + 1;
-					html += `
-						<tr>
-							<td class="text-center">` + r + `</td>
-							<td>
-								` + data[i].nik + ` <br />
-								<b>` + data[i].nama + `</b> <br />
-								` + data[i].tempat_lahir + `, ` + format_tanggal(data[i].tanggal_lahir) + ` <br />
-								<b>` + (data[i].jabatan || "").toUpperCase() + `</b>
-							</td>
-							<td class="text-center" style="vertical-align:middle;">
-								<button type="button" 
-									data-id="` + data[i].idOutlet + `"
-									data-id_karyawan="` + data[i].idKaryawan + `"
-									data-nik="` + data[i].nik + `"
-									data-nama="` + data[i].nama + `"
-								class="btn btn-warning btnPilihKaryawan"><i class="mdi mdi-arrow-right"></i></button>
-							</td>
-						</tr>
-					`;
+					let id_karyawan_cek = data[i].idKaryawan;
+					$.ajax({
+						url: base_url + 'Absensi/cek_karyawan_absen',
+						data: {
+							id_karyawan: id_karyawan_cek,
+							outlet_filter: outlet_filter,
+							periode_filter: periode_filter,
+						},
+						method: "POST",
+						dataType: "json",
+						async: false,
+						success: function (data_cek) {
+							if(data_cek){
+								console.log(data_cek)
+							}else{
+								html += `
+									<tr>
+										<td class="text-center">` + r + `</td>
+										<td>
+											` + data[i].nik + ` <br />
+											<b>` + data[i].nama + `</b> <br />
+											` + data[i].tempat_lahir + `, ` + format_tanggal(data[i].tanggal_lahir) + ` <br />
+											<b>` + (data[i].jabatan || "").toUpperCase() + `</b>
+										</td>
+										<td class="text-center" style="vertical-align:middle;">
+											<button type="button" 
+												data-id="` + data[i].idOutlet + `"
+												data-id_karyawan="` + data[i].idKaryawan + `"
+												data-nik="` + data[i].nik + `"
+												data-nama="` + data[i].nama + `"
+											class="btn btn-warning btnPilihKaryawan"><i class="mdi mdi-arrow-right"></i></button>
+										</td>
+									</tr>
+								`;
+							}
+							
+						}
+					});
 				}
 				$('#tbl-karyawan').DataTable().clear().destroy();
 				$("#tbl-karyawan tbody").html(html);
@@ -570,7 +601,7 @@
 					$("#formAbsensi")[0].reset();
 					$("#inputanLembur").empty();
 					$(".delthis").remove();
-					getKaryawanOutlet(outlet_filter);
+					getKaryawanOutlet(outlet_filter, periode_filter);
 					getAbsensi(periode_filter, outlet_filter);
 					$("#mdl-absensi").modal('hide');
 					action = 'Tambah';

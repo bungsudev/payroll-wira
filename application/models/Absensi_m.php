@@ -24,9 +24,29 @@ class Absensi_m extends CI_Model {
 
     public function get_karyawanOutlet()
     {
-        $id_outlet = $this->input->post('id_outlet');
-        $query = $this->db->query("SELECT a.*,b.*, c.*, d.*, a.id_karyawan AS idKaryawan, a.id_outlet AS idOutlet FROM outlet_detail a LEFT JOIN outlet b ON a.id_outlet = b.id_outlet LEFT JOIN karyawan c ON a.id_karyawan = c.id_karyawan LEFT JOIN absensi d ON a.id_karyawan = d.id_karyawan where a.id_outlet = '$id_outlet' AND d.id_absensi IS NULL AND a.deleted IS NULL AND b.deleted IS NULL AND c.deleted IS NULL AND d.deleted IS NULL GROUP BY a.id_outletdetail");
+        $outlet_filter = $this->input->post('outlet_filter');
+        $periode_filter = $this->input->post('periode_filter');
+        $query = $this->db->query("SELECT a.*, b.*,
+        a.id_karyawan AS idKaryawan, a.id_outlet AS idOutlet FROM outlet_detail a 
+        LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan 
+        where a.id_outlet = '$outlet_filter' 
+        AND a.deleted IS NULL 
+        AND b.deleted IS NULL 
+        GROUP BY a.id_outletdetail");
         return $query->result_array();
+    }
+
+    public function cek_karyawan_absen()
+    {
+        $id_karyawan = $this->input->post('id_karyawan');
+        $outlet_filter = $this->input->post('outlet_filter');
+        $periode_filter = $this->input->post('periode_filter');
+        $query = $this->db->query("SELECT * FROM absensi 
+        where id_outlet = '$outlet_filter'
+        AND periode = '$periode_filter'
+        AND id_karyawan = '$id_karyawan'
+        AND deleted IS NULL ");
+        return $query->row();
     }
 
     public function data_absensi_detail()

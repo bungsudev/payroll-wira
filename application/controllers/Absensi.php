@@ -34,6 +34,9 @@ class Absensi extends CI_Controller {
 	public function get_karyawanOutlet(){
 		echo json_encode($this->Absensi_m->get_karyawanOutlet());
 	}
+	public function cek_karyawan_absen(){
+		echo json_encode($this->Absensi_m->cek_karyawan_absen());
+	}
 
 	public function total_karyawan_absensi($id){
 		echo json_encode($this->Absensi_m->total_karyawan_absensi($id));
