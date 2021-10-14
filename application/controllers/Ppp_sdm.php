@@ -70,38 +70,6 @@ class Ppp_sdm extends CI_Controller {
 			(empty($data_absen[$key]['diz']))?$data_absen[$key]['diz'] = $sett_default->diz : '';
 			(empty($data_absen[$key]['dis']))?$data_absen[$key]['dis'] = $sett_default->dis : '';
 			(empty($data_absen[$key]['lain']))?$data_absen[$key]['lain'] = $sett_default->lain : '';
-
-			// $lhk = 0;
-			// $lbu = 0;
-			// $llr = 0;
-			// $data_lembur = explode(",", $val['lembur']);
-			// foreach ($data_lembur as $k => $lembur){
-			// 	$detail_lembur = explode("|", $lembur);
-			// 	$id = trim($detail_lembur[0]);
-			// 	if ($data_absen[$key]['shift_outlet'] == 2) {
-			// 		$shift = 20;
-			// 	}else if($data_absen[$key]['shift_outlet'] == 3){
-			// 		$shift = 26;
-			// 	}
-			// 	//menentukan lembur lhk lbu llr
-			// 	$lembur = $this->db->query("SELECT * FROM lembur WHERE id_lembur='$id'")->row();
-			// 	if (!empty($sel_lembur)) {
-			// 		if ($sel_lembur->id_lembur == 'LMBR202109030001') {
-			// 			//Lembur HK
-			// 			$lhk = $lhk + $sel_lembur->nilai;
-			// 		}else if($sel_lembur->id_lembur == 'LMBR202109030002'){
-			// 			// Lembur Backup
-			// 			$lbu = $lbu + ($data_absen[$key]['g_pkk']/$shift);
-			// 		}else if($sel_lembur->id_lembur == 'LMBR202109030003'){
-			// 			// Lembur Libur
-			// 			$llr = $llr + $lembur->nilai;
-			// 		}
-			// 	}
-
-			// 	$data_absen[$key]['lhk'] = $lhk;
-			// 	$data_absen[$key]['lbu'] = $lbu;
-			// 	$data_absen[$key]['llr'] = $llr;
-			// }
 		}
 
 		// echo json_encode($data_absen);
