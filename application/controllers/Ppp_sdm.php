@@ -127,7 +127,7 @@ class Ppp_sdm extends CI_Controller {
 	//update detail before print 
 	
 	public function update_detail_cek(){
-		$this->Logs_m->save('Update PPP Karyawan => nik : '.$_POST['nik']);
+		$this->Logs_m->save('Update PPP Karyawan => id_karyawan : '.$_POST['id_karyawan']);
 		echo json_encode([
 			'res' => $this->PppSDM_m->update_detail_cek(),
 			'msg' =>  'Data telah di edit'

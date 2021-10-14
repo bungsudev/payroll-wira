@@ -42,52 +42,55 @@ class Karyawan extends CI_Controller {
 		$config['encrypt_name'] = TRUE;
 
 		$this->load->library('upload', $config);
-		if ($act == 'Tambah') {
-			if ( ! $this->upload->do_upload('gambar_karyawan')){
-				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
+		if (empty($_FILES['gambar_karyawan']['name'])) {
+			$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
 				echo json_encode([
 					'res' => $this->Karyawan_m->simpan_karyawan(''), 
 					'msg' =>  'Data di tambahkan'
 				]);
-				// $error = $this->upload->display_errors();
-				// echo json_encode([
-				// 	'res' => false,
-				// 	'msg' => $error
-				// ]);
-			}else{
-				$data = $this->upload->data();
-				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
-				echo json_encode([
-					'res' => $this->Karyawan_m->simpan_karyawan($data['file_name']), 
-					'msg' =>  'Data di tambahkan'
-				]);
-			}
-		}else if ($act == 'Edit' && !empty($_FILES['gambar_karyawan']['name'])){
-			if ( ! $this->upload->do_upload('gambar_karyawan')){
-				$error = $this->upload->display_errors();
-				echo json_encode([
-					'res' => false,
-					'msg' => $error
-				]);
-			}else{
-				$data = $this->upload->data();
+		}else{
+			if ($act == 'Tambah') {
+				if ( ! $this->upload->do_upload('gambar_karyawan')){
+					$error = $this->upload->display_errors();
+					echo json_encode([
+						'res' => false,
+						'msg' => $error
+					]);
+				}else{
+					$data = $this->upload->data();
+					$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
+					echo json_encode([
+						'res' => $this->Karyawan_m->simpan_karyawan($data['file_name']), 
+						'msg' =>  'Data di tambahkan'
+					]);
+				}
+			}else if ($act == 'Edit' && !empty($_FILES['gambar_karyawan']['name'])){
+				if ( ! $this->upload->do_upload('gambar_karyawan')){
+					$error = $this->upload->display_errors();
+					echo json_encode([
+						'res' => false,
+						'msg' => $error
+					]);
+				}else{
+					$data = $this->upload->data();
+					$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
+					echo json_encode([
+						'res' => $this->Karyawan_m->edit_karyawan($data['file_name'], $id), 
+						'msg' =>  'Data telah di edit'
+					]);
+				}
+			}else if ($act == 'Edit' && empty($_FILES['gambar_karyawan']['name'])){
 				$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
 				echo json_encode([
-					'res' => $this->Karyawan_m->edit_karyawan($data['file_name'], $id), 
+					'res' => $this->Karyawan_m->edit_karyawan(NULL, $id), 
 					'msg' =>  'Data telah di edit'
 				]);
+			}else{
+				echo json_encode([
+					'res' => false, 
+					'msg' =>  'Error'
+				]);
 			}
-		}else if ($act == 'Edit' && empty($_FILES['gambar_karyawan']['name'])){
-			$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
-			echo json_encode([
-				'res' => $this->Karyawan_m->edit_karyawan(NULL, $id), 
-				'msg' =>  'Data telah di edit'
-			]);
-		}else{
-			echo json_encode([
-				'res' => false, 
-				'msg' =>  'Error'
-			]);
 		}
 		($error)?$this->Logs_m->save('Karyawan => error : '. $error): '';
 	}
@@ -141,6 +144,7 @@ class Karyawan extends CI_Controller {
                     // $pengalaman = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
                     // $pelatihan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
 
+					$id_karyawan = $this->getIDKaryawan();
 					$nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                     $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $tempat_lahir = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
@@ -151,7 +155,7 @@ class Karyawan extends CI_Controller {
 					// echo $tanggal_lahir; die();
                     if ($nik != ''  ) {
                         $data = [ 
-                            "id_karyawan" => $this->getIDKaryawan(),
+                            "id_karyawan" => $id_karyawan,
                             "nik" => $nik,
 							"nama" => $nama,
 							"tempat_lahir" => $tempat_lahir,
@@ -171,6 +175,13 @@ class Karyawan extends CI_Controller {
 							"created" => date('Y-m-d H:i:s').$this->session->userdata('nama'),
                         ];
                         $this->db->insert("karyawan",$data);
+
+						// karyawan detail
+                        $data_detail = [ 
+                            "id_karyawan" => $id_karyawan,
+							"created" => date('Y-m-d H:i:s').$this->session->userdata('nama'),
+                        ];
+                        $this->db->insert("karyawan_detail",$data_detail);
                     }
                 }
             }
