@@ -21,6 +21,19 @@ class Outlet_detail extends CI_Controller {
 		$this->load->view('admin/layout/layout',$data);
 	}
 
+	public function print($id_outlet){
+		require_once './vendor/autoload.php';
+		// $mpdf = new \Mpdf\Mpdf(['format' => 'Legal']);
+		$mpdf= new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'Legal','margin_left' => 10,'margin_right' => 10,'margin_top' => 8,'margin_bottom' => 15,'margin_header' => 0,'margin_footer' => 0]); 
+		$data['title'] = 'Daftar Karyawan Outlet ';
+		$data['data'] = $this->Outlet_m->data_outlet_detail_karyawanWParam($id_outlet);
+		// echo json_encode($data['data']); die();
+		$html = $this->load->view('admin/outlet-detail/page-print',$data,true);
+		$mpdf->SetTitle('Daftar Karyawan Outlet '.$data['data'][0]['nama_outlet'].' - '.$id_outlet);
+		$mpdf->WriteHTML($html);
+		$mpdf->Output('Daftar Karyawan Outlet  '.$data['data'][0]['nama_outlet'].' ('.date('d F Y').') - '.$id_outlet.'.pdf', 'I');
+    }
+	
 	public function get_data(){
 		echo json_encode($this->Outlet_m->data_outlet_detail_karyawan());
 	}

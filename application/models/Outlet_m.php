@@ -136,6 +136,11 @@ class Outlet_m extends CI_Model {
         $query = $this->db->query("SELECT a.*,b.*, c.* FROM outlet_detail a LEFT JOIN outlet b ON a.id_outlet = b.id_outlet LEFT JOIN karyawan c ON a.id_karyawan = c.id_karyawan where a.id_outlet = '$id' AND a.deleted IS NULL AND b.deleted IS NULL AND c.deleted IS NULL GROUP BY a.id_outletdetail");
         return $query->result_array();
     }
+    public function data_outlet_detail_karyawanWParam($id_outlet)
+    {
+        $query = $this->db->query("SELECT a.*,b.*, c.id_karyawan,c.nik, c.nama,c.alamat, c.tempat_lahir, c.tanggal_lahir, c.pendidikan FROM outlet_detail a LEFT JOIN outlet b ON a.id_outlet = b.id_outlet LEFT JOIN karyawan c ON a.id_karyawan = c.id_karyawan where a.id_outlet = '$id_outlet' AND a.deleted IS NULL AND b.deleted IS NULL AND c.deleted IS NULL GROUP BY a.id_outletdetail");
+        return $query->result_array();
+    }
 
     public function data_ByID()
     {

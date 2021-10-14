@@ -6,6 +6,7 @@
 				Karyawan Outlet</button>
 			<a href="<?= base_url(); ?>outlet" class="btn btn-warning"><i class="mdi mdi-backburger"></i> Kembali</a>
 			<!-- <button class="float-right btn btn-info" id="btn-import"><i class="mdi mdi-file-import"></i> Import Data</button> -->
+			<a href="<?= base_url(); ?>outlet/outlet-detail/print/<?= $this->uri->segment(3) ?>" target="_blank" class="float-right btn btn-primary btnCetak"><i class="fa fa-print"></i></a>
 		</h6>
 
 	</div>
