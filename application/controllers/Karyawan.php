@@ -42,55 +42,52 @@ class Karyawan extends CI_Controller {
 		$config['encrypt_name'] = TRUE;
 
 		$this->load->library('upload', $config);
-		if (empty($_FILES['gambar_karyawan']['name'])) {
-			$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
+		if ($act == 'Tambah') {
+			if ( ! $this->upload->do_upload('gambar_karyawan')){
+				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
 				echo json_encode([
 					'res' => $this->Karyawan_m->simpan_karyawan(''), 
 					'msg' =>  'Data di tambahkan'
 				]);
-		}else{
-			if ($act == 'Tambah') {
-				if ( ! $this->upload->do_upload('gambar_karyawan')){
-					$error = $this->upload->display_errors();
-					echo json_encode([
-						'res' => false,
-						'msg' => $error
-					]);
-				}else{
-					$data = $this->upload->data();
-					$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
-					echo json_encode([
-						'res' => $this->Karyawan_m->simpan_karyawan($data['file_name']), 
-						'msg' =>  'Data di tambahkan'
-					]);
-				}
-			}else if ($act == 'Edit' && !empty($_FILES['gambar_karyawan']['name'])){
-				if ( ! $this->upload->do_upload('gambar_karyawan')){
-					$error = $this->upload->display_errors();
-					echo json_encode([
-						'res' => false,
-						'msg' => $error
-					]);
-				}else{
-					$data = $this->upload->data();
-					$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
-					echo json_encode([
-						'res' => $this->Karyawan_m->edit_karyawan($data['file_name'], $id), 
-						'msg' =>  'Data telah di edit'
-					]);
-				}
-			}else if ($act == 'Edit' && empty($_FILES['gambar_karyawan']['name'])){
-				$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
-				echo json_encode([
-					'res' => $this->Karyawan_m->edit_karyawan(NULL, $id), 
-					'msg' =>  'Data telah di edit'
-				]);
+				// $error = $this->upload->display_errors();
+				// echo json_encode([
+				// 	'res' => false,
+				// 	'msg' => $error
+				// ]);
 			}else{
+				$data = $this->upload->data();
+				$this->Logs_m->save('Tambah Karyawan => nik : '.$_POST['nik']);
 				echo json_encode([
-					'res' => false, 
-					'msg' =>  'Error'
+					'res' => $this->Karyawan_m->simpan_karyawan($data['file_name']), 
+					'msg' =>  'Data di tambahkan'
 				]);
 			}
+		}else if ($act == 'Edit' && !empty($_FILES['gambar_karyawan']['name'])){
+			if ( ! $this->upload->do_upload('gambar_karyawan')){
+				$error = $this->upload->display_errors();
+				echo json_encode([
+					'res' => false,
+					'msg' => $error
+				]);
+			}else{
+				$data = $this->upload->data();
+				$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
+				echo json_encode([
+					'res' => $this->Karyawan_m->edit_karyawan($data['file_name'], $id), 
+					'msg' =>  'Data telah di edit'
+				]);
+			}
+		}else if ($act == 'Edit' && empty($_FILES['gambar_karyawan']['name'])){
+			$this->Logs_m->save('Edit Karyawan => nik : '.$_POST['nik']);
+			echo json_encode([
+				'res' => $this->Karyawan_m->edit_karyawan(NULL, $id), 
+				'msg' =>  'Data telah di edit'
+			]);
+		}else{
+			echo json_encode([
+				'res' => false, 
+				'msg' =>  'Error'
+			]);
 		}
 		($error)?$this->Logs_m->save('Karyawan => error : '. $error): '';
 	}
