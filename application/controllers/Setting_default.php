@@ -24,8 +24,8 @@ class Setting_default extends CI_Controller {
 		echo json_encode($this->Setting_m->data_setting());
 	}
 	
-	public function get_data_detail(){
-		echo json_encode($this->Setting_m->data_setting_detail());
+	public function get_data_detail($id_karyawan){
+		echo json_encode($this->Setting_m->data_setting_detail($id_karyawan));
 	}
 
 	function simpan_setting($act, $id = ''){

@@ -338,7 +338,7 @@
 		})
 		$("#btn-tambah").click(function () {
 			act = 'Tambah';
-			get_settingDefault();
+			get_settingDefault(id_karyawan);
 			$("#act").text(act);
 			$("form")[0].reset();
 			$('.custom-file-label').html('Pilih Gambar');
@@ -390,7 +390,7 @@
 			id_karyawan = $(this).data("id");
 			get_karyawan_detail(id_karyawan)
 			//ambil setting default
-			get_settingDefault()
+			get_settingDefault(id_karyawan)
 			//timpa dengan setting manual
 			edit_settingDefault(id_karyawan);
 			$('input.number').each(function (event) {
@@ -533,15 +533,15 @@
 						$("#bpdd").val(data.bpdd)
 					}
 				} else {
-					get_settingDefault()
+					get_settingDefault(id_karyawan)
 				}
 			}
 		});
 	}
 
-	function get_settingDefault() {
+	function get_settingDefault(id_karyawan) {
 		$.ajax({
-			url: base_url + 'Setting_default/get_data_detail',
+			url: base_url + 'Setting_default/get_data_detail/'+id_karyawan,
 			method: "POST",
 			dataType: "json",
 			async: false,
@@ -557,6 +557,9 @@
 					$("#dpst").val(data.dpst)
 					$("#srg").val(data.srg)
 					$("#bpdd").val(data.bpdd)
+					$("#bpjs_kesehatan").val(data.bpjs_kesehatan)
+					$("#bpjs_tk").val(data.bpjs_tk)
+					$("#bpjs_jp").val(data.bpjs_jp)
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}

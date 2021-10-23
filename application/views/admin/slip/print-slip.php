@@ -238,8 +238,7 @@
 				<td colspan="2" height="30"></td>
 			</tr>
 			<tr>
-				<td>(<?= $val['nama'] ?>)</td>
-				<td>_________________</td>
+				<td><?= $val['nama'] ?></td>
 			</tr>
 		</table>
 	</div>

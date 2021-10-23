@@ -13,9 +13,10 @@ class Setting_m extends CI_Model {
         return $query->result_array();
     }
 
-    public function data_setting_detail()
+    public function data_setting_detail($id_karyawan)
     {
-        $query = $this->db->query("SELECT * FROM setting_default");
+        $otl = $this->db->query("SELECT id_outletdetail ,id_outlet, id_karyawan FROM outlet_detail where id_karyawan = '$id_karyawan'")->row();
+        $query = $this->db->query("SELECT * FROM outlet where id_outlet = '$otl->id_outlet'");
         return $query->row();
     }
 

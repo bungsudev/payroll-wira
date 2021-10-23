@@ -123,13 +123,16 @@ class Karyawan_m extends CI_Model {
             "shift_outlet" => $this->input->post('shift_outlet'),
             "b_spkwt" => $this->input->post('b_spkwt'),
             "g_pkk" => $this->input->post('g_pkk'),
-            "t_jbt" => $this->input->post('t_jbt'),
+            // "t_jbt" => $this->input->post('t_jbt'),
             "t_trans" => $this->input->post('t_trans'),
             "t_ot" => $this->input->post('t_ot'),
             "jst" => $this->input->post('jst'),
             "dpst" => $this->input->post('dpst'),
             "srg" => $this->input->post('srg'),
             "bpdd" => $this->input->post('bpdd'),
+            "bpjs_kesehatan" => $this->input->post('bpjs_kesehatan'),
+            "bpjs_tk" => $this->input->post('bpjs_tk'),
+            "bpjs_jp" => $this->input->post('bpjs_jp'),
         ];
 
         if ($check_karyawanDetail > 0) {

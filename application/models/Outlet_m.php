@@ -72,6 +72,9 @@ class Outlet_m extends CI_Model {
             "dpst" => $this->input->post('dpst'),
             "srg" => $this->input->post('srg'),
             "bpdd" => $this->input->post('bpdd'),
+            "bpjs_kesehatan" => $this->input->post('bpjs_kesehatan'),
+            "bpjs_tk" => $this->input->post('bpjs_tk'),
+            "bpjs_jp" => $this->input->post('bpjs_jp'),
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('outlet', $data);
@@ -92,10 +95,9 @@ class Outlet_m extends CI_Model {
             "dpst" => $this->input->post('dpst'),
             "srg" => $this->input->post('srg'),
             "bpdd" => $this->input->post('bpdd'),
-            "dab" => $this->input->post('dab'),
-            "diz" => $this->input->post('diz'),
-            "dis" => $this->input->post('dis'),
-            "lain" => $this->input->post('lain'),
+            "bpjs_kesehatan" => $this->input->post('bpjs_kesehatan'),
+            "bpjs_tk" => $this->input->post('bpjs_tk'),
+            "bpjs_jp" => $this->input->post('bpjs_jp'),
             "edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username')
         ];
 

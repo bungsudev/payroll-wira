@@ -200,6 +200,9 @@
 					$("#dpst").val(data.dpst)
 					$("#srg").val(data.srg)
 					$("#bpdd").val(data.bpdd)
+					$("#bpjs_kesehatan").val(data.bpjs_kesehatan)
+					$("#bpjs_tk").val(data.bpjs_tk)
+					$("#bpjs_jp").val(data.bpjs_jp)
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}

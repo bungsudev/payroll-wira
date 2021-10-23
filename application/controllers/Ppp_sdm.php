@@ -70,6 +70,9 @@ class Ppp_sdm extends CI_Controller {
 			(empty($data_absen[$key]['diz']))?$data_absen[$key]['diz'] = $sett_default->diz : '';
 			(empty($data_absen[$key]['dis']))?$data_absen[$key]['dis'] = $sett_default->dis : '';
 			(empty($data_absen[$key]['lain']))?$data_absen[$key]['lain'] = $sett_default->lain : '';
+			(empty($data_absen[$key]['bpjs_kesehatan']))?$data_absen[$key]['bpjs_kesehatan'] = $sett_default->bpjs_kesehatan : '';
+			(empty($data_absen[$key]['bpjs_tk']))?$data_absen[$key]['bpjs_tk'] = $sett_default->bpjs_tk : '';
+			(empty($data_absen[$key]['bpjs_jp']))?$data_absen[$key]['bpjs_jp'] = $sett_default->bpjs_jp : '';
 		}
 
 		// echo json_encode($data_absen);
