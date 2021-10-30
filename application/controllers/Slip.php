@@ -78,6 +78,9 @@ class Slip extends CI_Controller {
 		return $data_absen;
 	}
 
+	public function test(){
+		echo json_encode($this->PppSDM_m->dataDefault());
+	}
 
 	public function get_data(){
 		echo json_encode($this->Absensi_m->data_absensi());

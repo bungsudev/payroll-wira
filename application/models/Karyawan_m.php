@@ -133,6 +133,7 @@ class Karyawan_m extends CI_Model {
             "bpjs_kesehatan" => $this->input->post('bpjs_kesehatan'),
             "bpjs_tk" => $this->input->post('bpjs_tk'),
             "bpjs_jp" => $this->input->post('bpjs_jp'),
+            "t_urine" => $this->input->post('t_urine'),
         ];
 
         if ($check_karyawanDetail > 0) {

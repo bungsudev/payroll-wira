@@ -79,9 +79,13 @@
 			// 		}
 			// 	}
 			// }
-			$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-			$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
+			// $penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
+			// $potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
+			// $saldo = $penghasilan - $potongan;
+			$dab = ($val['g_pkk']/20) * $val['absen'];
+			$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
+			$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 			$saldo = $penghasilan - $potongan;
 	?>
 	<div class="wrap">
@@ -126,6 +130,12 @@
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
+				<td width="60%">Lembur KBL</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->kbl) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
 				<td width="60%">Lembur LHK</td>
 				<td width="1%">Rp. </td>
 				<td width="34%" align="right"><?= number_format($ppp->lhk) ?></td>
@@ -161,7 +171,7 @@
 				<?php 
 					$jumlahA = $val['g_pkk'] + $val['t_jbt'] + $ppp->lhk + $ppp->llr + $ppp->lbu + $val['t_trans'];
 				?>
-				<td width="34%" align="right"><?= number_format($jumlahA) ?></td>
+				<td width="34%" align="right"><?= number_format($penghasilan) ?></td>
 			</tr>
 		</table>
 

@@ -532,6 +532,9 @@
 					if (data.bpdd != 0) {
 						$("#bpdd").val(data.bpdd)
 					}
+					if (data.t_urine != 0) {
+						$("#t_urine").val(data.t_urine)
+					}
 				} else {
 					get_settingDefault(id_karyawan)
 				}
@@ -560,6 +563,7 @@
 					$("#bpjs_kesehatan").val(data.bpjs_kesehatan)
 					$("#bpjs_tk").val(data.bpjs_tk)
 					$("#bpjs_jp").val(data.bpjs_jp)
+					
 				} else {
 					a_error('Terjadi Kesalahan!', 'Silahkan refresh page');
 				}

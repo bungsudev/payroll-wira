@@ -144,16 +144,17 @@ function numberToRomanRepresentation($number) {
 							}
 						}
 					}
+					// $data_default = $this->db-query("SELECT * FROM outlet where ")
 					$dab = ($val['g_pkk']/20) * $val['absen'];
 					$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-					$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
+					$potongan =$val['bpjs_kesehatan'] +$val['bpjs_tk'] +$val['bpjs_jp'] + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] +$val['t_urine'] + $ppp->lain + $ppp->sp;
 					$saldo = $penghasilan - $potongan;
 
 					$ttl_gaji_pokok = $ttl_gaji_pokok + $val['g_pkk'];
 					$ttl_penghasilan = $ttl_penghasilan + $penghasilan;
-					$ttl_bpjs_kesehatan = $ttl_bpjs_kesehatan + $data_default->bpjs_kesehatan;
-					$ttl_bpjs_tk = $ttl_bpjs_tk + $data_default->bpjs_tk;
-					$ttl_bpjs_jp = $ttl_bpjs_jp + $data_default->bpjs_jp;
+					$ttl_bpjs_kesehatan = $ttl_bpjs_kesehatan +$val['bpjs_kesehatan'];
+					$ttl_bpjs_tk = $ttl_bpjs_tk +$val['bpjs_tk'];
+					$ttl_bpjs_jp = $ttl_bpjs_jp +$val['bpjs_jp'];
 					$ttl_dab = $ttl_dab + $dab;
 					$ttl_potongan = $ttl_potongan + $potongan;
 					$ttl_saldo = $ttl_saldo + $saldo;
@@ -172,14 +173,14 @@ function numberToRomanRepresentation($number) {
 				<td><?= number_format($ppp->llr) ?></td>
 				<td><?= number_format($penghasilan) ?></td>
 				
-				<td><?= number_format($data_default->bpjs_kesehatan) ?></td>
-				<td><?= number_format($data_default->bpjs_tk) ?></td>
-				<td><?= number_format($data_default->bpjs_jp) ?></td>
+				<td><?= number_format($val['bpjs_kesehatan']) ?></td>
+				<td><?= number_format($val['bpjs_tk']) ?></td>
+				<td><?= number_format($val['bpjs_jp']) ?></td>
 				<td><?= number_format($val['dpst']) ?></td>
 				<td><?= number_format($val['bpdd']) ?></td>
 				<td><?= number_format($dab) ?></td>
 				<td><?= number_format($val['diz']) ?></td>
-				<td><?= number_format($data_default->t_urine) ?></td>
+				<td><?= number_format($val['t_urine']) ?></td>
 				<td><?= number_format($ppp->lain) ?></td>
 				<td><?= number_format($ppp->sp) ?></td>
 				<td><?= number_format($potongan) ?></td>
