@@ -57,6 +57,10 @@
 							<th>KBL</th>
 							<th>SP</th>
 							<th>LL</th>
+							<th>T.Urine</th>
+							<th>DPST</th>
+							<th>BPDD</th>
+							<th>DIZ</th>
 						</tr>
 					</thead>
 					<tbody></tbody>
@@ -100,6 +104,10 @@
 								<th>KBL</th>
 								<th>SP</th>
 								<th>LL</th>
+								<th>T.Urine</th>
+								<th>DPST</th>
+								<th>BPDD</th>
+								<th>DIZ</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -135,7 +143,7 @@
 				let data_input = $(this).attr('name').split('_');
 				let input_type = data_input[0];
 				let id_karyawan = data_input[1];
-				let kbl, sp, llr, lhk, lain, lbu = 0;
+				let kbl, sp, llr, lhk, lain, lbu, urine, dpst, bpdd, diz = 0;
 				if (input_type == 'kbl') {
 					kbl = this.value;
 					sp = 0;
@@ -143,6 +151,10 @@
 					llr = 0;
 					lbu = 0;
 					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
 				} else if (input_type == 'sp') {
 					kbl = 0;
 					sp = this.value;
@@ -150,6 +162,10 @@
 					llr = 0;
 					lbu = 0;
 					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
 				}  else if (input_type == 'lhk') {
 					kbl = 0;
 					sp = 0;
@@ -157,6 +173,10 @@
 					llr = 0;
 					lbu = 0;
 					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
 				}  else if (input_type == 'llr') {
 					kbl = 0;
 					sp = 0;
@@ -164,6 +184,10 @@
 					llr = this.value;
 					lbu = 0;
 					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
 				} else if (input_type == 'lbu') {
 					kbl = 0;
 					sp = 0;
@@ -171,6 +195,10 @@
 					llr = 0;
 					lbu = this.value;
 					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
 				} else if (input_type == 'lain') {
 					kbl = 0;
 					sp = 0;
@@ -178,8 +206,56 @@
 					llr = 0;
 					lbu = 0;
 					lain = this.value;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
+				} else if (input_type == 'urine') {
+					kbl = 0;
+					sp = 0;
+					lhk = 0;
+					llr = 0;
+					lbu = 0;
+					lain = 0;
+					urine = this.value;
+					dpst = 0;
+					bpdd = 0;
+					diz = 0;
+				} else if (input_type == 'dpst') {
+					kbl = 0;
+					sp = 0;
+					lhk = 0;
+					llr = 0;
+					lbu = 0;
+					lain = 0;
+					urine = 0;
+					dpst = this.value;
+					bpdd = 0;
+					diz = 0;
+				} else if (input_type == 'bpdd') {
+					kbl = 0;
+					sp = 0;
+					lhk = 0;
+					llr = 0;
+					lbu = 0;
+					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = this.value;
+					diz = 0;
+				} else if (input_type == 'diz') {
+					kbl = 0;
+					sp = 0;
+					lhk = 0;
+					llr = 0;
+					lbu = 0;
+					lain = 0;
+					urine = 0;
+					dpst = 0;
+					bpdd = 0;
+					diz = this.value;
 				}
-				update_detail_cek(input_type, periode, id_karyawan, kbl, sp, lhk, llr, lbu, lain);
+				update_detail_cek(input_type, periode, id_karyawan, kbl, sp, lhk, llr, lbu, lain, urine, dpst, bpdd, diz);
 			});
 			a_ok('Berhasil!', 'Berhasil menyimpan dan mencetak data');
 			let link = base_url + 'ppp_sdm/print/'+ id_outlet +'/' + periode;
@@ -218,7 +294,7 @@
 		})
 	})
 
-	function update_detail_cek(input_type, periode, id_karyawan, kbl, sp, lhk, llr, lbu, lain) {
+	function update_detail_cek(input_type, periode, id_karyawan, kbl, sp, lhk, llr, lbu, lain, urine, dpst, bpdd, diz) {
 		$.ajax({
 			url: base_url + 'Ppp_sdm/update_detail_cek',
 			data: {
@@ -230,7 +306,11 @@
 				lhk: lhk,
 				llr: llr,
 				lbu: lbu,
-				lain: lain
+				lain: lain,
+				urine: urine,
+				dpst: dpst,
+				bpdd: bpdd,
+				diz: diz
 			},
 			method: "POST",
 			dataType: "json",
@@ -278,7 +358,11 @@
 								(dataPPP.kbl != 0 || dataPPP.kbl != '') ? kbl = dataPPP.kbl: kbl = 0;
 								(dataPPP.sp != 0 || dataPPP.sp != '') ? sp = dataPPP.sp: sp = 0;
 								(dataPPP.lain != 0 || dataPPP.lain != '') ? lain = dataPPP.lain:
-									lain = 0;
+								lain = 0;
+								(dataPPP.urine != 0 || dataPPP.urine != '') ? urine = dataPPP.urine: urine = 0;
+								(dataPPP.dpst != 0 || dataPPP.dpst != '') ? dpst = dataPPP.dpst: dpst = 0;
+								(dataPPP.bpdd != 0 || dataPPP.bpdd != '') ? bpdd = dataPPP.bpdd: bpdd = 0;
+								(dataPPP.diz != 0 || dataPPP.diz != '') ? diz = dataPPP.diz: diz = 0;
 								html += `
 								<tr>
 									<td class="text-center">` + r + `</td>
@@ -290,44 +374,72 @@
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="lbu_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="lbu_` + data[i].id_karyawan + `">LBU</label>
 											<input type="text" class="number form-control" name="lbu_` + data[i].id_karyawan + `" id="lbu_` +
 									data[i].id_karyawan + `" value="` + lbu + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="lhk_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="lhk_` + data[i].id_karyawan + `">LHK</label>
 											<input type="text" class="number form-control" name="lhk_` + data[i].id_karyawan + `" id="lhk_` +
 									data[i].id_karyawan + `" value="` + lhk + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="llr_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="llr_` + data[i].id_karyawan + `">LLR</label>
 											<input type="text" class="number form-control" name="llr_` + data[i].id_karyawan + `" id="llr_` +
 									data[i].id_karyawan + `" value="` + llr + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="kbl_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="kbl_` + data[i].id_karyawan + `">KBL</label>
 											<input type="text" class="number form-control" name="kbl_` + data[i].id_karyawan + `" id="kbl_` + data[
 										i].id_karyawan + `" value="` + kbl + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="sp_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="sp_` + data[i].id_karyawan + `">SP</label>
 											<input type="text" class="number form-control" name="sp_` + data[i].id_karyawan + `" id="sp_` + data[i]
 									.id_karyawan + `" value="` + sp + `">
 										</div>
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label for="lain_` + data[i].id_karyawan + `"></label>
+											<label class="text-sm text-secondary" for="lain_` + data[i].id_karyawan + `">LL</label>
 											<input type="text" class="number form-control" name="lain_` + data[i].id_karyawan + `" id="lain_` +
 									data[i].id_karyawan + `" value="` + lain + `">
+										</div>
+									</td>
+									<td>
+										<div class="form-group mr-4">
+											<label class="text-sm text-secondary" for="urine_` + data[i].id_karyawan + `">URINE</label>
+											<input type="text" class="number form-control" name="urine_` + data[i].id_karyawan + `" id="urine_` +
+									data[i].id_karyawan + `" value="` + urine + `">
+										</div>
+									</td>
+									<td>
+										<div class="form-group mr-4">
+											<label class="text-sm text-secondary" for="dpst_` + data[i].id_karyawan + `">DPST</label>
+											<input type="text" class="number form-control" name="dpst_` + data[i].id_karyawan + `" id="dpst_` +
+									data[i].id_karyawan + `" value="` + dpst + `">
+										</div>
+									</td>
+									<td>
+										<div class="form-group mr-4">
+											<label class="text-sm text-secondary" for="bpdd_` + data[i].id_karyawan + `">BPDD</label>
+											<input type="text" class="number form-control" name="bpdd_` + data[i].id_karyawan + `" id="bpdd_` +
+									data[i].id_karyawan + `" value="` + bpdd + `">
+										</div>
+									</td>
+									<td>
+										<div class="form-group mr-4">
+											<label class="text-sm text-secondary" for="diz_` + data[i].id_karyawan + `">DIZ</label>
+											<input type="text" class="number form-control" name="diz_` + data[i].id_karyawan + `" id="diz_` +
+									data[i].id_karyawan + `" value="` + diz + `">
 										</div>
 									</td>
 								</tr>
@@ -346,7 +458,10 @@
 						{
 							"width": "10%",
 							"targets": 1
-						}]
+						}],
+						'createdRow': function(row, data, dataIndex){
+							$('td:not(:eq(0))', row).css('min-width', '150px');
+						}
 					});
 					$("#secTbl").show();
 					$('input.number').each(function(event) {

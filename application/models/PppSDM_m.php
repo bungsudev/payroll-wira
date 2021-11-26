@@ -92,8 +92,8 @@ class PppSDM_m extends CI_Model {
             "shift_outlet" => $this->input->post('shift_outlet'),
             "g_pkk" => $this->input->post('g_pkk'),
             "t_jbt" => $this->input->post('t_jbt'),
-            "t_trans" => $this->input->post('t_trans'),
-            "t_ot" => $this->input->post('t_ot'),
+            // "t_trans" => $this->input->post('t_trans'),
+            // "t_ot" => $this->input->post('t_ot'),
             "lhk" => $this->input->post('lhk'),
             "lbu" => $this->input->post('lbu'),
             "llr" => $this->input->post('llr'),
@@ -105,6 +105,7 @@ class PppSDM_m extends CI_Model {
             "diz" => $this->input->post('diz'),
             "dis" => $this->input->post('dis'),
             "lain" => $this->input->post('lain'),
+            "urine" => $this->input->post('urine'),
             "created" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username'),
         ];
         $this->db->insert('outlet', $data);
@@ -118,8 +119,8 @@ class PppSDM_m extends CI_Model {
             "shift_outlet" => $this->input->post('shift_outlet'),
             "g_pkk" => $this->input->post('g_pkk'),
             "t_jbt" => $this->input->post('t_jbt'),
-            "t_trans" => $this->input->post('t_trans'),
-            "t_ot" => $this->input->post('t_ot'),
+            // "t_trans" => $this->input->post('t_trans'),
+            // "t_ot" => $this->input->post('t_ot'),
             "lhk" => $this->input->post('lhk'),
             "lbu" => $this->input->post('lbu'),
             "llr" => $this->input->post('llr'),
@@ -131,6 +132,7 @@ class PppSDM_m extends CI_Model {
             "diz" => $this->input->post('diz'),
             "dis" => $this->input->post('dis'),
             "lain" => $this->input->post('lain'),
+            "urine" => $this->input->post('urine'),
             "edited" => date("d-m-Y H:i:s").'-'.$this->session->userdata('username')
         ];
 
@@ -154,6 +156,14 @@ class PppSDM_m extends CI_Model {
             $data_input = $this->input->post('lbu');
         }else if($input_type == 'lain'){
             $data_input = $this->input->post('lain');
+        }else if($input_type == 'urine'){
+            $data_input = $this->input->post('urine');
+        }else if($input_type == 'dpst'){
+            $data_input = $this->input->post('dpst');
+        }else if($input_type == 'bpdd'){
+            $data_input = $this->input->post('bpdd');
+        }else if($input_type == 'diz'){
+            $data_input = $this->input->post('diz');
         }
 
         $data = [

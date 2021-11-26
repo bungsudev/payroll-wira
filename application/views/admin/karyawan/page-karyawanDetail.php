@@ -70,7 +70,7 @@
 </div>
 
 <!-- //tambahan -->
-<div class="col-md-3">
+<!-- <div class="col-md-3">
     <div class="form-group">
         <label for="bpjs_kesehatan">BPJS Kesehatan</label>
         <input type="number" class="form-control required" name="bpjs_kesehatan" id="bpjs_kesehatan"
@@ -88,10 +88,4 @@
         <label for="bpjs_jp">BPJS JP</label>
         <input type="number" class="form-control required" name="bpjs_jp" id="bpjs_jp" value="0">
     </div>
-</div>
-<div class="col-md-3">
-    <div class="form-group">
-        <label for="t_urine">Tes Urine</label>
-        <input type="number" class="form-control required" name="t_urine" id="t_urine" value="0">
-    </div>
-</div>
+</div> -->

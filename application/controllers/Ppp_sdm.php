@@ -26,6 +26,7 @@ class Ppp_sdm extends CI_Controller {
 		$data['title'] = 'Perhitungan Penghasilan dan Pengeluaran SDM';
 		$data['data'] = $this->dataLaporanPPP($id_outlet, $periode);
 		$data['data_default'] = $this->PppSDM_m->dataDefault();
+		$data['outlet'] = $this->PppSDM_m->data_outlet_detail_wParam($id_outlet);
 		$this->load->view('admin/ppp/print-ppp',$data);
 	}
 
@@ -57,8 +58,8 @@ class Ppp_sdm extends CI_Controller {
 			(empty($data_absen[$key]['b_spkwt']))?$data_absen[$key]['b_spkwt'] = $sett_default->b_spkwt : '';
 			(empty($data_absen[$key]['g_pkk']))?$data_absen[$key]['g_pkk'] = $sett_default->g_pkk : '';
 			(empty($data_absen[$key]['t_jbt']))?$data_absen[$key]['t_jbt'] = $sett_default->t_jbt : '';
-			(empty($data_absen[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
-			(empty($data_absen[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
+			// (empty($data_absen[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
+			// (empty($data_absen[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
 			(empty($data_absen[$key]['lhk']))?$data_absen[$key]['lhk'] = $sett_default->lhk : '';
 			(empty($data_absen[$key]['lbu']))?$data_absen[$key]['lbu'] = $sett_default->lbu : '';
 			(empty($data_absen[$key]['llr']))?$data_absen[$key]['llr'] = $sett_default->llr : '';

@@ -82,6 +82,8 @@ function numberToRomanRepresentation($number) {
 			<tr>
 				<th rowspan="2">G.PKK</th>
 				<th rowspan="2">T.JBT</th>
+				<!-- <th rowspan="2">T.TRANS</th> -->
+				<!-- <th rowspan="2">T.OT</th> -->
 				<th rowspan="2">KBL</th>
 				<th rowspan="2">LHK</th>
 				<th rowspan="2">LBU</th>
@@ -115,6 +117,17 @@ function numberToRomanRepresentation($number) {
 				$ttl_dab = 0;
 				$ttl_potongan = 0;
 				$ttl_saldo = 0;
+				$ttl_t_jbt = 0;
+				$ttl_kbl = 0;
+				$ttl_lhk = 0;
+				$ttl_lbu = 0;
+				$ttl_llr = 0;
+				$ttl_dpst = 0;
+				$ttl_bpdd = 0;
+				$ttl_diz = 0;
+				$ttl_urine = 0;
+				$ttl_lain = 0;
+				$ttl_sp = 0;
 				foreach ($data as $key => $val): 
 					$ppp = $this->PppSDM_m->json_dataPPP($val['periode'],$val['id_karyawan']);
 					$lhk = 0;
@@ -147,10 +160,21 @@ function numberToRomanRepresentation($number) {
 					// $data_default = $this->db-query("SELECT * FROM outlet where ")
 					$dab = ($val['g_pkk']/20) * $val['absen'];
 					$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-					$potongan =$val['bpjs_kesehatan'] +$val['bpjs_tk'] +$val['bpjs_jp'] + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] +$val['t_urine'] + $ppp->lain + $ppp->sp;
+					$potongan = $val['bpjs_kesehatan'] +$val['bpjs_tk'] +$val['bpjs_jp'] + $ppp->dpst + $ppp->bpdd + $dab + $ppp->diz + $ppp->urine + $ppp->lain + $ppp->sp;
 					$saldo = $penghasilan - $potongan;
 
 					$ttl_gaji_pokok = $ttl_gaji_pokok + $val['g_pkk'];
+					$ttl_t_jbt = $ttl_t_jbt + $val['t_jbt'];
+					$ttl_kbl = $ttl_kbl + $ppp->kbl;
+					$ttl_lhk = $ttl_lhk + $ppp->lhk;
+					$ttl_lbu = $ttl_lbu + $ppp->lbu;
+					$ttl_llr = $ttl_llr + $ppp->llr;
+					$ttl_dpst = $ttl_dpst + $ppp->dpst;
+					$ttl_bpdd = $ttl_bpdd + $ppp->bpdd;
+					$ttl_diz = $ttl_diz + $ppp->diz;
+					$ttl_urine = $ttl_urine + $ppp->urine;
+					$ttl_lain = $ttl_lain + $ppp->lain;
+					$ttl_sp = $ttl_sp + $ppp->sp;
 					$ttl_penghasilan = $ttl_penghasilan + $penghasilan;
 					$ttl_bpjs_kesehatan = $ttl_bpjs_kesehatan +$val['bpjs_kesehatan'];
 					$ttl_bpjs_tk = $ttl_bpjs_tk +$val['bpjs_tk'];
@@ -176,11 +200,11 @@ function numberToRomanRepresentation($number) {
 				<td><?= number_format($val['bpjs_kesehatan']) ?></td>
 				<td><?= number_format($val['bpjs_tk']) ?></td>
 				<td><?= number_format($val['bpjs_jp']) ?></td>
-				<td><?= number_format($val['dpst']) ?></td>
-				<td><?= number_format($val['bpdd']) ?></td>
+				<td><?= number_format($ppp->dpst) ?></td>
+				<td><?= number_format($ppp->bpdd) ?></td>
 				<td><?= number_format($dab) ?></td>
-				<td><?= number_format($val['diz']) ?></td>
-				<td><?= number_format($val['t_urine']) ?></td>
+				<td><?= number_format($ppp->diz) ?></td>
+				<td><?= number_format($ppp->urine) ?></td>
 				<td><?= number_format($ppp->lain) ?></td>
 				<td><?= number_format($ppp->sp) ?></td>
 				<td><?= number_format($potongan) ?></td>
@@ -190,23 +214,23 @@ function numberToRomanRepresentation($number) {
 			<tr>
 				<td colspan="5" align="center">TOTAL</td>
 				<td><?= number_format($ttl_gaji_pokok) ?></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><?= number_format($ttl_t_jbt) ?></td>
+				<td><?= number_format($ttl_kbl) ?></td>
+				<td><?= number_format($ttl_lhk) ?></td>
+				<td><?= number_format($ttl_lbu) ?></td>
+				<td><?= number_format($ttl_llr) ?></td>
 				<td><?= number_format($ttl_penghasilan) ?></td>
 				
 				<td><?= number_format($ttl_bpjs_kesehatan) ?></td>
 				<td><?= number_format($ttl_bpjs_tk) ?></td>
 				<td><?= number_format($ttl_bpjs_jp) ?></td>
-				<td></td>
-				<td></td>
+				<td><?= number_format($ttl_dpst) ?></td>
+				<td><?= number_format($ttl_bpdd) ?></td>
 				<td><?= number_format($ttl_dab) ?></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><?= number_format($ttl_diz) ?></td>
+				<td><?= number_format($ttl_urine) ?></td>
+				<td><?= number_format($ttl_lain) ?></td>
+				<td><?= number_format($ttl_sp) ?></td>
 				<td><?= number_format($ttl_potongan) ?></td>
 				<td><?= number_format($ttl_saldo) ?></td>
 			</tr>

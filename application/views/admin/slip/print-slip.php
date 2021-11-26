@@ -42,7 +42,7 @@
 			background-color: #000; /* Modern Browsers */
 		}
 		table{
-			font-size: 13px;
+			font-size: 11px;
 		}
 	</style>
 </head>
@@ -80,12 +80,19 @@
 			// 	}
 			// }
 			// $penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-			// $potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
+			// $potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $ppp->dpst + $ppp->bpdd + $val['dab'] + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 
 			// $saldo = $penghasilan - $potongan;
-			$dab = ($val['g_pkk']/20) * $val['absen'];
+			if ($val['shift_outlet'] == 1 || $val['shift_outlet'] == 2) {
+				$hari_kerja = 20;
+			}elseif ($val['shift_outlet'] == 3){
+				$hari_kerja = 26;
+			}else{
+				$hari_kerja = 20;
+			}
+			$dab = ($val['g_pkk']/$hari_kerja) * $val['absen'];
 			$penghasilan = $val['g_pkk'] + $val['t_jbt'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
-			$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $val['dpst'] + $val['bpdd'] + $dab + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
+			$potongan = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $ppp->dpst + $ppp->bpdd + $dab + $val['diz'] + $data_default->t_urine + $ppp->lain + $ppp->sp;
 			$saldo = $penghasilan - $potongan;
 	?>
 	<div class="wrap">
@@ -160,6 +167,12 @@
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
+				<td width="60%">Tunjangan Outlet</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($val['t_ot']) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
 				<td width="60%">&nbsp;</td>
 				<td width="1%">&nbsp;</td>
 				<td width="34%" align="right"><hr></td>
@@ -169,9 +182,9 @@
 				<td width="60%" align="right"><b>Jumlah</b> &nbsp;&nbsp;</td>
 				<td width="1%">Rp. </td>
 				<?php 
-					$jumlahA = $val['g_pkk'] + $val['t_jbt'] + $ppp->lhk + $ppp->llr + $ppp->lbu + $val['t_trans'];
+					$jumlahA = $val['g_pkk'] + $val['t_jbt'] + $val['t_trans'] + $val['t_ot'] + $ppp->kbl + $ppp->lhk + $ppp->lbu + $ppp->llr;
 				?>
-				<td width="34%" align="right"><?= number_format($penghasilan) ?></td>
+				<td width="34%" align="right"><?= number_format($jumlahA) ?></td>
 			</tr>
 		</table>
 
@@ -198,8 +211,27 @@
 				<td width="1%">Rp. </td>
 				<td width="34%" align="right"><?= number_format($data_default->bpjs_jp) ?></td>
 			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td width="60%">Biaya Deposito</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->dpst) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td width="60%">Biaya Pendidikan</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->bpdd) ?></td>
+			</tr>
 			<?php 
-				$dab = ($val['g_pkk']/20) * $val['absen'];
+				if ($val['shift_outlet'] == 1 || $val['shift_outlet'] == 2) {
+					$hari_kerja = 20;
+				}elseif ($val['shift_outlet'] == 3){
+					$hari_kerja = 26;
+				}else{
+					$hari_kerja = 20;
+				}
+				$dab = ($val['g_pkk']/$hari_kerja) * $val['absen'];
 			?>
 			<tr>
 				<td width="5%">&nbsp;</td>
@@ -209,9 +241,27 @@
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
-				<td width="60%">Biaya Deposito</td>
+				<td width="60%">Denda Izin</td>
 				<td width="1%">Rp. </td>
-				<td width="34%" align="right"><?= number_format($val['dpst']) ?></td>
+				<td width="34%" align="right"><?= number_format($ppp->diz) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td width="60%">Tes Urin</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->urine) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td width="60%">SP</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->sp) ?></td>
+			</tr>
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td width="60%">Lainnya</td>
+				<td width="1%">Rp. </td>
+				<td width="34%" align="right"><?= number_format($ppp->lain) ?></td>
 			</tr>
 			<tr>
 				<td width="5%">&nbsp;</td>
@@ -224,22 +274,22 @@
 				<td width="60%" align="right"><b>Jumlah potong</b> &nbsp;&nbsp;</td>
 				<td width="1%">Rp. </td>
 				<?php 
-					$jumlahB = $data_default->bpjs_kesehatan + $data_default->bpjs_tk + $data_default->bpjs_jp + $dab + $val['dpst'];
+					$jumlahB = $val['bpjs_kesehatan'] +$val['bpjs_tk'] +$val['bpjs_jp'] + $ppp->dpst + $ppp->bpdd + $dab + $ppp->diz + $ppp->urine + $ppp->lain + $ppp->sp;
 				?>
 				<td width="34%" align="right"><?= number_format($jumlahB) ?></td>
 			</tr>
 		</table>
 
-		<table width="100%" style="margin-top: 30px;">
+		<table width="100%" style="margin:0 5px 0 5px;">
 			<tr>
 				<td width="5%">&nbsp;</td>
-				<td width="60%"><b>Sisa gaji yang dibayarkan</b></td>
+				<td width="60%" align="right"><b>Sisa gaji yang dibayarkan</b></td>
 				<td width="1%"><b>Rp. </b></td>
-				<td width="34%" align="right"><b><?= number_format($jumlahA - $jumlahB) ?></b></td>
+				<td width="34%" align="right"><u><b><?= number_format($jumlahA - $jumlahB) ?></b></u></td>
 			</tr>
 		</table>
 
-		<table width="100%" style="margin-top: 30px;">
+		<table width="100%" style="margin:0 5px 0 5px;">
 			<tr>
 				<td width="50%">Diterima oleh,</td>
 				<td width="50%">Kasir,</td>

@@ -13,12 +13,12 @@
         </select>
     </div>
 </div>
-<div class="col-md-3">
+<!-- <div class="col-md-3">
     <div class="form-group">
         <label for="b_spkwt">Berakhir SPKWT</label>
         <input type="date" class="form-control required" name="b_spkwt" id="b_spkwt">
     </div>
-</div>
+</div> -->
 <div class="col-md-3">
     <div class="form-group">
         <label for="g_pkk">Gaji Pokok</label>
@@ -31,18 +31,18 @@
         <input type="text" class="number form-control required" name="t_jbt" id="t_jbt" value="0">
     </div>
 </div>
-<div class="col-md-3">
+<!-- <div class="col-md-3">
     <div class="form-group">
         <label for="t_trans">Tunjangan Transportasi</label>
         <input type="text" class="number form-control required" name="t_trans" id="t_trans" value="0">
     </div>
-</div>
-<div class="col-md-3">
+</div> -->
+<!-- <div class="col-md-3">
     <div class="form-group">
         <label for="t_ot">Tunjangan Outlet</label>
         <input type="text" class="number form-control required" name="t_ot" id="t_ot" value="0">
     </div>
-</div>
+</div> -->
 <div class="col-md-3">
     <div class="form-group">
         <label for="jst">Jamsostek</label>
@@ -65,5 +65,27 @@
     <div class="form-group">
         <label for="bpdd">Biaya Pendidikan</label>
         <input type="text" class="number form-control required" name="bpdd" id="bpdd" value="0">
+    </div>
+</div>
+
+
+<!-- //tambahan -->
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="bpjs_kesehatan">BPJS Kesehatan</label>
+        <input type="number" class="form-control required" name="bpjs_kesehatan" id="bpjs_kesehatan"
+            value="0">
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="bpjs_tk">BPJS Ketenaga Kerjaan</label>
+        <input type="number" class="form-control required" name="bpjs_tk" id="bpjs_tk" value="0">
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="bpjs_jp">BPJS JP</label>
+        <input type="number" class="form-control required" name="bpjs_jp" id="bpjs_jp" value="0">
     </div>
 </div>

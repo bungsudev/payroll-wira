@@ -60,7 +60,7 @@
 									placeholder="">
 							</div>
 						</div>
-						<?php $this->load->view('admin/karyawan/page-karyawanDetail'); ?>
+						<?php $this->load->view('admin/outlet/page-outletDetail'); ?>
 					</div>
 				</form>
 			</div>
@@ -192,9 +192,8 @@
 					$("#alamat").val(data.alamat)
 					$("#shift_outlet").val(data.shift_outlet)
 					$("#g_pkk").val(data.g_pkk)
-					$("#b_spkwt").val(data.b_spkwt)
+					// $("#b_spkwt").val(data.b_spkwt)
 					$("#t_jbt").val(data.t_jbt)
-					$("#t_trans").val(data.t_trans)
 					$("#t_ot").val(data.t_ot)
 					$("#jst").val(data.jst)
 					$("#dpst").val(data.dpst)
