@@ -50,7 +50,7 @@ class PppSDM_m extends CI_Model {
     public function dataDefault()
     {
         // $query = $this->db->query("SELECT * FROM setting_default where id = '1'");
-        $query = $this->db->query("SELECT a.*, b.* FROM outlet_detail a INNER JOIN outlet b on a.id_outlet = b.id_outlet 
+        $query = $this->db->query("SELECT a.*, b.*, c.* FROM outlet_detail a INNER JOIN outlet b on a.id_outlet = b.id_outlet 
         INNER JOIN karyawan_detail c on a.id_karyawan = c.id_karyawan GROUP BY c.id_karyawan");
         return $query->row();
     }
