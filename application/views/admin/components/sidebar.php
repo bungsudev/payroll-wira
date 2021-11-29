@@ -24,12 +24,12 @@
 				</a>
 			</li>
 			<li class="header">Data Master</li>
-			<li class="<?php if($this->uri->segment(1)=="setting-default"){echo "active";}?>">
+			<!-- <li class="<?php if($this->uri->segment(1)=="setting-default"){echo "active";}?>">
 				<a href="<?= base_url(); ?>setting-default">
 					<i class="ti-settings"><span class="path1"></span><span class="path2"></span></i>
 					<span>Pengaturan Awal</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="<?php if($this->uri->segment(1)=="jabatan"){echo "active";}?>">
 				<a href="<?= base_url(); ?>jabatan">
 					<i class="mdi mdi-certificate"><span class="path1"></span><span class="path2"></span></i>
