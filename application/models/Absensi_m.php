@@ -26,9 +26,10 @@ class Absensi_m extends CI_Model {
     {
         $outlet_filter = $this->input->post('outlet_filter');
         $periode_filter = $this->input->post('periode_filter');
-        $query = $this->db->query("SELECT a.*, b.*,
+        $query = $this->db->query("SELECT a.*, b.*,a.shift_karyawan as shift_out ,c.shift_outlet as shift_kry, 
         a.id_karyawan AS idKaryawan, a.id_outlet AS idOutlet FROM outlet_detail a 
         LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan 
+        LEFT JOIN karyawan_detail c ON a.id_karyawan = c.id_karyawan 
         where a.id_outlet = '$outlet_filter' 
         AND a.deleted IS NULL 
         AND b.deleted IS NULL 
@@ -42,10 +43,10 @@ class Absensi_m extends CI_Model {
         $outlet_filter = $this->input->post('outlet_filter');
         $periode_filter = $this->input->post('periode_filter');
         $query = $this->db->query("SELECT * FROM absensi 
-        where id_outlet = '$outlet_filter'
-        AND periode = '$periode_filter'
-        AND id_karyawan = '$id_karyawan'
-        AND deleted IS NULL ");
+        where absensi.id_outlet = '$outlet_filter'
+        AND absensi.periode = '$periode_filter'
+        AND absensi.id_karyawan = '$id_karyawan'
+        AND absensi.deleted IS NULL ");
         return $query->row();
     }
 

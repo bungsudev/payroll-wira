@@ -32,7 +32,7 @@
         <input type="text" class="number form-control required" name="t_jbt" id="t_jbt" value="0">
     </div>
 </div> -->
-<div class="col-md-3">
+<!-- <div class="col-md-3">
     <div class="form-group">
         <label for="t_trans">Tunjangan Transportasi</label>
         <input type="text" class="number form-control required" name="t_trans" id="t_trans" value="0">
@@ -67,7 +67,7 @@
         <label for="bpdd">Biaya Pendidikan</label>
         <input type="text" class="number form-control required" name="bpdd" id="bpdd" value="0">
     </div>
-</div>
+</div> -->
 
 <!-- //tambahan -->
 <!-- <div class="col-md-3">

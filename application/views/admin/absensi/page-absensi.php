@@ -73,13 +73,19 @@
 									placeholder="Nama Karyawan">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="shift_karyawan">Shift</label>
+								<input type="text" class="form-control required" name="shift_karyawan" id="shift_karyawan" readonly>
+							</div>
+						</div>
+						<div class="col-md-5">
 							<div class="form-group">
 								<label for="hadir">Hadir</label>
 								<input type="number" class="form-control required" name="hadir" id="hadir">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-5">
 							<div class="form-group">
 								<label for="absen">Absen</label>
 								<input type="number" class="form-control required" name="absen" id="absen">
@@ -209,11 +215,19 @@
 		$("#absen").prop("readonly", true);
 		$("#hadir").keyup(function () {
 			let jlh_hadir = $(this).val();
-			if (jlh_hadir < 0 || jlh_hadir > 20) {
-				$(this).val(0)
-				a_warning('Maaf!', 'Maksimal Hadir 20');
+			let shift_karyawan = $("#shift_karyawan").val();
+			if (shift_karyawan == '1' || shift_karyawan == '2') {
+				jlh_hari = 20;
+			}else if(shift_karyawan == '3'){
+				jlh_hari = 26;
 			}else{
-				$("#absen").val(20 - jlh_hadir);
+				jlh_hari = 20;
+			}
+			if (jlh_hadir < 0 || jlh_hadir > jlh_hari) {
+				$(this).val(0)
+				a_warning('Maaf!', 'Maksimal Hadir 26');
+			}else{
+				$("#absen").val(jlh_hari - jlh_hadir);
 			}
 		})
 		
@@ -340,9 +354,11 @@
 			id_karyawan = $(this).data("id_karyawan");
 			nik = $(this).data("nik");
 			nama = $(this).data("nama");
+			shift_karyawan = $(this).data("shift_karyawan");
 			$("#id_karyawan").val(id_karyawan);
 			$("#nama").val(nama);
 			$("#nik").val(nik);
+			$("#shift_karyawan").val(shift_karyawan);
 			$("#hadir").val('');
 			$("#absen").val('');
 			$("#lembur").val('');
@@ -400,6 +416,7 @@
 					$("#periode").val(data.periode);
 					$("#nik").val(data.nik);
 					$("#nama").val(data.nama);
+					$("#shift_karyawan").val(data.shift_karyawan);
 					$("#hadir").val(data.hadir);
 					$("#absen").val(data.absen);
 					$("#txtTambah").text('Selesai Edit');
@@ -523,6 +540,12 @@
 							if(data_cek){
 								console.log(data_cek)
 							}else{
+								let shift_temp = '';
+								if (data[i].shift_kry != '') {
+									shift_temp = data[i].shift_kry
+								}else{
+									shift_temp = data[i].shift_out
+								}
 								html += `
 									<tr>
 										<td class="text-center">` + r + `</td>
@@ -538,6 +561,7 @@
 												data-id_karyawan="` + data[i].idKaryawan + `"
 												data-nik="` + data[i].nik + `"
 												data-nama="` + data[i].nama + `"
+												data-shift_karyawan="` + shift_temp + `"
 											class="btn btn-warning btnPilihKaryawan"><i class="mdi mdi-arrow-right"></i></button>
 										</td>
 									</tr>
