@@ -90,8 +90,8 @@
 						<div class="col-md-12">
 							<button class="float-right btn btn-success mt-2 ml-2" id="btnTambah"><i
 									class="mdi mdi-content-save"></i> <span id="txtTambah">Selesai</span></button>
-							<button class="float-right btn btn-info mt-2" id="btnTambahLemburMdl"><i
-									class="mdi mdi-plus-box-outline"></i> Input Lembur</button>
+							<!-- <button class="float-right btn btn-info mt-2" id="btnTambahLemburMdl"><i
+									class="mdi mdi-plus-box-outline"></i> Input Lembur</button> -->
 						</div>
 					</div>
 				</form>
