@@ -104,9 +104,7 @@ class Slip extends CI_Controller {
 		LEFT JOIN karyawan b ON a.id_karyawan = b.id_karyawan 
 		LEFT JOIN karyawan_detail c ON a.id_karyawan = c.id_karyawan 
 		LEFT JOIN outlet d ON a.id_outlet = d.id_outlet 
-			WHERE a.id_outlet = '$id_outlet' AND a.periode = '$periode' 
-			$qry
-			ORDER BY b.nama")->result_array();
+			WHERE a.id_outlet = '$id_outlet' AND a.periode = '$periode' ORDER BY b.nama")->result_array();
 		
 		//ambil id_lembur
 		$id_lembur_arr = [];
