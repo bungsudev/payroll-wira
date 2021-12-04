@@ -92,7 +92,10 @@
 
 <div class="box containerAbsensi">
 	<div class="box-header with-border">
-		<h3>Absensi Telah di Input </h3>
+		<h3>Absensi Telah di Input
+			<button class="btn btn-info float-right" id="btnPrintAll"><i class="fa fa-print"></i>
+				Print Semua Slip </button>
+		</h3>
 	</div>
 	<div class="box-body">
 		<div class="table-responsive">
@@ -133,6 +136,11 @@
 			} else {
 				a_error('Maaf!', 'Silahkan pilih Periode dan outlet dahulu!');
 			}
+		})
+
+		$("#btnPrintAll").click(function (e) {
+			let link = base_url + 'slip/print_all/' + outlet_filter + '/' + periode_filter;
+			window.open(link, link+'-all');
 		})
 
 		$("#tblAbsensi").on('click', ".btnCetak", function () {
@@ -203,4 +211,5 @@
 			}
 		});
 	}
+
 </script>

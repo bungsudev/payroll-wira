@@ -65,7 +65,7 @@
 						<th>LL</th>
 						<th>T.Urine</th>
 						<th>DPST</th>
-						<th>BPDD</th>
+						<th>BPDD/SRG</th>
 						<th>DIZ</th>
 					</tr>
 				</thead>
@@ -117,7 +117,7 @@
 								<th>LL</th>
 								<th>T.Urine</th>
 								<th>DPST</th>
-								<th>BPDD</th>
+								<th>BPDD/SRG</th>
 								<th>DIZ</th>
 							</tr>
 						</thead>
@@ -441,7 +441,7 @@
 									</td>
 									<td>
 										<div class="form-group mr-4">
-											<label class="text-sm text-secondary" for="bpdd_` + data[i].id_karyawan + `">BPDD</label>
+											<label class="text-sm text-secondary" for="bpdd_` + data[i].id_karyawan + `">BPDD/SRG</label>
 											<input type="text" class="number form-control" name="bpdd_` + data[i].id_karyawan + `" id="bpdd_` +
 									data[i].id_karyawan + `" value="` + bpdd + `">
 										</div>

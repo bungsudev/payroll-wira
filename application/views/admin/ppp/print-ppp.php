@@ -95,7 +95,7 @@ function numberToRomanRepresentation($number) {
 				<th width="50">BPJS KETENAGA KERJAAN</th>
 				<th width="50">BPJS JP</th>
 				<th>DPST</th>
-				<th>BPDD</th>
+				<th>BPDD/SRG</th>
 				<th>DAB</th>
 				<th>DIZ</th>
 				<th>T.URINE</th>
@@ -296,7 +296,7 @@ function numberToRomanRepresentation($number) {
 							<td>SERAGAM</td>
 						</tr>
 						<tr>
-							<td width="80">BPDD</td>
+							<td width="80">BPDD/SRG</td>
 							<td>BIAYA PENDIDIKAN</td>
 						</tr>
 						<tr>
