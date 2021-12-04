@@ -61,8 +61,8 @@ class Slip extends CI_Controller {
 			(empty($data_absen[$key]['b_spkwt']))?$data_absen[$key]['b_spkwt'] = $sett_default->b_spkwt : '';
 			(empty($data_absen[$key]['g_pkk']))?$data_absen[$key]['g_pkk'] = $sett_default->g_pkk : '';
 			(empty($data_absen[$key]['t_jbt']))?$data_absen[$key]['t_jbt'] = $sett_default->t_jbt : '';
-			(empty($data_absen[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
-			(empty($data_absen[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
+			// (empty($data_absen[$key]['t_trans']))?$data_absen[$key]['t_trans'] = $sett_default->t_trans : '';
+			// (empty($data_absen[$key]['t_ot']))?$data_absen[$key]['t_ot'] = $sett_default->t_ot : '';
 			(empty($data_absen[$key]['lhk']))?$data_absen[$key]['lhk'] = $sett_default->lhk : '';
 			(empty($data_absen[$key]['lbu']))?$data_absen[$key]['lbu'] = $sett_default->lbu : '';
 			(empty($data_absen[$key]['llr']))?$data_absen[$key]['llr'] = $sett_default->llr : '';
@@ -74,6 +74,9 @@ class Slip extends CI_Controller {
 			(empty($data_absen[$key]['diz']))?$data_absen[$key]['diz'] = $sett_default->diz : '';
 			(empty($data_absen[$key]['dis']))?$data_absen[$key]['dis'] = $sett_default->dis : '';
 			(empty($data_absen[$key]['lain']))?$data_absen[$key]['lain'] = $sett_default->lain : '';
+			(empty($data_absen[$key]['bpjs_kesehatan']))?$data_absen[$key]['bpjs_kesehatan'] = $sett_default->bpjs_kesehatan : '';
+			(empty($data_absen[$key]['bpjs_tk']))?$data_absen[$key]['bpjs_tk'] = $sett_default->bpjs_tk : '';
+			(empty($data_absen[$key]['bpjs_jp']))?$data_absen[$key]['bpjs_jp'] = $sett_default->bpjs_jp : '';
 		}
 		return $data_absen;
 	}

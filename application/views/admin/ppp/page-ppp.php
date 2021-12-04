@@ -47,23 +47,29 @@
 		<div class="table-responsive">
 			<form id="formCek">
 				<table id="tblCekPrint" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
-					<thead>
-						<tr>
-							<th width="1">No</th>
-							<th>Info Karyawan</th>
-							<th>LBU</th>
-							<th>LHK</th>
-							<th>LLR</th>
-							<th>KBL</th>
-							<th>SP</th>
-							<th>LL</th>
-							<th>T.Urine</th>
-							<th>DPST</th>
-							<th>BPDD</th>
-							<th>DIZ</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
+				<thead>
+					<tr>
+						<th width="1" rowspan="2" style="vertical-align: middle">No</th>
+						<th rowspan="2" class="text-center" style="vertical-align: middle">Info Karyawan</th>
+						<th colspan="4" class="text-center">Penghasilan</th>
+						<th colspan="7" class="text-center">Potongan</th>
+						
+					</tr>
+
+					<tr>
+						<th>LBU</th>
+						<th>LHK</th>
+						<th>KBL</th>
+						<th>LLR</th>
+						<th>SP</th>
+						<th>LL</th>
+						<th>T.Urine</th>
+						<th>DPST</th>
+						<th>BPDD</th>
+						<th>DIZ</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
 				</table>
 			</form>
 		</div>
@@ -95,13 +101,18 @@
 						class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 						<thead>
 							<tr>
-								<th width="1">No</th>
-								<th>Info Karyawan</th>
+								<th width="1" rowspan="2" style="vertical-align: middle">No</th>
+								<th rowspan="2" class="text-center" style="vertical-align: middle">Info Karyawan</th>
+								<th colspan="4" class="text-center">Penghasilan</th>
+								<th colspan="7" class="text-center">Potongan</th>
+								
+							</tr>
+
+							<tr>
 								<th>LBU</th>
 								<th>LHK</th>
 								<th>KBL</th>
 								<th>LLR</th>
-								<th>KBL</th>
 								<th>SP</th>
 								<th>LL</th>
 								<th>T.Urine</th>
