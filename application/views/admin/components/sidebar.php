@@ -4,7 +4,7 @@
 		<div class="user-profile px-10 py-15">
 			<div class="d-flex align-items-center">
 				<div class="image">
-					<img src="<?= base_url() ?>assets/admin/images/user/default.png"
+					<img src="<?= base_url() ?>assets/admin/images/user/default-wira.png"
 						class="avatar avatar-lg bg-primary-light" alt="User Image">
 				</div>
 				<div class="info ml-10">
